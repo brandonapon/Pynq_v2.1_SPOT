@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;arduino_cam/src/arduino_RA8875.c&apos; to &apos;arduino_cam.c&apos;" description="Rename resource &apos;arduino_RA8875.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/arduino_RA8875.c" name="arduino_cam.c" stamp="1520806079069" updateReferences="true"/>
+</session>

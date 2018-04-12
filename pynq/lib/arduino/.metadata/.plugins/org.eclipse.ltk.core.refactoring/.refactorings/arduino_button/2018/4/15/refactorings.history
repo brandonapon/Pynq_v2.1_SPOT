@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;arduino_button/src/arduino_RA8875.c&apos; to &apos;arduino_button.c&apos;" description="Rename resource &apos;arduino_RA8875.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/arduino_RA8875.c" name="arduino_button.c" stamp="1523483245108" updateReferences="true"/>
+</session>

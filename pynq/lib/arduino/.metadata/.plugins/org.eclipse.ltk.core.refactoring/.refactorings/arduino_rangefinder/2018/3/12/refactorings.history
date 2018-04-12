@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;arduino_rangefinder/src/arduino_grove_imu.c&apos; to &apos;arduino_rangefinder.c&apos;" description="Rename resource &apos;arduino_grove_imu.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/arduino_grove_imu.c" name="arduino_rangefinder.c" stamp="1521333773121" updateReferences="true"/>
+</session>

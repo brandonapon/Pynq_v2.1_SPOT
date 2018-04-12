@@ -1,0 +1,108 @@
+
+#include <stdint.h>
+#include "xparameters.h"
+#include "circular_buffer.h"
+#include "gpio.h"
+#include "spi.h"
+#include "timer.h"
+#include "xio_switch.h"
+#include "xil_cache.h"
+#include "xsysmon.h"
+//#include "bmp.h"
+
+#define INIT				    0x1
+#define READ 					0x2
+#define ROTARY					0x3
+
+/* Pin Assignments */
+//gpio - 0
+
+#define V_REF 3.33
+#define SYSMON_DEVICE_ID XPAR_SYSMON_0_DEVICE_ID
+
+gpio gpio_device_1;
+gpio gpio_device_2;
+u16 reset_dc_d7_to_d0;
+static XSysMon SysMonInst;
+XSysMon_Config *SysMonConfigPtr;
+XSysMon *SysMonInstPtr = &SysMonInst;
+
+int main(void)
+{
+    u32 cmd, xStatus;
+
+    // disable DCache
+    Xil_DCacheDisable();
+
+    init_io_switch();
+
+    // SysMon Initialize
+    SysMonConfigPtr = XSysMon_LookupConfig(SYSMON_DEVICE_ID);
+    if(SysMonConfigPtr == NULL)
+        return -1;
+    xStatus = XSysMon_CfgInitialize(SysMonInstPtr,SysMonConfigPtr,
+                                    SysMonConfigPtr->BaseAddress);
+    if(XST_SUCCESS != xStatus)
+        return -1;
+
+    // Clear the old status
+    XSysMon_GetStatus(SysMonInstPtr);
+
+    /*
+     * Configure A0-A5 as GPIO, D0-D9 as GPIO
+     * set the direction for all signals of channel 1 to be output
+     */
+    gpio_device_1 = gpio_open_device(0);
+    gpio_device_2 = gpio_open_device(1);
+    gpio_device_1 = gpio_configure(gpio_device_1, 0, 0, 1);
+    gpio_set_direction(gpio_device_1, 1);
+
+    gpio_device_2 = gpio_configure(gpio_device_2, 1,2, 1);
+    gpio_set_direction(gpio_device_2, 1);
+
+    Xil_Out32(XPAR_IOP_ARDUINO_INTR_BASEADDR+4,0x0);
+    Xil_Out32(XPAR_IOP_ARDUINO_INTR_BASEADDR,0x0);
+
+  	int output[6];
+  	int data[6];
+    int rotary_enc(gpio device){
+
+    	for(int i = 0; i < 6; i++){
+    		output[i] = gpio_read(device);
+    	}
+    	return output;
+    }
+
+    while(1) {
+        while(MAILBOX_CMD_ADDR==0);
+        cmd = MAILBOX_CMD_ADDR;
+
+        switch(cmd) {
+            case INIT:
+            	// Assign default pin configurations - no operations needed
+                MAILBOX_CMD_ADDR = 0x0;
+                break;
+
+            case READ:
+            	MAILBOX_DATA(0) = gpio_read(gpio_device_1);
+            	MAILBOX_CMD_ADDR = 0x0;
+            	break;
+
+            case ROTARY:
+            	data = rotary_enc(gpio_device_2);
+            	for(int i = 0; i < 6; i++){
+            		MAILBOX_DATA(i) = data[i];
+            	}
+            	MAILBOX_CMD_ADDR = 0x0;
+            	break;
+
+            default:
+                MAILBOX_CMD_ADDR = 0x0;
+                break;
+        }
+
+    }
+    return 0;
+}
+
+

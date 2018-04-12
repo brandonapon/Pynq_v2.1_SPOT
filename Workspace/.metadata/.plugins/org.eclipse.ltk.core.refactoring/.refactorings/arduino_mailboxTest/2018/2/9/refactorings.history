@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;arduino_mailboxTest/src/arduino_lcd18.c&apos; to &apos;arduino_mailboxTest.c&apos;" description="Rename resource &apos;arduino_lcd18.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/arduino_lcd18.c" name="arduino_mailboxTest.c" stamp="1519634456653" updateReferences="true"/>
+</session>
