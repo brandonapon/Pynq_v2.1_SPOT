@@ -31,7 +31,7 @@
 								<option id="xilinx.gnu.mb.compiler.inferred.usele.1207262452" name="Produce little endian code (-mlittle-endian)" superClass="xilinx.gnu.mb.compiler.inferred.usele" value="true" valueType="boolean"/>
 								<option id="xilinx.gnu.compiler.inferred.swplatform.includes.830858164" name="Software Platform Include Path" superClass="xilinx.gnu.compiler.inferred.swplatform.includes"/>
 								<option id="xilinx.gnu.compiler.dircategory.includes.455702949" name="Include Paths" superClass="xilinx.gnu.compiler.dircategory.includes" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;D:\Pynq\PYNQ_V2.1\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include&quot;"/>
 								</option>
 								<inputType id="xilinx.gnu.compiler.input.1892865713" name="C source files" superClass="xilinx.gnu.compiler.input"/>
 							</tool>

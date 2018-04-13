@@ -20,7 +20,7 @@ C_DEPS += \
 src/%.o: ../src/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: MicroBlaze gcc compiler'
-	mb-gcc -Wall -O0 -g3 -I"D:\Pynq\PYNQ_V2.1\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include" -c -fmessage-length=0 -MT"$@" -mlittle-endian -mcpu=v9.6 -mxl-soft-mul -Wl,--no-relax -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	mb-gcc -Wall -O0 -g3 -I"D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include" -c -fmessage-length=0 -MT"$@" -mlittle-endian -mcpu=v9.6 -mxl-soft-mul -Wl,--no-relax -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

@@ -5,8 +5,8 @@
  *      Author: Brandon
  */
 
-#ifndef UART_V2_H_
-#define UART_V2_H_
+#ifndef SRC_UART_V2_H_
+#define SRC_UART_V2_H_
 
 #include <xparameters.h>
 

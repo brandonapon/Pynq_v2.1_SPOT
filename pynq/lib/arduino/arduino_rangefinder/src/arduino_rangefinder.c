@@ -72,8 +72,13 @@
 #define OFF						0x3
 #define POLL 					0x4
 #define NOTHING					0x5
+#define DEVICE					0x6
+
+#define RX						0
+#define TX						1
 
 uart uart_device;
+
 char on[1] = {1};
 char off[1] = {0};
 
@@ -89,17 +94,21 @@ void readByte(char* byte){
 	uart_read(uart_device, byte, 1);
 }
 
-char range[5] = {0};
+char range[5] = {42};
 void readRF(void){
-	while(1){
-		readByte(&range[0]);
-		if(range[0] == 'R'){
-			int i = 0;
-			while(i < 5){
-				readByte(&range[++i]);
-			}
-			break;
-		}
+//	while(1){
+//		readByte(&range[0]);
+//		if(range[0] == 'R'){
+//			int i = 0;
+//			while(i < 5){
+//				readByte(&range[++i]);
+//			}
+//			break;
+//		}
+//	}
+	uart_read(uart_device, range, 5);
+	if(range[0] != 'R'){
+		readRF();
 	}
 }
 
@@ -109,17 +118,26 @@ int main()
 
    //UART Init
    init_io_switch();
-   uart_device = uart_open(1, 0);
-//   uart_device = uart_open_device(XPAR_IOP_ARDUINO_UARTLITE_DEVICE_ID);
+   uart_device = uart_open(TX, RX);
+   int status = 0;
+//   uart_device = uart_open_device(0);
+   if(uart_device == -1){
+	   status = -1;
+   }
 
    // Run application
    while(1){
      // wait and store valid command
-      while((MAILBOX_CMD_ADDR & 0x01)==0);
+      while((MAILBOX_CMD_ADDR)==0);
       cmd = MAILBOX_CMD_ADDR;
 
 		switch(cmd){
 			case CONFIG_IOP_SWITCH:
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case DEVICE:
+				MAILBOX_DATA(0) = status;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 
@@ -135,8 +153,8 @@ int main()
 
 			case POLL:
 				readRF();
-				for(int i = 0; i < 5; i++){
-					MAILBOX_DATA(i) = range[i];
+				for(int i = 0; i < 5; ++i){
+					MAILBOX_DATA(i) = (char) range[i];
 				}
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
