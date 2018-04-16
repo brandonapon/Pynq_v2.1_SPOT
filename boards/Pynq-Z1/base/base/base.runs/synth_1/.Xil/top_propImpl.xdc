@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/vivado/constraints/top.xdc rfile:../../../../vivado/constraints/top.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/vivado/constraints/top.xdc rfile:../../../../vivado/constraints/top.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:2 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict {PACKAGE_PIN M20 IOSTANDARD LVCMOS33} [get_ports {sws_2bits_tri_i[0]}]
 set_property src_info {type:XDC file:1 line:3 export:INPUT save:INPUT read:READ} [current_design]

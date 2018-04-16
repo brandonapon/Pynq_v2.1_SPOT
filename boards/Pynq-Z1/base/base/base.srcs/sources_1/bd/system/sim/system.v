@@ -1,7 +1,7 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
-//Date        : Mon Apr  9 19:59:37 2018
+//Date        : Mon Apr 16 15:00:22 2018
 //Host        : DESKTOP-PIC5S0G running 64-bit major release  (build 9200)
 //Command     : generate_target system.bd
 //Design      : system
@@ -3004,6 +3004,7 @@ module iop_arduino_imp_1IUOJZS
   wire [19:0]io_data_i_0_1;
   wire [19:0]io_switch_0_io_data_o;
   wire [19:0]io_switch_0_io_tri_o;
+  wire io_switch_0_uart0_rx_i;
   wire [0:0]logic_1_dout1;
   wire mb3_gpio_subsystem_ip2intc_irpt;
   wire mb3_iic_subsystem_iic2intc_irpt;
@@ -3393,8 +3394,8 @@ module iop_arduino_imp_1IUOJZS
   wire spi_subsystem_SPI_0_SCK_T;
   wire [0:0]spi_subsystem_SPI_0_SS_O;
   wire spi_subsystem_SPI_0_SS_T;
-  wire uartlite_UART_RxD;
-  wire uartlite_UART_TxD;
+  wire uartlite_tx;
+  wire [0:0]util_vector_logic_0_Res;
 
   assign Conn10_V_N = Vaux6_v_n;
   assign Conn10_V_P = Vaux6_v_p;
@@ -3680,8 +3681,8 @@ module iop_arduino_imp_1IUOJZS
         .ss0_t(spi_subsystem_SPI_0_SS_T),
         .timer_i(capture_i_1),
         .timer_o(mb3_timers_subsystem_generate_o),
-        .uart0_rx_i(uartlite_UART_RxD),
-        .uart0_tx_o(uartlite_UART_TxD));
+        .uart0_rx_i(io_switch_0_uart0_rx_i),
+        .uart0_tx_o(uartlite_tx));
   lmb_imp_1J0DO9M lmb
        (.BRAM_PORTB_addr(BRAM_PORTB_1_ADDR),
         .BRAM_PORTB_clk(BRAM_PORTB_1_CLK),
@@ -4349,7 +4350,7 @@ module iop_arduino_imp_1IUOJZS
         .timer_interrupts(mb3_timers_subsystem_mb3_timer_interrupts));
   system_uartlite_0 uartlite
        (.interrupt(mb3_uartlite_d1_d0_interrupt),
-        .rx(uartlite_UART_RxD),
+        .rx(util_vector_logic_0_Res),
         .s_axi_aclk(ps7_0_FCLK_CLK0),
         .s_axi_araddr(microblaze_0_axi_periph_M08_AXI_ARADDR),
         .s_axi_aresetn(s_axi_aresetn_1),
@@ -4369,7 +4370,10 @@ module iop_arduino_imp_1IUOJZS
         .s_axi_wready(microblaze_0_axi_periph_M08_AXI_WREADY),
         .s_axi_wstrb(microblaze_0_axi_periph_M08_AXI_WSTRB),
         .s_axi_wvalid(microblaze_0_axi_periph_M08_AXI_WVALID),
-        .tx(uartlite_UART_TxD));
+        .tx(uartlite_tx));
+  system_util_vector_logic_0_2 util_vector_logic_0
+       (.Op1(io_switch_0_uart0_rx_i),
+        .Res(util_vector_logic_0_Res));
   system_xadc_0 xadc
        (.s_axi_aclk(ps7_0_FCLK_CLK0),
         .s_axi_araddr(microblaze_0_axi_periph_M15_AXI_ARADDR),
@@ -25936,7 +25940,7 @@ module spi_subsystem_imp_Z7WCGE
         .ss_t(Conn2_SS_T));
 endmodule
 
-(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=329,numReposBlks=227,numNonXlnxBlks=5,numHierBlks=102,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=6,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "system.hwdef" *) 
+(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=330,numReposBlks=228,numNonXlnxBlks=5,numHierBlks=102,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=6,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "system.hwdef" *) 
 module system
    (DDR_addr,
     DDR_ba,

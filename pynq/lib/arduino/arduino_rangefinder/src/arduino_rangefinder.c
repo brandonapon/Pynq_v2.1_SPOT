@@ -94,7 +94,7 @@ void readByte(char* byte){
 	uart_read(uart_device, byte, 1);
 }
 
-char range[5] = {42};
+char range[10] = {42};
 void readRF(void){
 //	while(1){
 //		readByte(&range[0]);
@@ -106,10 +106,7 @@ void readRF(void){
 //			break;
 //		}
 //	}
-	uart_read(uart_device, range, 5);
-	if(range[0] != 'R'){
-		readRF();
-	}
+	uart_read(uart_device, range, 10);
 }
 
 int main()
@@ -153,7 +150,7 @@ int main()
 
 			case POLL:
 				readRF();
-				for(int i = 0; i < 5; ++i){
+				for(int i = 0; i < 10; ++i){
 					MAILBOX_DATA(i) = (char) range[i];
 				}
 				MAILBOX_CMD_ADDR = 0x0;

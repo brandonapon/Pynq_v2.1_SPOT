@@ -68,19 +68,19 @@ set rc [catch {
   create_project -in_memory -part xc7z020clg400-1
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.cache/wt [current_project]
-  set_property parent.project_path D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.xpr [current_project]
-  set_property ip_repo_paths D:/Pynq/PYNQ_V2.1/boards/ip [current_project]
-  set_property ip_output_repo D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.cache/ip [current_project]
+  set_property webtalk.parent_dir D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.cache/wt [current_project]
+  set_property parent.project_path D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.xpr [current_project]
+  set_property ip_repo_paths D:/Pynq/Pynq_v2.1_SPOT/boards/ip [current_project]
+  set_property ip_output_repo D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES {XPM_CDC XPM_FIFO XPM_MEMORY} [current_project]
-  add_files -quiet D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.runs/synth_1/top.dcp
+  add_files -quiet D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/synth_1/top.dcp
   set_msg_config -source 4 -id {BD 41-1661} -limit 0
   set_param project.isImplRun true
-  add_files D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/system.bd
+  add_files D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/system.bd
   set_param project.isImplRun false
-  read_edif d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_audio_direct_0_0/src/fifo_512.edif
-  read_xdc D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/vivado/constraints/top.xdc
+  read_edif d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_audio_direct_0_0/src/fifo_512.edif
+  read_xdc D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/vivado/constraints/top.xdc
   set_param project.isImplRun true
   link_design -top top -part xc7z020clg400-1
   set_param project.isImplRun false

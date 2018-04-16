@@ -7,13 +7,16 @@ LD_SRCS += \
 ../src/lscript.ld 
 
 C_SRCS += \
-../src/arduino_RA8875.c 
+../src/arduino_RA8875.c \
+../src/spi_v2.c 
 
 OBJS += \
-./src/arduino_RA8875.o 
+./src/arduino_RA8875.o \
+./src/spi_v2.o 
 
 C_DEPS += \
-./src/arduino_RA8875.d 
+./src/arduino_RA8875.d \
+./src/spi_v2.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

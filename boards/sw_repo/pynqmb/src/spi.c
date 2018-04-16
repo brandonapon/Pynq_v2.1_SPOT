@@ -34,7 +34,7 @@
  *
  * @file spi.c
  *
- * Implementing SPI related functions for PYNQ Microblaze, 
+ * Implementing SPI related functions for PYNQ Microblaze,
  * including the SPI initialization and transfer.
  *
  *
@@ -64,7 +64,7 @@ spi spi_open_device(unsigned int device){
     u16 dev_id;
     unsigned int base_address;
     u32 control;
-    
+
     if (device < XPAR_XSPI_NUM_INSTANCES) {
         dev_id = (u16)device;
     } else {
@@ -110,7 +110,7 @@ static int last_miso = -1;
 static int last_mosi = -1;
 static int last_ss = -1;
 
-spi spi_open(unsigned int spiclk, unsigned int miso, 
+spi spi_open(unsigned int spiclk, unsigned int miso,
              unsigned int mosi, unsigned int ss){
     if (last_spiclk != -1) set_pin(last_spiclk, GPIO);
     if (last_miso != -1) set_pin(last_miso, GPIO);
@@ -130,7 +130,7 @@ spi spi_open(unsigned int spiclk, unsigned int miso,
 #endif
 
 
-spi spi_configure(spi dev_id, unsigned int clk_phase, 
+spi spi_configure(spi dev_id, unsigned int clk_phase,
                    unsigned int clk_polarity){
     u32 control;
     unsigned int base_address = xspi[dev_id].BaseAddr;
@@ -160,7 +160,7 @@ spi spi_configure(spi dev_id, unsigned int clk_phase,
 }
 
 
-void spi_transfer(spi dev_id, const char* write_data, char* read_data, 
+void spi_transfer(spi dev_id, const char* write_data, char* read_data,
                   unsigned int length){
     unsigned int i;
     unsigned volatile char j;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1523329312">
+<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1523916165">
   <File Type="PA-TCL" Name="top.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="top_reports.tcl"/>
@@ -179,4 +179,5 @@
   <BlockFileSet Type="BlockSrcs" Name="system_xadc_0"/>
   <BlockFileSet Type="BlockSrcs" Name="system_mb3_timer_capture_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="system_mb3_timer_capture_3_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="system_util_vector_logic_0_2"/>
 </GenRun>

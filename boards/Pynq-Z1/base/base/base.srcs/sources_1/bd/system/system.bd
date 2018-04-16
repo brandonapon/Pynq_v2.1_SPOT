@@ -22252,6 +22252,15 @@
           <spirit:configurableElementValue spirit:referenceId="BIPOLAR_VAUXP12_VAUXN12">true</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>util_vector_logic_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="util_vector_logic" spirit:vendor="xilinx.com" spirit:version="2.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">system_util_vector_logic_0_2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="C_SIZE">1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="C_OPERATION">not</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
     </spirit:componentInstances>
     <spirit:interconnections>
       <spirit:interconnection>
@@ -22368,11 +22377,6 @@
         <spirit:name>spi_subsystem_SPI_0</spirit:name>
         <spirit:activeInterface spirit:busRef="spi0" spirit:componentRef="io_switch_0"/>
         <spirit:activeInterface spirit:busRef="SPI_0" spirit:componentRef="spi_subsystem"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>uartlite_UART</spirit:name>
-        <spirit:activeInterface spirit:busRef="uart0" spirit:componentRef="io_switch_0"/>
-        <spirit:activeInterface spirit:busRef="UART" spirit:componentRef="uartlite"/>
       </spirit:interconnection>
     </spirit:interconnections>
     <spirit:adHocConnections>
@@ -22591,6 +22595,21 @@
         <spirit:name>shield2sw_sda_i_in_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="sda_i_in"/>
         <spirit:internalPortReference spirit:componentRef="iic_subsystem" spirit:portRef="sda_i"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>uartlite_tx</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="uartlite" spirit:portRef="tx"/>
+        <spirit:internalPortReference spirit:componentRef="io_switch_0" spirit:portRef="uart0_tx_o"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>io_switch_0_uart0_rx_i</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="io_switch_0" spirit:portRef="uart0_rx_i"/>
+        <spirit:internalPortReference spirit:componentRef="util_vector_logic_0" spirit:portRef="Op1"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>util_vector_logic_0_Res</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="util_vector_logic_0" spirit:portRef="Res"/>
+        <spirit:internalPortReference spirit:componentRef="uartlite" spirit:portRef="rx"/>
       </spirit:adHocConnection>
     </spirit:adHocConnections>
     <spirit:hierConnections>
@@ -32913,20 +32932,20 @@
     <spirit:version>10.0</spirit:version>
     <spirit:busInterfaces>
       <spirit:busInterface>
-        <spirit:name>DLMB</spirit:name>
-        <spirit:master>
-          <spirit:addressSpaceRef spirit:addressSpaceRef="Data"/>
-        </spirit:master>
-        <spirit:busType spirit:library="interface" spirit:name="lmb" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:abstractionType spirit:library="interface" spirit:name="lmb_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-      </spirit:busInterface>
-      <spirit:busInterface>
         <spirit:name>M_AXI_DP</spirit:name>
         <spirit:master>
           <spirit:addressSpaceRef spirit:addressSpaceRef="Data"/>
         </spirit:master>
         <spirit:busType spirit:library="interface" spirit:name="aximm" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:abstractionType spirit:library="interface" spirit:name="aximm_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+      </spirit:busInterface>
+      <spirit:busInterface>
+        <spirit:name>DLMB</spirit:name>
+        <spirit:master>
+          <spirit:addressSpaceRef spirit:addressSpaceRef="Data"/>
+        </spirit:master>
+        <spirit:busType spirit:library="interface" spirit:name="lmb" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:abstractionType spirit:library="interface" spirit:name="lmb_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
       </spirit:busInterface>
       <spirit:busInterface>
         <spirit:name>ILMB</spirit:name>

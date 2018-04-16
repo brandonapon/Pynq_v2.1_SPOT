@@ -7,13 +7,16 @@ LD_SRCS += \
 ../src/lscript.ld 
 
 C_SRCS += \
-../src/arduino_cam.c 
+../src/arduino_cam.c \
+../src/spi_v2.c 
 
 OBJS += \
-./src/arduino_cam.o 
+./src/arduino_cam.o \
+./src/spi_v2.o 
 
 C_DEPS += \
-./src/arduino_cam.d 
+./src/arduino_cam.d \
+./src/spi_v2.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

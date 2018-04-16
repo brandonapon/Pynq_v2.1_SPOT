@@ -3,7 +3,7 @@ src/arduino_cam.o src/arduino_cam.o: ../src/arduino_cam.c \
  D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/circular_buffer.h \
  D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/xil_types.h \
  D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/gpio.h \
- D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/spi.h \
+ ../src/spi_v2.h \
  D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/timer.h \
  D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/xio_switch.h \
  D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/xstatus.h \
@@ -25,7 +25,7 @@ D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/x
 
 D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/gpio.h:
 
-D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/spi.h:
+../src/spi_v2.h:
 
 D:\Pynq\PYNQ_v2.1_SPOT\pynq\lib\arduino\bsp_iop_arduino\iop_arduino_mb\include/timer.h:
 

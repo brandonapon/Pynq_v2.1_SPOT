@@ -51,7 +51,7 @@
 #include "xparameters.h"
 #include "circular_buffer.h"
 #include "gpio.h"
-#include "spi.h"
+#include "spi_v2.h"
 #include "timer.h"
 #include "xio_switch.h"
 #include "xil_cache.h"
@@ -72,6 +72,7 @@
 /*PYNQ Commands */
 #define TEST 					0x01
 #define TEST_2					0x02
+#define COMBO					0x03
 
 /* SPI Commands */
 #define SNAPSHOT				0x01
@@ -86,7 +87,7 @@ XSysMon_Config *SysMonConfigPtr;
 XSysMon *SysMonInstPtr = &SysMonInst;
 
 
-uint8_t writeBuffer[2], readBuffer[2];
+uint8_t writeBuffer[8], readBuffer[8];
 
 /*Functions*/
 void transfer(uint8_t cmd, uint8_t data){
@@ -152,8 +153,8 @@ int main(void)
     Xil_Out32(XPAR_IOP_ARDUINO_INTR_BASEADDR,0x0);
 
     uint8_t data = 69;
-    uint8_t data_stream[7] = {0,1,2,3,4,5,6};
-    uint8_t recv_stream[8] = {-1};
+    uint8_t data_stream[8] = {0,1,2,3,4,5,6,7};
+    uint8_t recv_stream[15] = {-1};
     while(1) {
         while(MAILBOX_CMD_ADDR==0);
         cmd = MAILBOX_CMD_ADDR;
@@ -163,6 +164,7 @@ int main(void)
             	MAILBOX_DATA(0) = data;
             	MAILBOX_CMD_ADDR = 0x0;
                 break;
+
             case TEST_2:
             	transfer_mult(SR, data_stream, recv_stream, 8);
             	for(int i = 0; i < 8; i++){
@@ -170,6 +172,15 @@ int main(void)
             	}
             	MAILBOX_CMD_ADDR = 0x0;
             	break;
+
+            case COMBO:
+            	spi_transfer_mod(spi_device, data_stream, recv_stream, 8, 15);
+            	for(int i = 0; i < 8; i++){
+            		MAILBOX_DATA(i) = recv_stream[i];
+            	}
+            	MAILBOX_CMD_ADDR = 0x0;
+            	break;
+
             default: //add error message here
                 MAILBOX_CMD_ADDR = 0x0;
                 break;

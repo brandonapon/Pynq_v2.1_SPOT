@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
-| Date         : Mon Apr  9 20:06:30 2018
+| Date         : Mon Apr 16 15:06:05 2018
 | Host         : DESKTOP-PIC5S0G running 64-bit major release  (build 9200)
 | Command      : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
 | Design       : top
@@ -173,6 +173,7 @@ Table of Contents
 | system_vtc_in_0                  |    1 |
 | system_v_vid_in_axi4s_0_0        |    1 |
 | system_v_axi4s_vid_out_0_0       |    1 |
+| system_util_vector_logic_0_2     |    1 |
 | system_uartlite_0                |    1 |
 | system_trace_cntrl_64_0_0        |    1 |
 | system_trace_cntrl_32_0_0        |    1 |

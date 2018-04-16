@@ -2,11 +2,11 @@
 # Vivado v2017.4 (64-bit)
 # SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
 # IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
-# Start of session at: Mon Apr  9 20:03:17 2018
-# Process ID: 13136
-# Current directory: D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.runs/synth_1
+# Start of session at: Mon Apr 16 15:02:51 2018
+# Process ID: 27968
+# Current directory: D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/synth_1
 # Command line: vivado.exe -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
-# Log file: D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.runs/synth_1/top.vds
-# Journal file: D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.runs/synth_1\vivado.jou
+# Log file: D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/synth_1/top.vds
+# Journal file: D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
 source top.tcl -notrace

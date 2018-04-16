@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="35" Path="D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.xpr">
+<Project Version="7" Minor="35" Path="D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="25b2b9e8453e4520ae1054df990933ef"/>
@@ -62,392 +62,26 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_util_vector_logic_0_2/system_util_vector_logic_0_2.xci">
+          <Proxy FileSetName="system_util_vector_logic_0_2"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_audio_path_sel_0/system_audio_path_sel_0.xci">
           <Proxy FileSetName="system_audio_path_sel_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_audio_direct_0_0/system_audio_direct_0_0.xci">
-          <Proxy FileSetName="system_audio_direct_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_v_vid_in_axi4s_0_0/system_v_vid_in_axi4s_0_0.xci">
-          <Proxy FileSetName="system_v_vid_in_axi4s_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_vtc_in_0/system_vtc_in_0.xci">
-          <Proxy FileSetName="system_vtc_in_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_color_convert_0/system_color_convert_0.xci">
-          <Proxy FileSetName="system_color_convert_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_8/system_xbar_8.xci">
-          <Proxy FileSetName="system_xbar_8"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axis_data_fifo_0_1/system_axis_data_fifo_0_1.xci">
-          <Proxy FileSetName="system_axis_data_fifo_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_constant_tkeep_tstrb_1/system_constant_tkeep_tstrb_1.xci">
-          <Proxy FileSetName="system_constant_tkeep_tstrb_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_color_swap_0_1/system_color_swap_0_1.xci">
-          <Proxy FileSetName="system_color_swap_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_v_axi4s_vid_out_0_0/system_v_axi4s_vid_out_0_0.xci">
-          <Proxy FileSetName="system_v_axi4s_vid_out_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rgb2dvi_0_0/system_rgb2dvi_0_0.xci">
-          <Proxy FileSetName="system_rgb2dvi_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_vtc_out_0/system_vtc_out_0.xci">
-          <Proxy FileSetName="system_vtc_out_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axis_register_slice_0_0/system_axis_register_slice_0_0.xci">
-          <Proxy FileSetName="system_axis_register_slice_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_pixel_pack_0/system_pixel_pack_0.xci">
-          <Proxy FileSetName="system_pixel_pack_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_hdmi_out_hpd_video_0/system_hdmi_out_hpd_video_0.xci">
-          <Proxy FileSetName="system_hdmi_out_hpd_video_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_gpio_hdmiin_0/system_axi_gpio_hdmiin_0.xci">
-          <Proxy FileSetName="system_axi_gpio_hdmiin_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dvi2rgb_0_0/system_dvi2rgb_0_0.xci">
-          <Proxy FileSetName="system_dvi2rgb_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_color_swap_0_0/system_color_swap_0_0.xci">
-          <Proxy FileSetName="system_color_swap_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_7/system_xbar_7.xci">
-          <Proxy FileSetName="system_xbar_7"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_dma_0_1/system_axi_dma_0_1.xci">
-          <Proxy FileSetName="system_axi_dma_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_6_0/system_mb3_timer_capture_6_0.xci">
-          <Proxy FileSetName="system_mb3_timer_capture_6_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_generate_0/system_mb3_timer_generate_0.xci">
-          <Proxy FileSetName="system_mb3_timer_generate_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rst_clk_wiz_1_100M_0/system_rst_clk_wiz_1_100M_0.xci">
-          <Proxy FileSetName="system_rst_clk_wiz_1_100M_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_3_0/system_mb3_timer_capture_3_0.xci">
-          <Proxy FileSetName="system_mb3_timer_capture_3_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xadc_0/system_xadc_0.xci">
-          <Proxy FileSetName="system_xadc_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timers_interrupt_0/system_mb3_timers_interrupt_0.xci">
-          <Proxy FileSetName="system_mb3_timers_interrupt_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_uartlite_0/system_uartlite_0.xci">
-          <Proxy FileSetName="system_uartlite_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_1_0/system_mb3_timer_capture_1_0.xci">
-          <Proxy FileSetName="system_mb3_timer_capture_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_5_0/system_mb3_timer_capture_5_0.xci">
-          <Proxy FileSetName="system_mb3_timer_capture_5_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_0_0/system_timer_0_0.xci">
-          <Proxy FileSetName="system_timer_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_7_0/system_mb3_timer_capture_7_0.xci">
-          <Proxy FileSetName="system_mb3_timer_capture_7_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_1_0/system_timer_1_0.xci">
-          <Proxy FileSetName="system_timer_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_0_0/system_mb3_timer_capture_0_0.xci">
-          <Proxy FileSetName="system_mb3_timer_capture_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_2_0/system_mb3_timer_capture_2_0.xci">
-          <Proxy FileSetName="system_mb3_timer_capture_2_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_2_0/system_timer_2_0.xci">
-          <Proxy FileSetName="system_timer_2_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_pwm_0/system_mb3_timer_pwm_0.xci">
-          <Proxy FileSetName="system_mb3_timer_pwm_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_3_0/system_timer_3_0.xci">
-          <Proxy FileSetName="system_timer_3_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_4_0/system_mb3_timer_capture_4_0.xci">
-          <Proxy FileSetName="system_mb3_timer_capture_4_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_ilmb_v10_2/system_ilmb_v10_2.xci">
-          <Proxy FileSetName="system_ilmb_v10_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_io_switch_0/system_io_switch_0.xci">
-          <Proxy FileSetName="system_io_switch_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_1/system_intr_1.xci">
-          <Proxy FileSetName="system_intr_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_logic_1_1/system_logic_1_1.xci">
-          <Proxy FileSetName="system_logic_1_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_2/system_lmb_bram_2.xci">
-          <Proxy FileSetName="system_lmb_bram_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_1/system_mb_1.xci">
-          <Proxy FileSetName="system_mb_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_bram_ctrl_1/system_mb_bram_ctrl_1.xci">
-          <Proxy FileSetName="system_mb_bram_ctrl_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_if_cntlr_2/system_lmb_bram_if_cntlr_2.xci">
-          <Proxy FileSetName="system_lmb_bram_if_cntlr_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dff_en_reset_vector_0_1/system_dff_en_reset_vector_0_1.xci">
-          <Proxy FileSetName="system_dff_en_reset_vector_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rst_clk_wiz_1_100M_2/system_rst_clk_wiz_1_100M_2.xci">
-          <Proxy FileSetName="system_rst_clk_wiz_1_100M_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dlmb_v10_2/system_dlmb_v10_2.xci">
-          <Proxy FileSetName="system_dlmb_v10_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_4/system_xbar_4.xci">
-          <Proxy FileSetName="system_xbar_4"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_gpio_0/system_gpio_0.xci">
-          <Proxy FileSetName="system_gpio_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intc_1/system_intc_1.xci">
-          <Proxy FileSetName="system_intc_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_spi_1/system_spi_1.xci">
-          <Proxy FileSetName="system_spi_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_1/system_timer_1.xci">
-          <Proxy FileSetName="system_timer_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_iic_0/system_iic_0.xci">
-          <Proxy FileSetName="system_iic_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_concat_1/system_intr_concat_1.xci">
-          <Proxy FileSetName="system_intr_concat_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_iic_direct_0/system_iic_direct_0.xci">
-          <Proxy FileSetName="system_iic_direct_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_ilmb_v10_0/system_ilmb_v10_0.xci">
-          <Proxy FileSetName="system_ilmb_v10_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_2/system_xbar_2.xci">
-          <Proxy FileSetName="system_xbar_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_0/system_xbar_0.xci">
-          <Proxy FileSetName="system_xbar_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_5_0/system_timer_5_0.xci">
-          <Proxy FileSetName="system_timer_5_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dlmb_v10_0/system_dlmb_v10_0.xci">
-          <Proxy FileSetName="system_dlmb_v10_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_if_cntlr_0/system_lmb_bram_if_cntlr_0.xci">
-          <Proxy FileSetName="system_lmb_bram_if_cntlr_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_4_0/system_timer_4_0.xci">
-          <Proxy FileSetName="system_timer_4_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_ck_gpio_0/system_ck_gpio_0.xci">
-          <Proxy FileSetName="system_ck_gpio_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_spi_direct_0/system_spi_direct_0.xci">
-          <Proxy FileSetName="system_spi_direct_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_spi_shared_0/system_spi_shared_0.xci">
-          <Proxy FileSetName="system_spi_shared_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_arduino_gpio_0/system_arduino_gpio_0.xci">
-          <Proxy FileSetName="system_arduino_gpio_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_1/system_xbar_1.xci">
-          <Proxy FileSetName="system_xbar_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_0/system_lmb_bram_0.xci">
-          <Proxy FileSetName="system_lmb_bram_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_5/system_xbar_5.xci">
-          <Proxy FileSetName="system_xbar_5"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intc_2/system_intc_2.xci">
-          <Proxy FileSetName="system_intc_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_trace_cntrl_64_0_0/system_trace_cntrl_64_0_0.xci">
-          <Proxy FileSetName="system_trace_cntrl_64_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_2/system_mb_2.xci">
-          <Proxy FileSetName="system_mb_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_2/system_intr_2.xci">
-          <Proxy FileSetName="system_intr_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dff_en_reset_vector_0_2/system_dff_en_reset_vector_0_2.xci">
-          <Proxy FileSetName="system_dff_en_reset_vector_0_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_gpio_1/system_gpio_1.xci">
-          <Proxy FileSetName="system_gpio_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_logic_1_2/system_logic_1_2.xci">
-          <Proxy FileSetName="system_logic_1_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_bram_ctrl_2/system_mb_bram_ctrl_2.xci">
-          <Proxy FileSetName="system_mb_bram_ctrl_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axis_data_fifo_0_0/system_axis_data_fifo_0_0.xci">
-          <Proxy FileSetName="system_axis_data_fifo_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_constant_tkeep_tstrb_0/system_constant_tkeep_tstrb_0.xci">
-          <Proxy FileSetName="system_constant_tkeep_tstrb_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_6/system_xbar_6.xci">
-          <Proxy FileSetName="system_xbar_6"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_iic_1/system_iic_1.xci">
-          <Proxy FileSetName="system_iic_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_dma_0_0/system_axi_dma_0_0.xci">
-          <Proxy FileSetName="system_axi_dma_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_concat_2/system_intr_concat_2.xci">
-          <Proxy FileSetName="system_intr_concat_2"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_io_switch_1/system_io_switch_1.xci">
-          <Proxy FileSetName="system_io_switch_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_trace_cntrl_32_0_0/system_trace_cntrl_32_0_0.xci">
-          <Proxy FileSetName="system_trace_cntrl_32_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_1/system_lmb_bram_1.xci">
-          <Proxy FileSetName="system_lmb_bram_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intc_0/system_intc_0.xci">
-          <Proxy FileSetName="system_intc_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_concat_0/system_intr_concat_0.xci">
-          <Proxy FileSetName="system_intr_concat_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_io_switch_0_0/system_io_switch_0_0.xci">
-          <Proxy FileSetName="system_io_switch_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_spi_0/system_spi_0.xci">
-          <Proxy FileSetName="system_spi_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_3/system_xbar_3.xci">
-          <Proxy FileSetName="system_xbar_3"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_if_cntlr_1/system_lmb_bram_if_cntlr_1.xci">
-          <Proxy FileSetName="system_lmb_bram_if_cntlr_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rst_clk_wiz_1_100M_1/system_rst_clk_wiz_1_100M_1.xci">
-          <Proxy FileSetName="system_rst_clk_wiz_1_100M_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_0/system_timer_0.xci">
-          <Proxy FileSetName="system_timer_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_ilmb_v10_1/system_ilmb_v10_1.xci">
-          <Proxy FileSetName="system_ilmb_v10_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_0/system_intr_0.xci">
-          <Proxy FileSetName="system_intr_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_logic_1_0/system_logic_1_0.xci">
-          <Proxy FileSetName="system_logic_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dff_en_reset_vector_0_0/system_dff_en_reset_vector_0_0.xci">
-          <Proxy FileSetName="system_dff_en_reset_vector_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_0/system_mb_0.xci">
-          <Proxy FileSetName="system_mb_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_bram_ctrl_0/system_mb_bram_ctrl_0.xci">
-          <Proxy FileSetName="system_mb_bram_ctrl_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dlmb_v10_1/system_dlmb_v10_1.xci">
-          <Proxy FileSetName="system_dlmb_v10_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_dynclk_0/system_axi_dynclk_0.xci">
-          <Proxy FileSetName="system_axi_dynclk_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rst_ps7_0_fclk3_0/system_rst_ps7_0_fclk3_0.xci">
-          <Proxy FileSetName="system_rst_ps7_0_fclk3_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_system_interrupts_0/system_system_interrupts_0.xci">
-          <Proxy FileSetName="system_system_interrupts_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rst_ps7_0_fclk0_0/system_rst_ps7_0_fclk0_0.xci">
-          <Proxy FileSetName="system_rst_ps7_0_fclk0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rgbleds_gpio_0/system_rgbleds_gpio_0.xci">
-          <Proxy FileSetName="system_rgbleds_gpio_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_vdma_0/system_axi_vdma_0.xci">
-          <Proxy FileSetName="system_axi_vdma_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_proc_sys_reset_fclk1_0/system_proc_sys_reset_fclk1_0.xci">
-          <Proxy FileSetName="system_proc_sys_reset_fclk1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_switches_gpio_0/system_switches_gpio_0.xci">
-          <Proxy FileSetName="system_switches_gpio_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_proc_sys_reset_pixelclk_0/system_proc_sys_reset_pixelclk_0.xci">
-          <Proxy FileSetName="system_proc_sys_reset_pixelclk_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xlconcat_0_0/system_xlconcat_0_0.xci">
-          <Proxy FileSetName="system_xlconcat_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axis_register_slice_0_1/system_axis_register_slice_0_1.xci">
-          <Proxy FileSetName="system_axis_register_slice_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_color_convert_1/system_color_convert_1.xci">
-          <Proxy FileSetName="system_color_convert_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_pixel_unpack_0/system_pixel_unpack_0.xci">
-          <Proxy FileSetName="system_pixel_unpack_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_ps7_0_0/system_ps7_0_0.xci">
-          <Proxy FileSetName="system_ps7_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_logic_1_3/system_logic_1_3.xci">
-          <Proxy FileSetName="system_logic_1_3"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_leds_gpio_0/system_leds_gpio_0.xci">
-          <Proxy FileSetName="system_leds_gpio_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_arduino_intr_ack_0/system_mb_iop_arduino_intr_ack_0.xci">
-          <Proxy FileSetName="system_mb_iop_arduino_intr_ack_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_arduino_reset_0/system_mb_iop_arduino_reset_0.xci">
-          <Proxy FileSetName="system_mb_iop_arduino_reset_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_pmoda_intr_ack_0/system_mb_iop_pmoda_intr_ack_0.xci">
-          <Proxy FileSetName="system_mb_iop_pmoda_intr_ack_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_pmoda_reset_0/system_mb_iop_pmoda_reset_0.xci">
-          <Proxy FileSetName="system_mb_iop_pmoda_reset_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_concat_interrupts_0/system_concat_interrupts_0.xci">
-          <Proxy FileSetName="system_concat_interrupts_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_btns_gpio_0/system_btns_gpio_0.xci">
           <Proxy FileSetName="system_btns_gpio_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_pmodb_reset_0/system_mb_iop_pmodb_reset_0.xci">
-          <Proxy FileSetName="system_mb_iop_pmodb_reset_0"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_concat_arduino_0/system_concat_arduino_0.xci">
+          <Proxy FileSetName="system_concat_arduino_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_pmodb_intr_ack_0/system_mb_iop_pmodb_intr_ack_0.xci">
-          <Proxy FileSetName="system_mb_iop_pmodb_intr_ack_0"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_concat_pmoda_0/system_concat_pmoda_0.xci">
+          <Proxy FileSetName="system_concat_pmoda_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mdm_1_0/system_mdm_1_0.xci">
-          <Proxy FileSetName="system_mdm_1_0"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_audio_direct_0_0/system_audio_direct_0_0.xci">
+          <Proxy FileSetName="system_audio_direct_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_iop_interrupts_0/system_iop_interrupts_0.xci">
-          <Proxy FileSetName="system_iop_interrupts_0"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_concat_interrupts_0/system_concat_interrupts_0.xci">
+          <Proxy FileSetName="system_concat_interrupts_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_constant_10bit_0_0/system_constant_10bit_0_0.xci">
           <Proxy FileSetName="system_constant_10bit_0_0"/>
@@ -455,11 +89,380 @@
         <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_constant_8bit_0_0/system_constant_8bit_0_0.xci">
           <Proxy FileSetName="system_constant_8bit_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_concat_arduino_0/system_concat_arduino_0.xci">
-          <Proxy FileSetName="system_concat_arduino_0"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_4/system_xbar_4.xci">
+          <Proxy FileSetName="system_xbar_4"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_concat_pmoda_0/system_concat_pmoda_0.xci">
-          <Proxy FileSetName="system_concat_pmoda_0"/>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_ilmb_v10_2/system_ilmb_v10_2.xci">
+          <Proxy FileSetName="system_ilmb_v10_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_if_cntlr_2/system_lmb_bram_if_cntlr_2.xci">
+          <Proxy FileSetName="system_lmb_bram_if_cntlr_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_io_switch_1/system_io_switch_1.xci">
+          <Proxy FileSetName="system_io_switch_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_1/system_timer_1.xci">
+          <Proxy FileSetName="system_timer_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_logic_1_2/system_logic_1_2.xci">
+          <Proxy FileSetName="system_logic_1_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_bram_ctrl_2/system_mb_bram_ctrl_2.xci">
+          <Proxy FileSetName="system_mb_bram_ctrl_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rst_clk_wiz_1_100M_2/system_rst_clk_wiz_1_100M_2.xci">
+          <Proxy FileSetName="system_rst_clk_wiz_1_100M_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_concat_2/system_intr_concat_2.xci">
+          <Proxy FileSetName="system_intr_concat_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_spi_1/system_spi_1.xci">
+          <Proxy FileSetName="system_spi_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_iic_1/system_iic_1.xci">
+          <Proxy FileSetName="system_iic_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_2/system_mb_2.xci">
+          <Proxy FileSetName="system_mb_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dlmb_v10_2/system_dlmb_v10_2.xci">
+          <Proxy FileSetName="system_dlmb_v10_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intc_2/system_intc_2.xci">
+          <Proxy FileSetName="system_intc_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_2/system_lmb_bram_2.xci">
+          <Proxy FileSetName="system_lmb_bram_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_gpio_1/system_gpio_1.xci">
+          <Proxy FileSetName="system_gpio_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_2/system_intr_2.xci">
+          <Proxy FileSetName="system_intr_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_dynclk_0/system_axi_dynclk_0.xci">
+          <Proxy FileSetName="system_axi_dynclk_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_hdmi_out_hpd_video_0/system_hdmi_out_hpd_video_0.xci">
+          <Proxy FileSetName="system_hdmi_out_hpd_video_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_vtc_out_0/system_vtc_out_0.xci">
+          <Proxy FileSetName="system_vtc_out_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_vdma_0/system_axi_vdma_0.xci">
+          <Proxy FileSetName="system_axi_vdma_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rgb2dvi_0_0/system_rgb2dvi_0_0.xci">
+          <Proxy FileSetName="system_rgb2dvi_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_color_convert_0/system_color_convert_0.xci">
+          <Proxy FileSetName="system_color_convert_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_pixel_pack_0/system_pixel_pack_0.xci">
+          <Proxy FileSetName="system_pixel_pack_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xlconcat_0_0/system_xlconcat_0_0.xci">
+          <Proxy FileSetName="system_xlconcat_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_v_axi4s_vid_out_0_0/system_v_axi4s_vid_out_0_0.xci">
+          <Proxy FileSetName="system_v_axi4s_vid_out_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axis_register_slice_0_1/system_axis_register_slice_0_1.xci">
+          <Proxy FileSetName="system_axis_register_slice_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_color_swap_0_1/system_color_swap_0_1.xci">
+          <Proxy FileSetName="system_color_swap_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axis_register_slice_0_0/system_axis_register_slice_0_0.xci">
+          <Proxy FileSetName="system_axis_register_slice_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_color_convert_1/system_color_convert_1.xci">
+          <Proxy FileSetName="system_color_convert_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_system_interrupts_0/system_system_interrupts_0.xci">
+          <Proxy FileSetName="system_system_interrupts_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_pixel_unpack_0/system_pixel_unpack_0.xci">
+          <Proxy FileSetName="system_pixel_unpack_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_proc_sys_reset_pixelclk_0/system_proc_sys_reset_pixelclk_0.xci">
+          <Proxy FileSetName="system_proc_sys_reset_pixelclk_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_logic_1_1/system_logic_1_1.xci">
+          <Proxy FileSetName="system_logic_1_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_3/system_xbar_3.xci">
+          <Proxy FileSetName="system_xbar_3"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_1/system_mb_1.xci">
+          <Proxy FileSetName="system_mb_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_gpio_0/system_gpio_0.xci">
+          <Proxy FileSetName="system_gpio_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_1/system_intr_1.xci">
+          <Proxy FileSetName="system_intr_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rst_clk_wiz_1_100M_1/system_rst_clk_wiz_1_100M_1.xci">
+          <Proxy FileSetName="system_rst_clk_wiz_1_100M_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_spi_0/system_spi_0.xci">
+          <Proxy FileSetName="system_spi_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_0/system_timer_0.xci">
+          <Proxy FileSetName="system_timer_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intc_1/system_intc_1.xci">
+          <Proxy FileSetName="system_intc_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_bram_ctrl_1/system_mb_bram_ctrl_1.xci">
+          <Proxy FileSetName="system_mb_bram_ctrl_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_1/system_lmb_bram_1.xci">
+          <Proxy FileSetName="system_lmb_bram_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dlmb_v10_1/system_dlmb_v10_1.xci">
+          <Proxy FileSetName="system_dlmb_v10_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_concat_1/system_intr_concat_1.xci">
+          <Proxy FileSetName="system_intr_concat_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dff_en_reset_vector_0_1/system_dff_en_reset_vector_0_1.xci">
+          <Proxy FileSetName="system_dff_en_reset_vector_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_ilmb_v10_1/system_ilmb_v10_1.xci">
+          <Proxy FileSetName="system_ilmb_v10_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_io_switch_0/system_io_switch_0.xci">
+          <Proxy FileSetName="system_io_switch_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_iic_0/system_iic_0.xci">
+          <Proxy FileSetName="system_iic_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dff_en_reset_vector_0_0/system_dff_en_reset_vector_0_0.xci">
+          <Proxy FileSetName="system_dff_en_reset_vector_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intc_0/system_intc_0.xci">
+          <Proxy FileSetName="system_intc_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_concat_0/system_intr_concat_0.xci">
+          <Proxy FileSetName="system_intr_concat_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_0/system_mb_0.xci">
+          <Proxy FileSetName="system_mb_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_0_0/system_mb3_timer_capture_0_0.xci">
+          <Proxy FileSetName="system_mb3_timer_capture_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_intr_0/system_intr_0.xci">
+          <Proxy FileSetName="system_intr_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_1_0/system_mb3_timer_capture_1_0.xci">
+          <Proxy FileSetName="system_mb3_timer_capture_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_2_0/system_mb3_timer_capture_2_0.xci">
+          <Proxy FileSetName="system_mb3_timer_capture_2_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_3_0/system_mb3_timer_capture_3_0.xci">
+          <Proxy FileSetName="system_mb3_timer_capture_3_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_uartlite_0/system_uartlite_0.xci">
+          <Proxy FileSetName="system_uartlite_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_io_switch_0_0/system_io_switch_0_0.xci">
+          <Proxy FileSetName="system_io_switch_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_4_0/system_mb3_timer_capture_4_0.xci">
+          <Proxy FileSetName="system_mb3_timer_capture_4_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_if_cntlr_1/system_lmb_bram_if_cntlr_1.xci">
+          <Proxy FileSetName="system_lmb_bram_if_cntlr_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_bram_ctrl_0/system_mb_bram_ctrl_0.xci">
+          <Proxy FileSetName="system_mb_bram_ctrl_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xadc_0/system_xadc_0.xci">
+          <Proxy FileSetName="system_xadc_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rst_clk_wiz_1_100M_0/system_rst_clk_wiz_1_100M_0.xci">
+          <Proxy FileSetName="system_rst_clk_wiz_1_100M_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_logic_1_0/system_logic_1_0.xci">
+          <Proxy FileSetName="system_logic_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_iic_direct_0/system_iic_direct_0.xci">
+          <Proxy FileSetName="system_iic_direct_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_arduino_gpio_0/system_arduino_gpio_0.xci">
+          <Proxy FileSetName="system_arduino_gpio_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_1/system_xbar_1.xci">
+          <Proxy FileSetName="system_xbar_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_0/system_xbar_0.xci">
+          <Proxy FileSetName="system_xbar_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_ck_gpio_0/system_ck_gpio_0.xci">
+          <Proxy FileSetName="system_ck_gpio_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_if_cntlr_0/system_lmb_bram_if_cntlr_0.xci">
+          <Proxy FileSetName="system_lmb_bram_if_cntlr_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_gpio_hdmiin_0/system_axi_gpio_hdmiin_0.xci">
+          <Proxy FileSetName="system_axi_gpio_hdmiin_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_vtc_in_0/system_vtc_in_0.xci">
+          <Proxy FileSetName="system_vtc_in_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_color_swap_0_0/system_color_swap_0_0.xci">
+          <Proxy FileSetName="system_color_swap_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_8/system_xbar_8.xci">
+          <Proxy FileSetName="system_xbar_8"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_7/system_xbar_7.xci">
+          <Proxy FileSetName="system_xbar_7"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_dma_0_0/system_axi_dma_0_0.xci">
+          <Proxy FileSetName="system_axi_dma_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axis_data_fifo_0_0/system_axis_data_fifo_0_0.xci">
+          <Proxy FileSetName="system_axis_data_fifo_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dvi2rgb_0_0/system_dvi2rgb_0_0.xci">
+          <Proxy FileSetName="system_dvi2rgb_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_trace_cntrl_64_0_0/system_trace_cntrl_64_0_0.xci">
+          <Proxy FileSetName="system_trace_cntrl_64_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_6/system_xbar_6.xci">
+          <Proxy FileSetName="system_xbar_6"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_v_vid_in_axi4s_0_0/system_v_vid_in_axi4s_0_0.xci">
+          <Proxy FileSetName="system_v_vid_in_axi4s_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_5/system_xbar_5.xci">
+          <Proxy FileSetName="system_xbar_5"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_constant_tkeep_tstrb_0/system_constant_tkeep_tstrb_0.xci">
+          <Proxy FileSetName="system_constant_tkeep_tstrb_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dff_en_reset_vector_0_2/system_dff_en_reset_vector_0_2.xci">
+          <Proxy FileSetName="system_dff_en_reset_vector_0_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axis_data_fifo_0_1/system_axis_data_fifo_0_1.xci">
+          <Proxy FileSetName="system_axis_data_fifo_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_axi_dma_0_1/system_axi_dma_0_1.xci">
+          <Proxy FileSetName="system_axi_dma_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_constant_tkeep_tstrb_1/system_constant_tkeep_tstrb_1.xci">
+          <Proxy FileSetName="system_constant_tkeep_tstrb_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_trace_cntrl_32_0_0/system_trace_cntrl_32_0_0.xci">
+          <Proxy FileSetName="system_trace_cntrl_32_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timers_interrupt_0/system_mb3_timers_interrupt_0.xci">
+          <Proxy FileSetName="system_mb3_timers_interrupt_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_generate_0/system_mb3_timer_generate_0.xci">
+          <Proxy FileSetName="system_mb3_timer_generate_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_3_0/system_timer_3_0.xci">
+          <Proxy FileSetName="system_timer_3_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_4_0/system_timer_4_0.xci">
+          <Proxy FileSetName="system_timer_4_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_5_0/system_mb3_timer_capture_5_0.xci">
+          <Proxy FileSetName="system_mb3_timer_capture_5_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_0_0/system_timer_0_0.xci">
+          <Proxy FileSetName="system_timer_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_ilmb_v10_0/system_ilmb_v10_0.xci">
+          <Proxy FileSetName="system_ilmb_v10_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_1_0/system_timer_1_0.xci">
+          <Proxy FileSetName="system_timer_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_7_0/system_mb3_timer_capture_7_0.xci">
+          <Proxy FileSetName="system_mb3_timer_capture_7_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_5_0/system_timer_5_0.xci">
+          <Proxy FileSetName="system_timer_5_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_spi_direct_0/system_spi_direct_0.xci">
+          <Proxy FileSetName="system_spi_direct_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_timer_2_0/system_timer_2_0.xci">
+          <Proxy FileSetName="system_timer_2_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_spi_shared_0/system_spi_shared_0.xci">
+          <Proxy FileSetName="system_spi_shared_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_lmb_bram_0/system_lmb_bram_0.xci">
+          <Proxy FileSetName="system_lmb_bram_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_xbar_2/system_xbar_2.xci">
+          <Proxy FileSetName="system_xbar_2"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_dlmb_v10_0/system_dlmb_v10_0.xci">
+          <Proxy FileSetName="system_dlmb_v10_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_capture_6_0/system_mb3_timer_capture_6_0.xci">
+          <Proxy FileSetName="system_mb3_timer_capture_6_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb3_timer_pwm_0/system_mb3_timer_pwm_0.xci">
+          <Proxy FileSetName="system_mb3_timer_pwm_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_pmoda_reset_0/system_mb_iop_pmoda_reset_0.xci">
+          <Proxy FileSetName="system_mb_iop_pmoda_reset_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_pmodb_intr_ack_0/system_mb_iop_pmodb_intr_ack_0.xci">
+          <Proxy FileSetName="system_mb_iop_pmodb_intr_ack_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_iop_interrupts_0/system_iop_interrupts_0.xci">
+          <Proxy FileSetName="system_iop_interrupts_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mdm_1_0/system_mdm_1_0.xci">
+          <Proxy FileSetName="system_mdm_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_leds_gpio_0/system_leds_gpio_0.xci">
+          <Proxy FileSetName="system_leds_gpio_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_pmoda_intr_ack_0/system_mb_iop_pmoda_intr_ack_0.xci">
+          <Proxy FileSetName="system_mb_iop_pmoda_intr_ack_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_arduino_reset_0/system_mb_iop_arduino_reset_0.xci">
+          <Proxy FileSetName="system_mb_iop_arduino_reset_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_proc_sys_reset_fclk1_0/system_proc_sys_reset_fclk1_0.xci">
+          <Proxy FileSetName="system_proc_sys_reset_fclk1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rgbleds_gpio_0/system_rgbleds_gpio_0.xci">
+          <Proxy FileSetName="system_rgbleds_gpio_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rst_ps7_0_fclk0_0/system_rst_ps7_0_fclk0_0.xci">
+          <Proxy FileSetName="system_rst_ps7_0_fclk0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_rst_ps7_0_fclk3_0/system_rst_ps7_0_fclk3_0.xci">
+          <Proxy FileSetName="system_rst_ps7_0_fclk3_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_logic_1_3/system_logic_1_3.xci">
+          <Proxy FileSetName="system_logic_1_3"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_ps7_0_0/system_ps7_0_0.xci">
+          <Proxy FileSetName="system_ps7_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_switches_gpio_0/system_switches_gpio_0.xci">
+          <Proxy FileSetName="system_switches_gpio_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_arduino_intr_ack_0/system_mb_iop_arduino_intr_ack_0.xci">
+          <Proxy FileSetName="system_mb_iop_arduino_intr_ack_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="system.bd" FileRelPathName="ip/system_mb_iop_pmodb_reset_0/system_mb_iop_pmodb_reset_0.xci">
+          <Proxy FileSetName="system_mb_iop_pmodb_reset_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PPRDIR/../vivado/top.v">
@@ -1293,6 +1296,12 @@
     <FileSet Name="system_mb3_timer_capture_3_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/system_mb3_timer_capture_3_0">
       <Config>
         <Option Name="TopModule" Val="system_mb3_timer_capture_3_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="system_util_vector_logic_0_2" Type="BlockSrcs" RelSrcDir="$PSRCDIR/system_util_vector_logic_0_2">
+      <Config>
+        <Option Name="TopModule" Val="system_util_vector_logic_0_2"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -2516,6 +2525,17 @@
     <Run Id="system_mb3_timer_capture_3_0_synth_1" Type="Ft3:Synth" SrcSet="system_mb3_timer_capture_3_0" Part="xc7z020clg400-1" ConstrsSet="system_mb3_timer_capture_3_0" Description="Vivado Synthesis Defaults" WriteIncrSynthDcp="false" Dir="$PRUNDIR/system_mb3_timer_capture_3_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2017"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+    </Run>
+    <Run Id="system_util_vector_logic_0_2_synth_1" Type="Ft3:Synth" SrcSet="system_util_vector_logic_0_2" Part="xc7z020clg400-1" ConstrsSet="system_util_vector_logic_0_2" Description="Vivado Synthesis Defaults" WriteIncrSynthDcp="false" Dir="$PRUNDIR/system_util_vector_logic_0_2_synth_1" IncludeInArchive="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2017">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -4654,6 +4674,24 @@
     <Run Id="system_mb3_timer_capture_3_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="system_mb3_timer_capture_3_0" Description="Default settings for Implementation." WriteIncrSynthDcp="false" SynthRun="system_mb3_timer_capture_3_0_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2017"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2017"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+    </Run>
+    <Run Id="system_util_vector_logic_0_2_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="system_util_vector_logic_0_2" Description="Default settings for Implementation." WriteIncrSynthDcp="false" SynthRun="system_util_vector_logic_0_2_synth_1" IncludeInArchive="false">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2017">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>

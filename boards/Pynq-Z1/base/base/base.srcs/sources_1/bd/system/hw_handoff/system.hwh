@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Apr  9 19:59:55 2018" VIVADOVERSION="2017.4">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Apr 16 15:00:43 2018" VIVADOVERSION="2017.4">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z020" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -6286,10 +6286,10 @@
         </PORT>
         <PORT DIR="O" NAME="uart0_rx_i" SIGIS="undef" SIGNAME="iop_arduino_io_switch_0_uart0_rx_i">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="iop_arduino_uartlite" PORT="rx"/>
+            <CONNECTION INSTANCE="iop_arduino_util_vector_logic_0" PORT="Op1"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="uart0_tx_o" SIGIS="undef" SIGNAME="iop_arduino_io_switch_0_uart0_tx_o">
+        <PORT DIR="I" NAME="uart0_tx_o" SIGIS="undef" SIGNAME="iop_arduino_uartlite_tx">
           <CONNECTIONS>
             <CONNECTION INSTANCE="iop_arduino_uartlite" PORT="tx"/>
           </CONNECTIONS>
@@ -6562,7 +6562,7 @@
             <PORTMAP LOGICAL="IO0_I" PHYSICAL="mosi0_i"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="iop_arduino_uartlite_UART" NAME="uart0" TYPE="TARGET" VLNV="xilinx.com:interface:uart:1.0">
+        <BUSINTERFACE BUSNAME="__NOC__" NAME="uart0" TYPE="TARGET" VLNV="xilinx.com:interface:uart:1.0">
           <PORTMAPS>
             <PORTMAP LOGICAL="TxD" PHYSICAL="uart0_tx_o"/>
             <PORTMAP LOGICAL="RxD" PHYSICAL="uart0_rx_i"/>
@@ -15771,12 +15771,12 @@
             <CONNECTION INSTANCE="iop_arduino_microblaze_0_axi_periph" PORT="M08_AXI_rready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="rx" SIGIS="undef" SIGNAME="iop_arduino_io_switch_0_uart0_rx_i">
+        <PORT DIR="I" NAME="rx" SIGIS="undef" SIGNAME="iop_arduino_util_vector_logic_0_Res">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="iop_arduino_io_switch_0" PORT="uart0_rx_i"/>
+            <CONNECTION INSTANCE="iop_arduino_util_vector_logic_0" PORT="Res"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="tx" SIGIS="undef" SIGNAME="iop_arduino_io_switch_0_uart0_tx_o">
+        <PORT DIR="O" NAME="tx" SIGIS="undef" SIGNAME="iop_arduino_uartlite_tx">
           <CONNECTIONS>
             <CONNECTION INSTANCE="iop_arduino_io_switch_0" PORT="uart0_tx_o"/>
           </CONNECTIONS>
@@ -15834,13 +15834,36 @@
             <PORTMAP LOGICAL="WVALID" PHYSICAL="s_axi_wvalid"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="iop_arduino_uartlite_UART" NAME="UART" TYPE="INITIATOR" VLNV="xilinx.com:interface:uart:1.0">
+        <BUSINTERFACE BUSNAME="__NOC__" NAME="UART" TYPE="INITIATOR" VLNV="xilinx.com:interface:uart:1.0">
           <PORTMAPS>
             <PORTMAP LOGICAL="RxD" PHYSICAL="rx"/>
             <PORTMAP LOGICAL="TxD" PHYSICAL="tx"/>
           </PORTMAPS>
         </BUSINTERFACE>
       </BUSINTERFACES>
+    </MODULE>
+    <MODULE FULLNAME="/iop_arduino/util_vector_logic_0" HWVERSION="2.0" INSTANCE="iop_arduino_util_vector_logic_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="util_vector_logic" VLNV="xilinx.com:ip:util_vector_logic:2.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="C_OPERATION" VALUE="not"/>
+        <PARAMETER NAME="C_SIZE" VALUE="1"/>
+        <PARAMETER NAME="Component_Name" VALUE="system_util_vector_logic_0_2"/>
+        <PARAMETER NAME="LOGO_FILE" VALUE="data/sym_notgate.png"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="0" NAME="Op1" RIGHT="0" SIGIS="undef" SIGNAME="iop_arduino_io_switch_0_uart0_rx_i">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="iop_arduino_io_switch_0" PORT="uart0_rx_i"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="0" NAME="Res" RIGHT="0" SIGIS="undef" SIGNAME="iop_arduino_util_vector_logic_0_Res">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="iop_arduino_uartlite" PORT="rx"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
     </MODULE>
     <MODULE FULLNAME="/iop_arduino/xadc" HWVERSION="3.3" INSTANCE="iop_arduino_xadc" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xadc_wiz" VLNV="xilinx.com:ip:xadc_wiz:3.3">
       <DOCUMENTS>
@@ -50224,7 +50247,7 @@
     </MODULE>
     <MODULE FULLNAME="/video/hdmi_in/frontend/dvi2rgb_0" HWVERSION="1.7" INSTANCE="video_hdmi_in_frontend_dvi2rgb_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="dvi2rgb" VLNV="digilentinc.com:ip:dvi2rgb:1.7">
       <DOCUMENTS>
-        <DOCUMENT SOURCE="d:/Pynq/PYNQ_V2.1/boards/ip/dvi2rgb_v1_7/docs/dvi2rgb.pdf"/>
+        <DOCUMENT SOURCE="d:/Pynq/Pynq_v2.1_SPOT/boards/ip/dvi2rgb_v1_7/docs/dvi2rgb.pdf"/>
       </DOCUMENTS>
       <PARAMETERS>
         <PARAMETER NAME="kEmulateDDC" VALUE="true"/>
@@ -52578,7 +52601,7 @@
     </MODULE>
     <MODULE FULLNAME="/video/hdmi_out/frontend/rgb2dvi_0" HWVERSION="1.2" INSTANCE="video_hdmi_out_frontend_rgb2dvi_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="rgb2dvi" VLNV="digilentinc.com:ip:rgb2dvi:1.2">
       <DOCUMENTS>
-        <DOCUMENT SOURCE="d:/Pynq/PYNQ_V2.1/boards/ip/rgb2dvi_v1_2/docs/rgb2dvi_v1_2.pdf"/>
+        <DOCUMENT SOURCE="d:/Pynq/Pynq_v2.1_SPOT/boards/ip/rgb2dvi_v1_2/docs/rgb2dvi_v1_2.pdf"/>
       </DOCUMENTS>
       <PARAMETERS>
         <PARAMETER NAME="kGenerateSerialClk" VALUE="false"/>
