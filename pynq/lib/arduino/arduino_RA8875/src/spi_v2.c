@@ -150,7 +150,7 @@ void spi_transfer_mod(spi dev_id, const char* write_data, char* read_data, unsig
 	while(((XSpi_ReadReg(base_address, XSP_SR_OFFSET) & 0x04)) != 0x04);
 
 	// delay for 100 clock cycles
-	j = 10000;
+	j = 10;
 	while(j--);
 
 	for(i=0; i<length_read; i++){

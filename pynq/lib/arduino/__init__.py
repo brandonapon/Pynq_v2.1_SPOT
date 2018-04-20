@@ -49,7 +49,7 @@ from .arduino_grove_haptic_motor import Grove_HapticMotor
 from .arduino_grove_th02 import Grove_TH02
 from .arduino_mailboxTest import Arduino_mailboxTest
 from .arduino_RA8875 import Arduino_RA8875
-from .arduino_cam import Arduino_CAM
+from .arduino_cam_uart import Arduino_CAM_UART
 from .arduino_rangefinder import Arduino_Rangefinder
 from .arduino_button import Arduino_Button
 
