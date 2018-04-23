@@ -10,7 +10,8 @@ from . import MAILBOX_PY2IOP_CMD_OFFSET
 
 ARDUINO_CAM_UART_PROGRAM = "arduino_cam_uart.bin"
 WRITE = 0x2
-READ = 0x
+READ = 0x3
+
 
 class Arduino_CAM_UART(object):
     '''
