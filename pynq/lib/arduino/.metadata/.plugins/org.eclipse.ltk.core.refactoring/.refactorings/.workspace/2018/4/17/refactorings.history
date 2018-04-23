@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 6 resources" deleteContents="false" description="Delete 6 resources" element1="/arduino_cam" element2="/arduino_grove_haptic_motor" element3="/arduino_grove_imu" element4="/arduino_lcd18" element5="/arduino_mailboxTest" element6="/arduino_RA8875" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="6" stamp="1524456580797"/>
+</session>

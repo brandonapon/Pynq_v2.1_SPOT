@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="D:\Pynq\Pynq_v2.1_SPOT\pynq\lib\arduino\arduino_RA8875"/>
+		<item value="D:\Pynq\Pynq_v2.1_SPOT\pynq\lib\arduino\arduino_cam_uart"/>
 		<item value="D:\Pynq\PYNQ_V2.1\pynq\lib\arduino"/>
 	</list>
 </section>
