@@ -14,7 +14,8 @@ src/arduino_cam_uart.o src/arduino_cam_uart.o: ../src/arduino_cam_uart.c \
  ../../bsp_iop_arduino/iop_arduino_mb/include/xil_exception.h \
  ../../bsp_iop_arduino/iop_arduino_mb/include/xil_cache.h \
  ../../bsp_iop_arduino/iop_arduino_mb/include/xsysmon.h \
- ../../bsp_iop_arduino/iop_arduino_mb/include/xsysmon_hw.h
+ ../../bsp_iop_arduino/iop_arduino_mb/include/xsysmon_hw.h \
+ ../../bsp_iop_arduino/iop_arduino_mb/include/xuartlite_l.h
 
 ../../bsp_iop_arduino/iop_arduino_mb/include/circular_buffer.h:
 
@@ -49,3 +50,5 @@ src/arduino_cam_uart.o src/arduino_cam_uart.o: ../src/arduino_cam_uart.c \
 ../../bsp_iop_arduino/iop_arduino_mb/include/xsysmon.h:
 
 ../../bsp_iop_arduino/iop_arduino_mb/include/xsysmon_hw.h:
+
+../../bsp_iop_arduino/iop_arduino_mb/include/xuartlite_l.h:

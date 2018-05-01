@@ -124,7 +124,7 @@ int main()
    uint8_t *ddr_address;
    char send_cmd[1] = {0};
    int flag = 1;
-   char buffer_1[1024] = {};
+   char buffer_1[14400] = {};
    char buffer_2[64] = {};
    char stream_in[128] = {};
    char wait[1] = {0};
@@ -193,30 +193,11 @@ int main()
 						++read_count;
 					}
 				}
-				for(int i = 0; i < stream_size; ++i){
+				for(int i = 0; i < 128; ++i){
 					MAILBOX_DATA(i) = buffer_1[i];
 				}
-				MAILBOX_DATA(stream_size) = read_count;
-				MAILBOX_DATA(stream_size+1) = stream_size;
-				MAILBOX_CMD_ADDR = 0x0;
-				break;
-
-			case STREAM_DDR:
-				ddr_address = MAILBOX_DATA(1) | 0x20000000;
-				stream_size = MAILBOX_DATA(0);
-				read_count = 0;
-				while(read_count < stream_size){
-					num_read = uart_read(uart_device, stream_in, 1);
-					if(num_read == 1){
-						buffer_1[read_count] = stream_in[0];
-						++read_count;
-					}
-				}
-				for(int i = 0; i < stream_size; ++i){
-					ddr_address[i] = buffer_1[i];
-				}
-				MAILBOX_DATA(0) = read_count;
-				MAILBOX_DATA(1) = stream_size;
+				MAILBOX_DATA(128) = read_count;
+				MAILBOX_DATA(129) = stream_size;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 
@@ -227,6 +208,22 @@ int main()
 				for (int index = 0; index < 128; ++index){
 					MAILBOX_DATA(index) = stream_in[index];
 				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case STREAM_DDR:
+				ddr_address = MAILBOX_DATA(1) | 0x20000000;
+				stream_size = MAILBOX_DATA(0);
+				read_count = 0;
+				while(read_count < stream_size){
+					num_read = uart_read(uart_device, stream_in, 1);
+					if(num_read == 1){
+						ddr_address[read_count] = stream_in[0];
+						++read_count;
+					}
+				}
+				MAILBOX_DATA(0) = read_count;
+				MAILBOX_DATA(1) = stream_size;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 
