@@ -56,6 +56,7 @@
 #include "circular_buffer.h"
 #include "timer.h"
 #include "uart_v2.h"
+#include "gpio.h"
 #include "xio_switch.h"
 #include "xparameters.h"
 #include <stdint.h>
@@ -72,12 +73,20 @@
 #define WRITE					0x2
 #define READ					0x3
 #define TRANSACTION				0x4
+#define SIMPLE					0x5
+#define STREAM					0x6
+#define STREAM_DDR				0x7
+#define STREAM_PIXEL 			0x8
+#define FLOW 					0x9
+#define CONSECUTIVE 			0xa
 
 //Define Pins
 #define RX						0
 #define TX						1
 
 uart uart_device;
+gpio gpio_device;
+
 
 // UART functions
 //uart uart_open_device(unsigned int device);
@@ -94,6 +103,9 @@ int main()
    //UART Init
    init_io_switch();
    uart_device = uart_open(TX, RX);
+   gpio_device = gpio_open_device(0);
+   gpio_device = gpio_configure(gpio_device, 2, 2, 1);
+   gpio_set_direction(gpio_device, 0);
    int status = 0;
 //   uart_device = uart_open_device(0);
    if(uart_device == -1){
@@ -101,12 +113,21 @@ int main()
    }
 
    char write_snap_cmd[1] = {1};
+   char go_cmd[1] = "a";
+   char stop_cmd[1] = "b";
    char write_data[4] = {0,1,2,3};
    char read_data[4] = {-1};
    int file_size;
+   int increment = 0;
    uint8_t *ddr_address;
    char send_cmd[1] = {0};
    int flag = 1;
+   char buffer_1[64] = {};
+   char buffer_2[64] = {};
+   char stream_in[128] = {};
+   char wait[1] = {0};
+   int num_read = 0;
+   gpio_write(gpio_device, 1); //set high
    // Run application
    while(1){
      // wait and store valid command
@@ -132,18 +153,132 @@ int main()
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 
+			case SIMPLE:
+				uart_write(uart_device, write_snap_cmd, 1);
+				num_read = uart_read(uart_device, read_data, 4);
+				MAILBOX_DATA(0) =  num_read;
+				MAILBOX_DATA(1) = read_data[0];
+				MAILBOX_DATA(2) = read_data[1];
+				MAILBOX_DATA(3) = read_data[2];
+				MAILBOX_DATA(4) = read_data[3];
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
 			case TRANSACTION:
 				ddr_address = MAILBOX_DATA(0) | 0x20000000;
 				file_size = MAILBOX_DATA(1);
 				uart_write(uart_device, write_snap_cmd, 1);
-				while(1){
-					uart_read(uart_device, send_cmd, 1);
-					if(strcmp(send_cmd, "1") == 0){
-						break;
+				for(int i = 0; i < file_size/16; ++i){
+					uart_read(uart_device, buffer_1, 64);
+					for(int j = 0; j < 16; ++j){
+						ddr_address[i*16+j] = buffer_1[j];
 					}
 				}
-				uart_read(uart_device, ddr_address, file_size);
 				MAILBOX_DATA(0) = file_size;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case STREAM:
+				uart_write(uart_device, write_snap_cmd, 1);
+				for(int i = 0; i < 128/16; ++i){
+					num_read = uart_read(uart_device, stream_in, 16);
+					for(int j = 0; j < 16; ++j){
+						MAILBOX_DATA(i*16+j) = stream_in[j];
+					}
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case STREAM_DDR:
+				ddr_address = MAILBOX_DATA(0) | 0x20000000;
+				file_size = MAILBOX_DATA(1);
+				uart_write(uart_device, write_snap_cmd, 1);
+				for(int i = 0; i < file_size/16; ++i){
+					num_read = uart_read(uart_device, stream_in, 16);
+					for(int j = 0; j < 16; ++j){
+						ddr_address[i*16+j]= stream_in[j];
+					}
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case STREAM_PIXEL:
+				ddr_address = MAILBOX_DATA(0) | 0x20000000;
+				file_size = MAILBOX_DATA(1);
+				uart_write(uart_device, write_snap_cmd, 1);
+				for(int i = 0; i < file_size; ++i){
+					num_read = uart_read(uart_device, stream_in, 3);
+					for(int j = 0; j < 3; ++j){
+						ddr_address[i*3+j]= stream_in[j];
+					}
+//					ddr_address[i] = stream_in[0];
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case FLOW:
+				ddr_address = MAILBOX_DATA(0) | 0x20000000;
+				file_size = MAILBOX_DATA(1);
+				uart_write(uart_device, write_snap_cmd, 1);
+				for(int i = 0; i < file_size; ++i){
+					gpio_write(gpio_device, 0);
+//					while(stream_in[0] != '0');
+					uart_read(uart_device, stream_in, 3);
+					gpio_write(gpio_device, 1);
+					for(int j = 0; j < 3; ++j){
+						ddr_address[i*3+j] = stream_in[j];
+					}
+
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case CONSECUTIVE:
+				gpio_write(gpio_device, 1);
+//				ddr_address = MAILBOX_DATA(0) | 0x20000000;
+				gpio_write(gpio_device, 0);
+				num_read = uart_read(uart_device, buffer_1, 4);
+//				gpio_write(gpio_device, 1);
+				for(int i=0; i < 4; ++i){
+					MAILBOX_DATA(i) = buffer_1[i];
+//					ddr_address[i] = buffer_1[i];
+				}
+				uart_read(uart_device, wait, 1);
+				while(wait[0] != 1){
+					uart_read(uart_device, wait, 1);
+				}
+				wait[0] = (char) 0;
+				gpio_write(gpio_device, 1);
+				num_read = uart_read(uart_device, buffer_2, 4);
+//				gpio_write(gpio_device, 1);
+				for(int i=4; i < 8; ++i){
+					MAILBOX_DATA(i) = buffer_2[i-4];
+//					ddr_address[i] = buffer_1[i];
+				}
+				uart_read(uart_device, wait, 1);
+				while(wait[0] != 1){
+					uart_read(uart_device, wait, 1);
+				}
+				wait[0] = (char) 0;
+				gpio_write(gpio_device, 0);
+				num_read = uart_read(uart_device, buffer_1, 4);
+//				gpio_write(gpio_device, 1);
+				for(int i=8; i < 12; ++i){
+					MAILBOX_DATA(i) = buffer_1[i-8];
+//					ddr_address[i] = buffer_1[i];
+				}
+				uart_read(uart_device, wait, 1);
+				while(wait[0] != 1){
+					uart_read(uart_device, wait, 1);
+				}
+				wait[0] = (char) 0;
+				gpio_write(gpio_device, 1);
+				num_read = uart_read(uart_device, buffer_2, 4);
+//				gpio_write(gpio_device, 1);
+				for(int i=12; i < 16; ++i){
+					MAILBOX_DATA(i) = buffer_2[i-12];
+//					ddr_address[i] = buffer_1[i];
+				}
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 

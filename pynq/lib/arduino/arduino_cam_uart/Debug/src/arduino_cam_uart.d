@@ -3,6 +3,7 @@ src/arduino_cam_uart.o src/arduino_cam_uart.o: ../src/arduino_cam_uart.c \
  ../../bsp_iop_arduino/iop_arduino_mb/include/xparameters.h \
  ../../bsp_iop_arduino/iop_arduino_mb/include/xil_types.h \
  ../../bsp_iop_arduino/iop_arduino_mb/include/timer.h ../src/uart_v2.h \
+ ../../bsp_iop_arduino/iop_arduino_mb/include/gpio.h \
  ../../bsp_iop_arduino/iop_arduino_mb/include/xio_switch.h \
  ../../bsp_iop_arduino/iop_arduino_mb/include/xstatus.h \
  ../../bsp_iop_arduino/iop_arduino_mb/include/xil_assert.h \
@@ -24,6 +25,8 @@ src/arduino_cam_uart.o src/arduino_cam_uart.o: ../src/arduino_cam_uart.c \
 ../../bsp_iop_arduino/iop_arduino_mb/include/timer.h:
 
 ../src/uart_v2.h:
+
+../../bsp_iop_arduino/iop_arduino_mb/include/gpio.h:
 
 ../../bsp_iop_arduino/iop_arduino_mb/include/xio_switch.h:
 
