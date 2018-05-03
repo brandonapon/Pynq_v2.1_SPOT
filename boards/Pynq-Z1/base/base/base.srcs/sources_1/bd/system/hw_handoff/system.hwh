@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed May  2 15:54:00 2018" VIVADOVERSION="2017.4">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu May  3 14:23:13 2018" VIVADOVERSION="2017.4">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z020" NAME="system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -6286,7 +6286,7 @@
         </PORT>
         <PORT DIR="O" NAME="uart0_rx_i" SIGIS="undef" SIGNAME="iop_arduino_io_switch_0_uart0_rx_i">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="iop_arduino_util_vector_logic_0" PORT="Op1"/>
+            <CONNECTION INSTANCE="iop_arduino_uartlite" PORT="rx"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="uart0_tx_o" SIGIS="undef" SIGNAME="iop_arduino_uartlite_tx">
@@ -15657,7 +15657,7 @@
         <PARAMETER NAME="C_S_AXI_ACLK_FREQ_HZ" VALUE="100000000"/>
         <PARAMETER NAME="C_S_AXI_ADDR_WIDTH" VALUE="4"/>
         <PARAMETER NAME="C_S_AXI_DATA_WIDTH" VALUE="32"/>
-        <PARAMETER NAME="C_BAUDRATE" VALUE="9600"/>
+        <PARAMETER NAME="C_BAUDRATE" VALUE="230400"/>
         <PARAMETER NAME="C_DATA_BITS" VALUE="8"/>
         <PARAMETER NAME="C_USE_PARITY" VALUE="0"/>
         <PARAMETER NAME="C_ODD_PARITY" VALUE="0"/>
@@ -15771,9 +15771,9 @@
             <CONNECTION INSTANCE="iop_arduino_microblaze_0_axi_periph" PORT="M08_AXI_rready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="rx" SIGIS="undef" SIGNAME="iop_arduino_util_vector_logic_0_Res">
+        <PORT DIR="I" NAME="rx" SIGIS="undef" SIGNAME="iop_arduino_io_switch_0_uart0_rx_i">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="iop_arduino_util_vector_logic_0" PORT="Res"/>
+            <CONNECTION INSTANCE="iop_arduino_io_switch_0" PORT="uart0_rx_i"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="tx" SIGIS="undef" SIGNAME="iop_arduino_uartlite_tx">
@@ -15841,29 +15841,6 @@
           </PORTMAPS>
         </BUSINTERFACE>
       </BUSINTERFACES>
-    </MODULE>
-    <MODULE FULLNAME="/iop_arduino/util_vector_logic_0" HWVERSION="2.0" INSTANCE="iop_arduino_util_vector_logic_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="util_vector_logic" VLNV="xilinx.com:ip:util_vector_logic:2.0">
-      <DOCUMENTS/>
-      <PARAMETERS>
-        <PARAMETER NAME="C_OPERATION" VALUE="not"/>
-        <PARAMETER NAME="C_SIZE" VALUE="1"/>
-        <PARAMETER NAME="Component_Name" VALUE="system_util_vector_logic_0_2"/>
-        <PARAMETER NAME="LOGO_FILE" VALUE="data/sym_notgate.png"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
-      </PARAMETERS>
-      <PORTS>
-        <PORT DIR="I" LEFT="0" NAME="Op1" RIGHT="0" SIGIS="undef" SIGNAME="iop_arduino_io_switch_0_uart0_rx_i">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="iop_arduino_io_switch_0" PORT="uart0_rx_i"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="0" NAME="Res" RIGHT="0" SIGIS="undef" SIGNAME="iop_arduino_util_vector_logic_0_Res">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="iop_arduino_uartlite" PORT="rx"/>
-          </CONNECTIONS>
-        </PORT>
-      </PORTS>
-      <BUSINTERFACES/>
     </MODULE>
     <MODULE FULLNAME="/iop_arduino/xadc" HWVERSION="3.3" INSTANCE="iop_arduino_xadc" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xadc_wiz" VLNV="xilinx.com:ip:xadc_wiz:3.3">
       <DOCUMENTS>

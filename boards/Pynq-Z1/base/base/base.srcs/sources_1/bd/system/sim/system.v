@@ -1,7 +1,7 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
-//Date        : Wed May  2 15:53:41 2018
+//Date        : Thu May  3 14:22:56 2018
 //Host        : DESKTOP-PIC5S0G running 64-bit major release  (build 9200)
 //Command     : generate_target system.bd
 //Design      : system
@@ -3395,7 +3395,6 @@ module iop_arduino_imp_1IUOJZS
   wire [0:0]spi_subsystem_SPI_0_SS_O;
   wire spi_subsystem_SPI_0_SS_T;
   wire uartlite_tx;
-  wire [0:0]util_vector_logic_0_Res;
 
   assign Conn10_V_N = Vaux6_v_n;
   assign Conn10_V_P = Vaux6_v_p;
@@ -4350,7 +4349,7 @@ module iop_arduino_imp_1IUOJZS
         .timer_interrupts(mb3_timers_subsystem_mb3_timer_interrupts));
   system_uartlite_0 uartlite
        (.interrupt(mb3_uartlite_d1_d0_interrupt),
-        .rx(util_vector_logic_0_Res),
+        .rx(io_switch_0_uart0_rx_i),
         .s_axi_aclk(ps7_0_FCLK_CLK0),
         .s_axi_araddr(microblaze_0_axi_periph_M08_AXI_ARADDR),
         .s_axi_aresetn(s_axi_aresetn_1),
@@ -4371,9 +4370,6 @@ module iop_arduino_imp_1IUOJZS
         .s_axi_wstrb(microblaze_0_axi_periph_M08_AXI_WSTRB),
         .s_axi_wvalid(microblaze_0_axi_periph_M08_AXI_WVALID),
         .tx(uartlite_tx));
-  system_util_vector_logic_0_2 util_vector_logic_0
-       (.Op1(io_switch_0_uart0_rx_i),
-        .Res(util_vector_logic_0_Res));
   system_xadc_0 xadc
        (.s_axi_aclk(ps7_0_FCLK_CLK0),
         .s_axi_araddr(microblaze_0_axi_periph_M15_AXI_ARADDR),
@@ -25940,7 +25936,7 @@ module spi_subsystem_imp_Z7WCGE
         .ss_t(Conn2_SS_T));
 endmodule
 
-(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=330,numReposBlks=228,numNonXlnxBlks=5,numHierBlks=102,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=6,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "system.hwdef" *) 
+(* CORE_GENERATION_INFO = "system,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=system,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=329,numReposBlks=227,numNonXlnxBlks=5,numHierBlks=102,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=6,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "system.hwdef" *) 
 module system
    (DDR_addr,
     DDR_ba,

@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
-| Date         : Wed May  2 16:09:48 2018
+| Date         : Thu May  3 14:38:11 2018
 | Host         : DESKTOP-PIC5S0G running 64-bit major release  (build 9200)
 | Command      : report_utilization -file top_utilization_placed.rpt -pb top_utilization_placed.pb
 | Design       : top
@@ -31,13 +31,13 @@ Table of Contents
 +----------------------------+-------+-------+-----------+-------+
 |          Site Type         |  Used | Fixed | Available | Util% |
 +----------------------------+-------+-------+-----------+-------+
-| Slice LUTs                 | 33171 |     0 |     53200 | 62.35 |
-|   LUT as Logic             | 30994 |     0 |     53200 | 58.26 |
+| Slice LUTs                 | 33152 |     0 |     53200 | 62.32 |
+|   LUT as Logic             | 30975 |     0 |     53200 | 58.22 |
 |   LUT as Memory            |  2177 |     0 |     17400 | 12.51 |
 |     LUT as Distributed RAM |  1028 |     0 |           |       |
 |     LUT as Shift Register  |  1149 |     0 |           |       |
-| Slice Registers            | 47607 |     9 |    106400 | 44.74 |
-|   Register as Flip Flop    | 47604 |     9 |    106400 | 44.74 |
+| Slice Registers            | 47602 |     9 |    106400 | 44.74 |
+|   Register as Flip Flop    | 47599 |     9 |    106400 | 44.74 |
 |   Register as Latch        |     0 |     0 |    106400 |  0.00 |
 |   Register as AND/OR       |     3 |     0 |    106400 | <0.01 |
 | F7 Muxes                   |   824 |     0 |     26600 |  3.10 |
@@ -60,7 +60,7 @@ Table of Contents
 | 339   |          Yes |           - |          Set |
 | 1166  |          Yes |           - |        Reset |
 | 1502  |          Yes |         Set |            - |
-| 44600 |          Yes |       Reset |            - |
+| 44595 |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -70,13 +70,13 @@ Table of Contents
 +-------------------------------------------+-------+-------+-----------+-------+
 |                 Site Type                 |  Used | Fixed | Available | Util% |
 +-------------------------------------------+-------+-------+-----------+-------+
-| Slice                                     | 12902 |     0 |     13300 | 97.01 |
-|   SLICEL                                  |  8690 |     0 |           |       |
-|   SLICEM                                  |  4212 |     0 |           |       |
-| LUT as Logic                              | 30994 |     0 |     53200 | 58.26 |
-|   using O5 output only                    |     5 |       |           |       |
-|   using O6 output only                    | 24350 |       |           |       |
-|   using O5 and O6                         |  6639 |       |           |       |
+| Slice                                     | 12943 |     0 |     13300 | 97.32 |
+|   SLICEL                                  |  8736 |     0 |           |       |
+|   SLICEM                                  |  4207 |     0 |           |       |
+| LUT as Logic                              | 30975 |     0 |     53200 | 58.22 |
+|   using O5 output only                    |     3 |       |           |       |
+|   using O6 output only                    | 24323 |       |           |       |
+|   using O5 and O6                         |  6649 |       |           |       |
 | LUT as Memory                             |  2177 |     0 |     17400 | 12.51 |
 |   LUT as Distributed RAM                  |  1028 |     0 |           |       |
 |     using O5 output only                  |     0 |       |           |       |
@@ -86,10 +86,10 @@ Table of Contents
 |     using O5 output only                  |    39 |       |           |       |
 |     using O6 output only                  |   707 |       |           |       |
 |     using O5 and O6                       |   403 |       |           |       |
-| LUT Flip Flop Pairs                       | 16437 |     0 |     53200 | 30.90 |
-|   fully used LUT-FF pairs                 |  3853 |       |           |       |
-|   LUT-FF pairs with one unused LUT output | 11847 |       |           |       |
-|   LUT-FF pairs with one unused Flip Flop  | 10633 |       |           |       |
+| LUT Flip Flop Pairs                       | 16477 |     0 |     53200 | 30.97 |
+|   fully used LUT-FF pairs                 |  3855 |       |           |       |
+|   LUT-FF pairs with one unused LUT output | 11862 |       |           |       |
+|   LUT-FF pairs with one unused Flip Flop  | 10649 |       |           |       |
 | Unique Control Sets                       |  2441 |       |           |       |
 +-------------------------------------------+-------+-------+-----------+-------+
 * Note: Review the Control Sets Report for more information regarding control sets.
@@ -192,11 +192,11 @@ Table of Contents
 +------------+-------+----------------------+
 |  Ref Name  |  Used |  Functional Category |
 +------------+-------+----------------------+
-| FDRE       | 44600 |         Flop & Latch |
-| LUT3       | 10196 |                  LUT |
-| LUT6       |  9570 |                  LUT |
-| LUT5       |  6463 |                  LUT |
-| LUT4       |  5963 |                  LUT |
+| FDRE       | 44595 |         Flop & Latch |
+| LUT3       | 10194 |                  LUT |
+| LUT6       |  9562 |                  LUT |
+| LUT5       |  6465 |                  LUT |
+| LUT4       |  5962 |                  LUT |
 | LUT2       |  4289 |                  LUT |
 | FDSE       |  1502 |         Flop & Latch |
 | CARRY4     |  1235 |           CarryLogic |
@@ -264,7 +264,6 @@ Table of Contents
 | system_vtc_in_0                  |    1 |
 | system_v_vid_in_axi4s_0_0        |    1 |
 | system_v_axi4s_vid_out_0_0       |    1 |
-| system_util_vector_logic_0_2     |    1 |
 | system_uartlite_0                |    1 |
 | system_trace_cntrl_64_0_0        |    1 |
 | system_trace_cntrl_32_0_0        |    1 |

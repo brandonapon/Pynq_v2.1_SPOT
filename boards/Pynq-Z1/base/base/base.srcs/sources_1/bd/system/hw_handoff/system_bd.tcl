@@ -2128,16 +2128,8 @@ proc create_hier_cell_iop_arduino { parentCell nameHier } {
   # Create instance: uartlite, and set properties
   set uartlite [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_uartlite:2.0 uartlite ]
   set_property -dict [ list \
-   CONFIG.C_BAUDRATE {9600} \
+   CONFIG.C_BAUDRATE {230400} \
  ] $uartlite
-
-  # Create instance: util_vector_logic_0, and set properties
-  set util_vector_logic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_0 ]
-  set_property -dict [ list \
-   CONFIG.C_OPERATION {not} \
-   CONFIG.C_SIZE {1} \
-   CONFIG.LOGO_FILE {data/sym_notgate.png} \
- ] $util_vector_logic_0
 
   # Create instance: xadc, and set properties
   set xadc [ create_bd_cell -type ip -vlnv xilinx.com:ip:xadc_wiz:3.3 xadc ]
@@ -2240,7 +2232,7 @@ proc create_hier_cell_iop_arduino { parentCell nameHier } {
   connect_bd_net -net io_data_i_0_1 [get_bd_pins data_i] [get_bd_pins io_switch_0/io_data_i]
   connect_bd_net -net io_switch_0_io_data_o [get_bd_pins data_o] [get_bd_pins io_switch_0/io_data_o]
   connect_bd_net -net io_switch_0_io_tri_o [get_bd_pins tri_o] [get_bd_pins io_switch_0/io_tri_o]
-  connect_bd_net -net io_switch_0_uart0_rx_i [get_bd_pins io_switch_0/uart0_rx_i] [get_bd_pins util_vector_logic_0/Op1]
+  connect_bd_net -net io_switch_0_uart0_rx_i [get_bd_pins io_switch_0/uart0_rx_i] [get_bd_pins uartlite/rx]
   connect_bd_net -net logic_1_dout1 [get_bd_pins dff_en_reset_vector_0/d] [get_bd_pins logic_1/dout] [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in]
   connect_bd_net -net mb3_gpio_subsystem_ip2intc_irpt [get_bd_pins gpio_subsystem/ip2intc_irpt] [get_bd_pins intr_concat/In5]
   connect_bd_net -net mb3_iic_subsystem_iic2intc_irpt [get_bd_pins iic_subsystem/iic2intc_irpt] [get_bd_pins intr_concat/In1]
@@ -2267,7 +2259,6 @@ proc create_hier_cell_iop_arduino { parentCell nameHier } {
   connect_bd_net -net shield2sw_scl_i_in_1 [get_bd_pins scl_i_in] [get_bd_pins iic_subsystem/scl_i]
   connect_bd_net -net shield2sw_sda_i_in_1 [get_bd_pins sda_i_in] [get_bd_pins iic_subsystem/sda_i]
   connect_bd_net -net uartlite_tx [get_bd_pins io_switch_0/uart0_tx_o] [get_bd_pins uartlite/tx]
-  connect_bd_net -net util_vector_logic_0_Res [get_bd_pins uartlite/rx] [get_bd_pins util_vector_logic_0/Res]
 
   # Restore current instance
   current_bd_instance $oldCurInst
