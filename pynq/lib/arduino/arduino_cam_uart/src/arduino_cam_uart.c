@@ -208,39 +208,41 @@ int main()
 				while(read_count < stream_size){
 					num_read = uart_read(uart_device, stream_in, 1);
 					if(num_read == 1){
-						buffer_1[read_count] = stream_in[0];
+						ddr_address[read_count] = stream_in[0];
 						++read_count;
 					}
 				}
-				for(int i = 0; i < stream_size; ++i){
-					ddr_address[i] = buffer_1[i];
-				}
+//				for(int i = 0; i < stream_size; ++i){
+//					ddr_address[i] = buffer_1[i];
+//				}
 				MAILBOX_DATA(0) = read_count;
 				MAILBOX_DATA(1) = stream_size;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
-
-			case LOW_LEVEL:
-				for (int Index = 0; Index < 128; ++Index) {
-					stream_in[Index] = XUartLite_RecvByte(XPAR_UARTLITE_0_BASEADDR);
-				}
-				for (int index = 0; index < 128; ++index){
-					MAILBOX_DATA(index) = stream_in[index];
-				}
-				MAILBOX_CMD_ADDR = 0x0;
-				break;
+//
+//			case LOW_LEVEL:
+//				for (int Index = 0; Index < 128; ++Index) {
+//					stream_in[Index] = XUartLite_RecvByte(XPAR_UARTLITE_0_BASEADDR);
+//				}
+//				for (int index = 0; index < 128; ++index){
+//					MAILBOX_DATA(index) = stream_in[index];
+//				}
+//				MAILBOX_CMD_ADDR = 0x0;
+//				break;
 
 			case STREAM_PIXEL:
-				ddr_address = MAILBOX_DATA(0) | 0x20000000;
-				file_size = MAILBOX_DATA(1);
-				uart_write(uart_device, write_snap_cmd, 1);
-				for(int i = 0; i < file_size; ++i){
-					num_read = uart_read(uart_device, stream_in, 3);
-					for(int j = 0; j < 3; ++j){
-						ddr_address[i*3+j]= stream_in[j];
+				ddr_address = MAILBOX_DATA(1) | 0x20000000;
+				stream_size = MAILBOX_DATA(0);
+				read_count = 0;
+				while(read_count < stream_size){
+					num_read = uart_read(uart_device, stream_in, 1);
+					if(num_read == 1){
+						ddr_address[read_count]= stream_in[0];
+						++read_count;
 					}
-//					ddr_address[i] = stream_in[0];
 				}
+				MAILBOX_DATA(0) = read_count;
+				MAILBOX_DATA(1) = stream_size;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 

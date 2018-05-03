@@ -973,6 +973,7 @@ proc create_hier_cell_spi_subsystem { parentCell nameHier } {
   set_property -dict [ list \
    CONFIG.C_USE_STARTUP {0} \
    CONFIG.C_USE_STARTUP_INT {0} \
+   CONFIG.Multiples16 {2} \
  ] $spi_shared
 
   # Create interface connections

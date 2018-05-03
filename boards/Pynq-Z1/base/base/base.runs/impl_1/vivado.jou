@@ -2,8 +2,8 @@
 # Vivado v2017.4 (64-bit)
 # SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
 # IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
-# Start of session at: Mon Apr 16 15:11:38 2018
-# Process ID: 17728
+# Start of session at: Wed May  2 16:00:58 2018
+# Process ID: 76660
 # Current directory: D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/impl_1
 # Command line: vivado.exe -log top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source top.tcl -notrace
 # Log file: D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/impl_1/top.vdi
