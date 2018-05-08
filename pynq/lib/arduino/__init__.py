@@ -52,6 +52,7 @@ from .arduino_RA8875 import Arduino_RA8875
 from .arduino_cam_uart import Arduino_CAM_UART
 from .arduino_rangefinder import Arduino_Rangefinder
 from .arduino_button import Arduino_Button
+from .arduino_displaycam import Arduino_Displaycam
 
 
 __author__ = "Graham Schelle, Yun Rock Qu"

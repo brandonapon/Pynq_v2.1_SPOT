@@ -5,7 +5,7 @@
     <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1525382596"/>
     <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1525382596"/>
     <Generation Name="SIMULATION" State="GENERATED" Timestamp="1525382596"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1525382596"/>
+    <Generation Name="HW_HANDOFF" State="STALE" Timestamp="1525739589"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip\system_audio_direct_0_0\system_audio_direct_0_0.xci" Type="IP">
         <Instance HierarchyPath="audio_direct_0"/>

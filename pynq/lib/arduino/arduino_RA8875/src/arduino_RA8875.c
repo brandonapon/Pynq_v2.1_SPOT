@@ -51,7 +51,7 @@
 #include "xparameters.h"
 #include "circular_buffer.h"
 #include "gpio.h"
-#include "spi.h"
+#include "spi_v2.h"
 #include "timer.h"
 #include "xio_switch.h"
 #include "xil_cache.h"
@@ -69,9 +69,10 @@
 #define FILL_COLOR				0x9
 
 /* Pin Assignments */
-//cs - 0
+#define RX						0
+#define TX						1
+//cs - 3
 //reset - 7
-#define cs						0x0
 #define reset					0x7F
 #define	start_transfer			0xFE
 #define end_transfer			0xFF
@@ -305,7 +306,7 @@ void writeCommand(uint8_t cmd){
 //	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 1);
 	writeBuffer[0] = RA8875_CMDWRITE;
 	writeBuffer[1] = cmd;
-	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 2);
+	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 2);
 	gpio_write(gpio_device, end_transfer);
 }
 
@@ -317,25 +318,25 @@ void writeData(uint8_t d){
 //	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 1);
 	writeBuffer[0] = RA8875_DATAWRITE;
 	writeBuffer[1] = d;
-	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 2);
+	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 2);
 	gpio_write(gpio_device, end_transfer);
 }
 
 void slowWriteCommand(uint8_t cmd){
 	gpio_write(gpio_device, start_transfer);
 	writeBuffer[0] = RA8875_CMDWRITE;
-	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 1);
+	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 1);
 	writeBuffer[0] = cmd;
-	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 1);
+	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 1);
 	gpio_write(gpio_device, end_transfer);
 }
 
 void slowWriteData(uint8_t d){
 	gpio_write(gpio_device, start_transfer);
 	writeBuffer[0] = RA8875_DATAWRITE;
-	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 1);
+	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 1);
 	writeBuffer[0] = d;
-	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 1);
+	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 1);
 	gpio_write(gpio_device, end_transfer);
 }
 
@@ -451,7 +452,7 @@ void drawPixel(int16_t x, int16_t y, uint16_t color){
 	w_buffer[1] = (color & 0xFF00) >> 8;
 	w_buffer[2] = color;
 	gpio_write(gpio_device, start_transfer);
-	spi_transfer(spi_device, (const char*) w_buffer, (char*) r_buffer, 3);
+	spi_transfer(spi_device, (const uint8_t*) w_buffer, (uint8_t*) r_buffer, 3);
 	gpio_write(gpio_device, end_transfer);
 }
 
@@ -606,7 +607,8 @@ int main(void)
      * Configure D10-D13 as Shared SPI (MISO is not used)
      */
     init_io_switch();
-    //spi_device = spi_open(13, 12, 11, 10);
+//    spi_open(unsigned int spiclk, unsigned int miso, unsigned int mosi, unsigned int ss)
+//    spi_device = spi_open(13, 12, 11, 10);
     spi_device = spi_open_device(XPAR_SPI_0_DEVICE_ID);
     spi_device = spi_configure(spi_device, 0, 0);
 
@@ -634,10 +636,10 @@ int main(void)
      * reset = 1 -> not in reset state
      * dc = 0    -> in command mode
      */
-    reset_dc_d7_to_d0 = 0x000; //reset low (active low)
-    gpio_write(gpio_device, reset_dc_d7_to_d0);
-    reset_dc_d7_to_d0 = 0x200; //reset high
-    gpio_write(gpio_device, reset_dc_d7_to_d0);
+//    reset_dc_d7_to_d0 = 0x000; //reset low (active low)
+//    gpio_write(gpio_device, reset_dc_d7_to_d0);
+//    reset_dc_d7_to_d0 = 0x200; //reset high
+//    gpio_write(gpio_device, reset_dc_d7_to_d0);
 
     Xil_Out32(XPAR_IOP_ARDUINO_INTR_BASEADDR+4,0x0);
     Xil_Out32(XPAR_IOP_ARDUINO_INTR_BASEADDR,0x0);

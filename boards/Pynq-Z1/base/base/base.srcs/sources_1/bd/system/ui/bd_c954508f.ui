@@ -1,5 +1,5 @@
 {
-   ExpandedHierarchyInLayout: "",
+   ExpandedHierarchyInLayout: "/iop_arduino|/iop_arduino/spi_subsystem",
    guistr: "# # String gsaved with Nlview 6.6.11  2017-06-12 bk=1.3860 VDI=40 GEI=35 GUI=JA:1.6
 #  -string -flagsOSRD
 preplace port btns_4bits -pg 1 -y 60 -defaultsOSRD
@@ -45,240 +45,252 @@ preplace portBus pmodJA_data_out -pg 1 -y 260 -defaultsOSRD
 preplace portBus pmodJA_data_in -pg 1 -y 260 -defaultsOSRD
 preplace portBus sw2shield_data_o -pg 1 -y 420 -defaultsOSRD
 preplace portBus hdmi_in_hpd -pg 1 -y 120 -defaultsOSRD
-preplace inst constant_8bit_0 -pg 1 -lvl 4 -y 5994 -defaultsOSRD
-preplace inst iop_arduino|intr_concat -pg 1 -lvl 3 -y 504 -defaultsOSRD
+preplace inst constant_8bit_0 -pg 1 -lvl 4 -y 7628 -defaultsOSRD
+preplace inst iop_arduino|spi_subsystem|spi_shared -pg 1 -lvl 1 -y 668 -defaultsOSRD
+preplace inst iop_arduino|intr_concat -pg 1 -lvl 3 -y 496 -defaultsOSRD
 preplace inst rst_ps7_0_fclk0 -pg 1 -lvl 2 -y 1140 -defaultsOSRD
-preplace inst concat_pmoda -pg 1 -lvl 4 -y 5874 -defaultsOSRD
-preplace inst iop_arduino|iic_subsystem -pg 1 -lvl 8 -y 584 -defaultsOSRD
-preplace inst iop_arduino|gpio_subsystem -pg 1 -lvl 7 -y 254 -defaultsOSRD
+preplace inst concat_pmoda -pg 1 -lvl 4 -y 7508 -defaultsOSRD
+preplace inst iop_arduino|iic_subsystem -pg 1 -lvl 8 -y 576 -defaultsOSRD
+preplace inst iop_arduino|gpio_subsystem -pg 1 -lvl 7 -y 86 -defaultsOSRD
 preplace inst system_interrupts -pg 1 -lvl 1 -y 510 -defaultsOSRD
 preplace inst switches_gpio -pg 1 -lvl 1 -y 62 -defaultsOSRD
 preplace inst mb_iop_pmodb_intr_ack -pg 1 -lvl 3 -y 630 -defaultsOSRD
-preplace inst iop_interrupts -pg 1 -lvl 4 -y 6194 -defaultsOSRD
-preplace inst iop_arduino|mb -pg 1 -lvl 5 -y 464 -defaultsOSRD
-preplace inst iop_arduino|lmb -pg 1 -lvl 6 -y 464 -defaultsOSRD
+preplace inst iop_interrupts -pg 1 -lvl 4 -y 7828 -defaultsOSRD
+preplace inst iop_arduino|spi_subsystem|spi_direct -pg 1 -lvl 1 -y 518 -defaultsOSRD
+preplace inst iop_arduino|mb -pg 1 -lvl 5 -y 546 -defaultsOSRD
+preplace inst iop_arduino|lmb -pg 1 -lvl 6 -y 586 -defaultsOSRD
 preplace inst mb_iop_arduino_reset -pg 1 -lvl 3 -y 360 -defaultsOSRD
 preplace inst mb_iop_arduino_intr_ack -pg 1 -lvl 3 -y 270 -defaultsOSRD
-preplace inst iop_arduino|xadc -pg 1 -lvl 5 -y 774 -defaultsOSRD
+preplace inst iop_arduino|xadc -pg 1 -lvl 5 -y 836 -defaultsOSRD
 preplace inst trace_analyzer_arduino -pg 1 -lvl 1 -y 340 -defaultsOSRD
 preplace inst rst_ps7_0_fclk3 -pg 1 -lvl 2 -y 1310 -defaultsOSRD
-preplace inst constant_10bit_0 -pg 1 -lvl 4 -y 6084 -defaultsOSRD
+preplace inst constant_10bit_0 -pg 1 -lvl 4 -y 7718 -defaultsOSRD
 preplace inst concat_interrupts -pg 1 -lvl 5 -y 1336 -defaultsOSRD
-preplace inst iop_arduino|spi_subsystem -pg 1 -lvl 7 -y 454 -defaultsOSRD
+preplace inst iop_arduino|spi_subsystem -pg 1 -lvl 7 -y 418 -defaultsOSRD
 preplace inst rgbleds_gpio -pg 1 -lvl 2 -y 990 -defaultsOSRD
 preplace inst logic_1 -pg 1 -lvl 3 -y 180 -defaultsOSRD
 preplace inst leds_gpio -pg 1 -lvl 3 -y 70 -defaultsOSRD
 preplace inst audio_path_sel -pg 1 -lvl 5 -y 550 -defaultsOSRD
-preplace inst iop_arduino|uartlite -pg 1 -lvl 4 -y 164 -defaultsOSRD
+preplace inst iop_arduino|uartlite -pg 1 -lvl 4 -y 186 -defaultsOSRD
 preplace inst mb_iop_pmoda_reset -pg 1 -lvl 3 -y 540 -defaultsOSRD
-preplace inst iop_arduino|dff_en_reset_vector_0 -pg 1 -lvl 8 -y 894 -defaultsOSRD
+preplace inst iop_arduino|dff_en_reset_vector_0 -pg 1 -lvl 8 -y 386 -defaultsOSRD
 preplace inst mdm_1 -pg 1 -lvl 3 -y 840 -defaultsOSRD
 preplace inst mb_iop_pmodb_reset -pg 1 -lvl 3 -y 720 -defaultsOSRD
 preplace inst proc_sys_reset_fclk1 -pg 1 -lvl 3 -y 1000 -defaultsOSRD
-preplace inst iop_pmoda -pg 1 -lvl 4 -y 6382 -defaultsOSRD
-preplace inst iop_arduino -pg 1 -lvl 4 -y -316 -defaultsOSRD
+preplace inst iop_pmoda -pg 1 -lvl 4 -y 8016 -defaultsOSRD
+preplace inst iop_arduino -pg 1 -lvl 4 -y -314 -defaultsOSRD
 preplace inst btns_gpio -pg 1 -lvl 5 -y 946 -defaultsOSRD
-preplace inst iop_arduino|timers_subsystem -pg 1 -lvl 4 -y -76 -defaultsOSRD
-preplace inst iop_arduino|rst_clk_wiz_1_100M -pg 1 -lvl 2 -y 554 -defaultsOSRD
-preplace inst iop_arduino|mb_bram_ctrl -pg 1 -lvl 5 -y 1024 -defaultsOSRD
-preplace inst iop_arduino|logic_1 -pg 1 -lvl 1 -y 604 -defaultsOSRD
+preplace inst iop_arduino|timers_subsystem -pg 1 -lvl 4 -y -74 -defaultsOSRD
+preplace inst iop_arduino|rst_clk_wiz_1_100M -pg 1 -lvl 2 -y 626 -defaultsOSRD
+preplace inst iop_arduino|mb_bram_ctrl -pg 1 -lvl 5 -y 1076 -defaultsOSRD
+preplace inst iop_arduino|logic_1 -pg 1 -lvl 1 -y 606 -defaultsOSRD
 preplace inst trace_analyzer_pmoda -pg 1 -lvl 1 -y 680 -defaultsOSRD
 preplace inst ps7_0_axi_periph -pg 1 -lvl 2 -y 290 -defaultsOSRD
 preplace inst ps7_0 -pg 1 -lvl 3 -y 1250 -defaultsOSRD
-preplace inst iop_pmodb -pg 1 -lvl 4 -y 6620 -defaultsOSRD
+preplace inst iop_pmodb -pg 1 -lvl 4 -y 8254 -defaultsOSRD
 preplace inst axi_interconnect_0 -pg 1 -lvl 5 -y 332 -defaultsOSRD
-preplace inst iop_arduino|microblaze_0_axi_periph -pg 1 -lvl 3 -y -86 -defaultsOSRD
-preplace inst iop_arduino|intc -pg 1 -lvl 4 -y 394 -defaultsOSRD
+preplace inst iop_arduino|microblaze_0_axi_periph -pg 1 -lvl 3 -y -84 -defaultsOSRD
+preplace inst iop_arduino|intc -pg 1 -lvl 4 -y 366 -defaultsOSRD
 preplace inst video -pg 1 -lvl 1 -y 910 -defaultsOSRD
 preplace inst concat_arduino -pg 1 -lvl 5 -y 1126 -defaultsOSRD
 preplace inst audio_direct_0 -pg 1 -lvl 5 -y 74 -defaultsOSRD
 preplace inst mb_iop_pmoda_intr_ack -pg 1 -lvl 3 -y 450 -defaultsOSRD
 preplace inst axi_mem_intercon -pg 1 -lvl 5 -y 738 -defaultsOSRD
-preplace inst iop_arduino|io_switch_0 -pg 1 -lvl 8 -y 294 -defaultsOSRD
-preplace inst iop_arduino|intr -pg 1 -lvl 4 -y 544 -defaultsOSRD
+preplace inst iop_arduino|io_switch_0 -pg 1 -lvl 8 -y 166 -defaultsOSRD
+preplace inst iop_arduino|intr -pg 1 -lvl 4 -y 526 -defaultsOSRD
 preplace inst ps7_0_axi_periph_1 -pg 1 -lvl 2 -y 752 -defaultsOSRD
-preplace netloc iop_arduino|s_axi_aresetn_1 1 0 7 2970J 364 NJ 364 3510 364 3880 684 4470 364 NJ 364 5340J
-preplace netloc ps7_0_IIC_0 1 3 3 NJ 1210 6430J -50 16120
+preplace netloc iop_arduino|s_axi_aresetn_1 1 0 7 3020J 356 NJ 356 3600 356 4110 686 4580 656 5070J 696 5330
+preplace netloc ps7_0_IIC_0 1 3 3 2330J 1260 6640J -50 19360
 preplace netloc Vaux5_1 1 0 4 -370J -220 NJ -220 NJ -220 2640
-preplace netloc audio_direct_0_audio_out 1 5 1 16010
-preplace netloc S00_AXI_2 1 4 1 6720
-preplace netloc iop_arduino|microblaze_0_axi_periph_M04_AXI 1 3 1 3960
-preplace netloc iop_arduino|uartlite_tx 1 4 4 4420J 164 NJ 164 NJ 164 5780
-preplace netloc iop_arduino|shield2sw_sda_i_in_1 1 0 8 NJ 1124 NJ 1124 NJ 1124 NJ 1124 NJ 1124 NJ 1124 NJ 1124 5760
-preplace netloc ps7_0_axi_periph_M09_AXI 1 2 1 1380
+preplace netloc audio_direct_0_audio_out 1 5 1 19250
+preplace netloc S00_AXI_2 1 4 1 6890
+preplace netloc iop_arduino|microblaze_0_axi_periph_M04_AXI 1 3 1 4020
+preplace netloc iop_arduino|uartlite_tx 1 4 4 4460 166 NJ 166 NJ 166 5970J
+preplace netloc iop_arduino|shield2sw_sda_i_in_1 1 0 8 NJ 1156 NJ 1156 NJ 1156 NJ 1156 NJ 1156 NJ 1156 NJ 1156 6060
+preplace netloc ps7_0_axi_periph_M09_AXI 1 2 1 1390
 preplace netloc ps7_0_axi_periph_M08_AXI 1 0 3 -290 -60 NJ -60 1290
-preplace netloc proc_sys_reset_fclk1_peripheral_aresetn 1 0 4 -210 1590 NJ 1590 NJ 1590 2230
-preplace netloc video_dout 1 1 4 360 1520 NJ 1520 2460J 1370 6760J
-preplace netloc iop_arduino|rst_clk_wiz_1_100M_interconnect_aresetn 1 2 1 3480
-preplace netloc mb_3_reset_Dout 1 3 1 2420
+preplace netloc proc_sys_reset_fclk1_peripheral_aresetn 1 0 4 -230 1600 NJ 1600 NJ 1600 2230
+preplace netloc video_dout 1 1 4 370 1500 NJ 1500 2470J 1480 6950J
+preplace netloc iop_arduino|rst_clk_wiz_1_100M_interconnect_aresetn 1 2 1 3560
+preplace netloc mb_3_reset_Dout 1 3 1 2450
 preplace netloc pmodJB_data_in_1 1 0 4 -380J -310 NJ -310 NJ -310 2410
-preplace netloc ps7_0_FIXED_IO 1 3 3 2330J 1200 6420J -60 16160
-preplace netloc iop_arduino_sw2shield_scl_t_out 1 4 2 6640 -150 16080J
-preplace netloc iop_arduino|logic_1_dout1 1 1 7 3140 644 NJ 644 3850J 1094 NJ 1094 5140J 864 NJ 864 N
+preplace netloc iop_arduino|spi_subsystem|mb3_spi_pl_sw_d13_d10_ip2intc_irpt 1 1 1 N
+preplace netloc ps7_0_FIXED_IO 1 3 3 2350J 1230 6620J -60 19400
+preplace netloc iop_arduino_sw2shield_scl_t_out 1 4 2 6850 -150 19320J
+preplace netloc iop_arduino|logic_1_dout1 1 1 7 3200 536 3600J 596 NJ 596 4460J 426 NJ 426 5360J 786 6010J
 preplace netloc hdmi_in_1 1 0 1 -440
-preplace netloc ps7_0_axi_periph_M02_AXI 1 2 2 1330J -30 2340
-preplace netloc iop_interrupts_irq 1 1 2 420 -210 1390J
-preplace netloc iop_arduino|Conn1 1 7 2 5740 44 NJ
-preplace netloc iop_arduino|microblaze_0_ilmb_1 1 5 1 N
-preplace netloc iop_arduino_sw2shield_sda_t_out 1 4 2 6620 -190 16100J
-preplace netloc mb_2_reset_Dout 1 3 1 2280
-preplace netloc iop_arduino|mb3_spi_subsystem_spi_sw_shield 1 7 2 5760 154 NJ
-preplace netloc iop_arduino|Conn2 1 0 5 2950J 654 NJ 654 NJ 654 NJ 654 4430
-preplace netloc iop_arduino|microblaze_0_axi_periph_M08_AXI 1 3 1 3980
-preplace netloc iop_arduino|microblaze_0_axi_periph_M02_AXI 1 3 5 3870J -266 NJ -266 NJ -266 NJ -266 5830
-preplace netloc iop_arduino|mdm_1_debug_sys_rst 1 0 2 2980J 534 3130
-preplace netloc ps7_0_axi_periph_M04_AXI 1 2 2 1360 -20 2560J
-preplace netloc trace_analyzer_pmoda_s2mm_introut 1 1 4 410 -270 NJ -270 2500J 1300 6560J
-preplace netloc iop_arduino|microblaze_0_M_AXI_DP 1 2 4 3520 964 NJ 964 4520J 954 5100
-preplace netloc axi_mem_intercon_M00_AXI1 1 2 4 1430 1440 NJ 1440 NJ 1440 15950
-preplace netloc concat_interrupts_dout 1 0 6 -270 1560 NJ 1560 NJ 1560 NJ 1560 NJ 1560 15960
-preplace netloc iop_arduino|Conn4 1 0 5 NJ 684 NJ 684 NJ 684 3860J 694 N
-preplace netloc iop_arduino|microblaze_0_axi_periph_M15_AXI 1 3 2 NJ 54 4460
-preplace netloc rst_ps7_0_fclk0_peripheral_aresetn 1 0 5 -320 -100 460 -190 1350 1620 2450 1310 6530
-preplace netloc ps7_0_FCLK_CLK0 1 0 5 -260 -10 510 -170 1340 1610 2510 1330 6380
-preplace netloc ps7_0_axi_periph_M03_AXI 1 2 2 1320J -60 2320
-preplace netloc S02_ARESETN_1 1 4 1 6460
-preplace netloc ps7_0_FCLK_CLK1 1 0 4 -230 1430 NJ 1430 1370 1430 2210
-preplace netloc iop_arduino|Conn6 1 0 5 NJ 774 NJ 774 NJ 774 NJ 774 N
-preplace netloc iop_arduino|mb_1_reset_Dout 1 0 2 2940J 554 N
-preplace netloc ps7_0_M_AXI_GP0 1 1 3 520 -340 NJ -340 2210
-preplace netloc shield2sw_scl_i_in_1 1 0 5 -350 -300 NJ -300 NJ -300 2530 1280 6710J
-preplace netloc ps7_0_FCLK_CLK2 1 0 4 -240 1600 NJ 1600 NJ 1600 2220
-preplace netloc iop_arduino|Conn7 1 0 5 NJ 874 NJ 874 NJ 874 NJ 874 4490
-preplace netloc iop_arduino|io_switch_0_io_tri_o 1 8 1 6160
-preplace netloc ps7_0_M_AXI_GP1 1 1 3 530 -90 NJ -90 2200
-preplace netloc ps7_0_FCLK_CLK3 1 0 5 -200 230 450 1440 1410 1490 2360 1350 6680
-preplace netloc iop_arduino|Conn8 1 0 5 NJ 714 NJ 714 NJ 714 NJ 714 N
-preplace netloc iop_arduino|mb3_intc_interrupt 1 4 1 4410
-preplace netloc dvi2rgb_0_DDC 1 1 5 400 1460 NJ 1460 NJ 1460 6550J -80 16170J
-preplace netloc S01_AXI_1 1 1 4 430 -180 NJ -180 2550J 1160 6510J
-preplace netloc iop_arduino|Conn9 1 0 5 NJ 734 NJ 734 NJ 734 NJ 734 N
-preplace netloc Vaux12_1 1 0 4 -390J 150 440J -140 NJ -140 2590
-preplace netloc S01_AXI_2 1 4 1 6740
-preplace netloc audio_direct_0_audio_shutdown 1 5 1 16050
-preplace netloc swsleds_gpio_ip2intc_irpt 1 1 4 360 -280 NJ -280 2470J 1380 6460J
-preplace netloc iop_interrupts_dout 1 4 1 6790
-preplace netloc Vaux15_1 1 0 4 NJ 180 490J -120 NJ -120 2540
-preplace netloc iop_pmodb_intr_ack_1 1 3 1 2260
-preplace netloc hdmi_out_hpd_video_gpio_io_o 1 1 5 370 1570 NJ 1570 NJ 1570 6570J -120 16180J
-preplace netloc constant_8bit_0_dout 1 3 2 2670 5790 6340
+preplace netloc ps7_0_axi_periph_M02_AXI 1 2 2 1330J -30 2360
+preplace netloc iop_interrupts_irq 1 1 2 420 -210 1400J
+preplace netloc iop_arduino|Conn1 1 7 2 5950 26 NJ
+preplace netloc iop_arduino|microblaze_0_ilmb_1 1 5 1 5080
+preplace netloc iop_arduino_sw2shield_sda_t_out 1 4 2 6840 -190 19340J
+preplace netloc mb_2_reset_Dout 1 3 1 2290
+preplace netloc iop_arduino|spi_subsystem|rst_clk_wiz_1_100M_peripheral_aresetn 1 0 1 N
+preplace netloc iop_arduino|mb3_spi_subsystem_spi_sw_shield 1 7 2 5970 306 6390J
+preplace netloc iop_arduino|Conn2 1 0 5 NJ 736 NJ 736 NJ 736 NJ 736 4500
+preplace netloc iop_arduino|microblaze_0_axi_periph_M08_AXI 1 3 1 4050
+preplace netloc iop_arduino|microblaze_0_axi_periph_M02_AXI 1 3 5 3950J -284 NJ -284 NJ -284 NJ -284 6020
+preplace netloc iop_arduino|mdm_1_debug_sys_rst 1 0 2 3040J 666 3200
+preplace netloc ps7_0_axi_periph_M04_AXI 1 2 2 1340 -20 2560J
+preplace netloc trace_analyzer_pmoda_s2mm_introut 1 1 4 410 -270 NJ -270 2500J 1330 6700J
+preplace netloc iop_arduino|microblaze_0_M_AXI_DP 1 2 4 3610 656 NJ 656 4550J 646 5060
+preplace netloc axi_mem_intercon_M00_AXI1 1 2 4 1440 1440 NJ 1440 NJ 1440 19190
+preplace netloc concat_interrupts_dout 1 0 6 -280 1590 NJ 1590 NJ 1590 NJ 1590 NJ 1590 19200
+preplace netloc iop_arduino|Conn4 1 0 5 NJ 756 NJ 756 NJ 756 NJ 756 N
+preplace netloc iop_arduino|microblaze_0_axi_periph_M15_AXI 1 3 2 4040J 66 4520
+preplace netloc rst_ps7_0_fclk0_peripheral_aresetn 1 0 5 -320 -100 470 -190 1360 1620 2450 1370 6800
+preplace netloc ps7_0_FCLK_CLK0 1 0 5 -260 -10 520 -170 1350 1610 2250 1360 6790
+preplace netloc ps7_0_axi_periph_M03_AXI 1 2 2 1320J -60 2340
+preplace netloc S02_ARESETN_1 1 4 1 6670
+preplace netloc ps7_0_FCLK_CLK1 1 0 4 -220 1460 NJ 1460 1380 1460 2210
+preplace netloc iop_arduino|Conn6 1 0 5 NJ 836 NJ 836 NJ 836 NJ 836 N
+preplace netloc iop_arduino|mb_1_reset_Dout 1 0 2 3000J 656 3190
+preplace netloc ps7_0_M_AXI_GP0 1 1 3 530 -340 NJ -340 2210
+preplace netloc shield2sw_scl_i_in_1 1 0 5 -350 -300 NJ -300 NJ -300 2520 1340 6900J
+preplace netloc ps7_0_FCLK_CLK2 1 0 4 -240 1550 NJ 1550 NJ 1550 2220
+preplace netloc iop_arduino|Conn7 1 0 5 3010J 746 NJ 746 NJ 746 NJ 746 4570
+preplace netloc iop_arduino|io_switch_0_io_tri_o 1 8 1 6380
+preplace netloc ps7_0_M_AXI_GP1 1 1 3 540 -90 NJ -90 2200
+preplace netloc ps7_0_FCLK_CLK3 1 0 5 -200 230 440 1430 1410 1430 2430 1350 6860
+preplace netloc iop_arduino|Conn8 1 0 5 NJ 776 NJ 776 NJ 776 NJ 776 N
+preplace netloc iop_arduino|mb3_intc_interrupt 1 4 1 4540
+preplace netloc dvi2rgb_0_DDC 1 1 5 400 1470 NJ 1470 NJ 1470 6690J -80 19410J
+preplace netloc S01_AXI_1 1 1 4 430 -180 NJ -180 2550J 1190 6710J
+preplace netloc iop_arduino|Conn9 1 0 5 NJ 796 NJ 796 NJ 796 NJ 796 N
+preplace netloc Vaux12_1 1 0 4 -390J 150 440J -140 NJ -140 2600
+preplace netloc S01_AXI_2 1 4 1 6930
+preplace netloc audio_direct_0_audio_shutdown 1 5 1 19290
+preplace netloc swsleds_gpio_ip2intc_irpt 1 1 4 360 -280 NJ -280 2470J 1380 6650J
+preplace netloc iop_interrupts_dout 1 4 1 6980
+preplace netloc Vaux15_1 1 0 4 NJ 180 500J -120 NJ -120 2540
+preplace netloc iop_pmodb_intr_ack_1 1 3 1 2270
+preplace netloc hdmi_out_hpd_video_gpio_io_o 1 1 5 360 1570 NJ 1570 NJ 1570 6760J -120 19420J
+preplace netloc constant_8bit_0_dout 1 3 2 2670 7420 6540
+preplace netloc iop_arduino|spi_subsystem|Conn1 1 1 1 N
 preplace netloc ps7_0_axi_periph_M00_AXI 1 0 3 -200 -70 NJ -70 1250
-preplace netloc mdm_1_debug_sys_rst 1 3 1 2250
-preplace netloc iop_arduino_mb3_intr_req 1 3 2 2640 1430 6340
-preplace netloc iop_arduino|microblaze_0_axi_periph_M11_AXI 1 3 1 3940
-preplace netloc iop_arduino|microblaze_0_axi_periph_M00_AXI 1 3 4 3860J -276 NJ -276 NJ -276 5390
-preplace netloc rst_ps7_0_fclk3_interconnect_aresetn 1 1 4 550 1410 1250 1540 NJ 1540 6750
-preplace netloc rst_ps7_0_fclk3_peripheral_aresetn 1 0 5 -210 210 440 1470 1300 1500 2420J 1340 6690
-preplace netloc S02_AXI_1 1 4 1 6350
-preplace netloc iop_arduino|rst_clk_wiz_1_100M_peripheral_aresetn 1 2 7 3500 394 4020 624 4420J 564 NJ 564 5370 544 5780 684 NJ
-preplace netloc ps7_0_axi_periph_M01_AXI 1 2 3 1310 -40 2400J 1220 6630J
-preplace netloc iop_arduino_sw2shield_sda_o_out 1 4 2 6360 -160 16090J
-preplace netloc mb3_intr_ack_1 1 3 1 2430
-preplace netloc iop_arduino|microblaze_0_dlmb_1 1 5 1 N
-preplace netloc iop_arduino|mb3_timers_subsystem_generate_o 1 4 4 NJ -96 NJ -96 NJ -96 5810
-preplace netloc Vaux13_1 1 0 4 NJ 160 480J -130 NJ -130 2570
-preplace netloc io_data_i_0_1 1 0 5 -400 -380 NJ -380 NJ -380 2600 1260 6650J
-preplace netloc iop_arduino|rst_clk_wiz_1_100M_mb_reset 1 2 3 3510 624 3910J 634 4390J
-preplace netloc iop_arduino|rst_clk_wiz_1_100M_bus_struct_reset 1 2 4 3490J 704 NJ 704 4450J 544 5110
-preplace netloc ps7_0_GPIO_O 1 2 3 1400 -80 2390 1250 6610
-preplace netloc trace_analyzer_arduino_s2mm_introut 1 1 4 390 -260 NJ -260 2460J 1320 6460J
+preplace netloc mdm_1_debug_sys_rst 1 3 1 2260
+preplace netloc iop_arduino_mb3_intr_req 1 3 2 2600 1390 6540
+preplace netloc iop_arduino|spi_subsystem|Conn2 1 1 1 5810
+preplace netloc iop_arduino|microblaze_0_axi_periph_M11_AXI 1 3 1 4030
+preplace netloc iop_arduino|microblaze_0_axi_periph_M00_AXI 1 3 4 3940J -264 NJ -264 NJ -264 5400
+preplace netloc rst_ps7_0_fclk3_interconnect_aresetn 1 1 4 560 1420 1310 1490 NJ 1490 6910
+preplace netloc rst_ps7_0_fclk3_peripheral_aresetn 1 0 5 -210 210 460 1410 1250 1560 NJ 1560 6940
+preplace netloc S02_AXI_1 1 4 1 6550
+preplace netloc iop_arduino|spi_subsystem|microblaze_0_axi_periph_M00_AXI 1 0 1 5570
+preplace netloc iop_arduino|spi_subsystem|s_axi_aresetn_1 1 0 1 N
+preplace netloc iop_arduino|spi_subsystem|mb3_spi_pl_sw_ip2intc_irpt 1 1 1 N
+preplace netloc iop_arduino|rst_clk_wiz_1_100M_peripheral_aresetn 1 2 7 3590 626 4090 666 NJ 666 5060J 676 5370 256 5980 476 NJ
+preplace netloc ps7_0_axi_periph_M01_AXI 1 2 3 1310 -40 2430J 1240 6830J
+preplace netloc iop_arduino_sw2shield_sda_o_out 1 4 2 6560 -160 19330J
+preplace netloc mb3_intr_ack_1 1 3 1 2460
+preplace netloc iop_arduino|microblaze_0_dlmb_1 1 5 1 5110
+preplace netloc iop_arduino|mb3_timers_subsystem_generate_o 1 4 4 NJ -94 NJ -94 NJ -94 5990
+preplace netloc Vaux13_1 1 0 4 NJ 160 490J -130 NJ -130 2570
+preplace netloc io_data_i_0_1 1 0 5 -400 -380 NJ -380 NJ -380 2590 1300 6590J
+preplace netloc iop_arduino|rst_clk_wiz_1_100M_mb_reset 1 2 3 3580J 646 NJ 646 4530
+preplace netloc iop_arduino|rst_clk_wiz_1_100M_bus_struct_reset 1 2 4 3570J 616 4100J 626 NJ 626 N
+preplace netloc ps7_0_GPIO_O 1 2 3 1420 -80 2390 1290 6810
+preplace netloc trace_analyzer_arduino_s2mm_introut 1 1 4 390 -260 NJ -260 2490J 1320 6730J
 preplace netloc io_data_i_0_2 1 0 4 -430J -360 NJ -360 NJ -360 2480
-preplace netloc iop_arduino|microblaze_0_axi_periph_M05_AXI 1 3 4 3890J -246 NJ -246 NJ -246 5400
-preplace netloc rgbled_gpio_GPIO 1 2 4 1360J 1420 2430J 1410 6600J -20 16020
-preplace netloc ps7_0_axi_periph_M07_AXI 1 2 3 1370J 0 2360J 1240 6470
-preplace netloc iop_arduino|microblaze_0_axi_periph_M12_AXI 1 3 1 3950
-preplace netloc iop_arduino|microblaze_0_axi_periph_M06_AXI 1 3 4 3900J -226 NJ -226 NJ -226 5350
-preplace netloc axi_dma_0_M_AXI_S2MM 1 1 4 500 -110 NJ -110 2490J 1170 6500J
-preplace netloc S01_ARESETN_1 1 4 1 6770
-preplace netloc iop_arduino|microblaze_0_axi_periph_M01_AXI 1 3 5 3850J -296 NJ -296 NJ -296 NJ -296 5820
-preplace netloc iop_arduino|shield2sw_scl_i_in_1 1 0 8 NJ 1104 NJ 1104 NJ 1104 NJ 1104 4400J 604 NJ 604 NJ 604 N
+preplace netloc iop_arduino|microblaze_0_axi_periph_M05_AXI 1 3 4 3960J -254 NJ -254 NJ -254 5410
+preplace netloc rgbled_gpio_GPIO 1 2 4 1370J 1420 NJ 1420 6780J -20 19260
+preplace netloc ps7_0_axi_periph_M07_AXI 1 2 3 1380J 0 2380J 1250 6660
+preplace netloc iop_arduino|microblaze_0_axi_periph_M12_AXI 1 3 1 4060
+preplace netloc iop_arduino|microblaze_0_axi_periph_M06_AXI 1 3 4 3980J -234 NJ -234 NJ -234 5380
+preplace netloc axi_dma_0_M_AXI_S2MM 1 1 4 510 -110 NJ -110 2510J 1200 6700J
+preplace netloc S01_ARESETN_1 1 4 1 6960
+preplace netloc iop_arduino|microblaze_0_axi_periph_M01_AXI 1 3 5 3930J -294 NJ -294 NJ -294 NJ -294 6000
+preplace netloc iop_arduino|shield2sw_scl_i_in_1 1 0 8 NJ 1076 NJ 1076 NJ 1076 NJ 1076 4470J 1146 NJ 1146 NJ 1146 6050
 preplace netloc Vp_Vn_1 1 0 4 NJ 200 370J -400 NJ -400 2670
-preplace netloc iop_pmoda_pmodJA_tri_o 1 3 3 2660 5770 6580 -170 16190J
-preplace netloc iop_arduino|microblaze_0_axi_periph_M10_AXI 1 3 1 3930
-preplace netloc iop_arduino|microblaze_0_axi_periph_M03_AXI 1 3 4 3880J -256 NJ -256 NJ -256 5410
-preplace netloc iop_arduino|mb3_intr_ack_1 1 0 8 2990J 954 NJ 954 NJ 954 NJ 954 4510J 944 5130J 924 NJ 924 N
-preplace netloc iop_arduino|mb3_iic_subsystem_iic2intc_irpt 1 2 7 3560 404 3870J 474 4390J 334 NJ 334 5340J 344 5750J 434 6110
-preplace netloc iop_arduino|dff_en_reset_vector_0_q 1 8 1 6170
-preplace netloc ps7_0_DDR 1 3 3 2350J 1190 6410J -70 16200
-preplace netloc iop_arduino|microblaze_0_axi_periph_M09_AXI 1 3 1 3920
-preplace netloc iop_arduino|mb3_spi_subsystem_ip2intc_irpt 1 2 6 3550 634 3870J 644 4440J 574 NJ 574 NJ 574 5720
+preplace netloc iop_pmoda_pmodJA_tri_o 1 3 3 2650 7400 6770 -170 19430J
+preplace netloc iop_arduino|spi_subsystem|ps7_0_FCLK_CLK0 1 0 1 5570
+preplace netloc iop_arduino|microblaze_0_axi_periph_M10_AXI 1 3 1 4010
+preplace netloc iop_arduino|microblaze_0_axi_periph_M03_AXI 1 3 4 3970J -244 NJ -244 NJ -244 5390
+preplace netloc iop_arduino|mb3_intr_ack_1 1 0 8 3050J 1006 NJ 1006 NJ 1006 NJ 1006 NJ 1006 NJ 1006 NJ 1006 6040
+preplace netloc iop_arduino|mb3_iic_subsystem_iic2intc_irpt 1 2 7 3660 396 3940J 456 4470J 446 NJ 446 5310J 826 NJ 826 6350
+preplace netloc iop_arduino|dff_en_reset_vector_0_q 1 8 1 N
+preplace netloc ps7_0_DDR 1 3 3 2370J 1220 6610J -70 19440
+preplace netloc iop_arduino|microblaze_0_axi_periph_M09_AXI 1 3 1 4000
+preplace netloc iop_arduino|mb3_spi_subsystem_ip2intc_irpt 1 2 6 3650 606 NJ 606 4500J 456 NJ 456 5320J 796 5960
 preplace netloc Vaux0_1 1 0 4 -410J -240 NJ -240 NJ -240 2660
-preplace netloc iop_arduino_sw2shield_scl_o_out 1 4 2 6370 -140 16070J
-preplace netloc iop_arduino|mb3_intr_gpio_io_o 1 4 4 N 554 NJ 554 NJ 554 5730J
-preplace netloc iop_pmodb_sw2pmod_data_out 1 4 2 6480 -230 16230J
-preplace netloc pdm_m_data_i_1 1 0 5 -420J -320 NJ -320 NJ -320 2580J 1270 6490
-preplace netloc btns_gpio_ip2intc_irpt 1 4 2 6800 1460 15980
-preplace netloc iop_arduino|capture_i_1 1 3 6 4030 614 4430J 594 5110J 674 NJ 674 NJ 674 6120
-preplace netloc microblaze_0_debug 1 3 1 2290
-preplace netloc iop_pmodb_sw2pmod_tri_out 1 4 2 6520 -240 16240J
-preplace netloc iop_arduino|Conn10 1 0 5 NJ 754 NJ 754 NJ 754 NJ 754 N
-preplace netloc iop_arduino|interrupts_concat_dout 1 3 1 4010
-preplace netloc S00_ARESETN_1 1 4 1 6730
-preplace netloc concat_pmods_dout 1 0 5 -300 4640 NJ 4640 NJ 4640 NJ 4640 6370
-preplace netloc iop_arduino|Conn11 1 0 5 NJ 794 NJ 794 NJ 794 NJ 794 N
-preplace netloc iop_arduino|mb3_timers_subsystem_pwm_o 1 4 4 NJ -76 NJ -76 NJ -76 5800
-preplace netloc iop_pmoda_intr_ack_Dout 1 3 1 2310
-preplace netloc shield2sw_sda_i_in_1 1 0 5 -330 -290 NJ -290 NJ -290 2520 1290 6700J
-preplace netloc iop_arduino_io_data_o_0 1 4 2 6340 -200 16140J
-preplace netloc iop_arduino|Conn12 1 0 5 NJ 834 NJ 834 NJ 834 NJ 834 N
-preplace netloc iop_arduino|mb3_timers_subsystem_mb3_timer_interrupts 1 2 3 3550 384 3850J 304 4390
+preplace netloc iop_arduino_sw2shield_scl_o_out 1 4 2 6570 -140 19310J
+preplace netloc iop_arduino|mb3_intr_gpio_io_o 1 4 4 4510J 636 5080J 806 NJ 806 6030
+preplace netloc iop_pmodb_sw2pmod_data_out 1 4 2 6720 -230 19470J
+preplace netloc pdm_m_data_i_1 1 0 5 -420J -320 NJ -320 NJ -320 2580J 1280 6680
+preplace netloc btns_gpio_ip2intc_irpt 1 4 2 6990 1460 19220
+preplace netloc iop_arduino|capture_i_1 1 3 6 4140 56 4520J -4 NJ -4 NJ -4 NJ -4 6370
+preplace netloc microblaze_0_debug 1 3 1 2300
+preplace netloc iop_pmodb_sw2pmod_tri_out 1 4 2 6740 -240 19480J
+preplace netloc iop_arduino|Conn10 1 0 5 NJ 816 NJ 816 NJ 816 NJ 816 N
+preplace netloc iop_arduino|interrupts_concat_dout 1 3 1 4120
+preplace netloc S00_ARESETN_1 1 4 1 6920
+preplace netloc concat_pmods_dout 1 0 5 -300 4640 NJ 4640 NJ 4640 NJ 4640 6590
+preplace netloc iop_arduino|Conn11 1 0 5 NJ 856 NJ 856 NJ 856 NJ 856 N
+preplace netloc iop_arduino|mb3_timers_subsystem_pwm_o 1 4 4 NJ -74 NJ -74 NJ -74 5980
+preplace netloc iop_pmoda_intr_ack_Dout 1 3 1 2320
+preplace netloc shield2sw_sda_i_in_1 1 0 5 -330 -290 NJ -290 NJ -290 2530 1310 6670J
+preplace netloc iop_arduino_io_data_o_0 1 4 2 6540 -200 19380J
+preplace netloc iop_arduino|Conn12 1 0 5 NJ 896 NJ 896 NJ 896 NJ 896 N
+preplace netloc iop_arduino|mb3_timers_subsystem_mb3_timer_interrupts 1 2 3 3620 676 NJ 676 4440
 preplace netloc Vaux8_1 1 0 4 -360J 130 380J -160 NJ -160 2620
-preplace netloc ps7_0_axi_periph_M06_AXI 1 1 2 540 -10 1230
-preplace netloc proc_sys_reset_fclk1_interconnect_aresetn 1 0 4 -220 1580 NJ 1580 NJ 1580 2240
-preplace netloc iop_arduino|Conn13 1 0 5 NJ 854 NJ 854 NJ 854 NJ 854 N
-preplace netloc iop_arduino|mb3_spi_subsystem_ip2intc_irpt1 1 2 6 3560 674 NJ 674 4480J 584 NJ 584 NJ 584 5710
-preplace netloc mb_1_reset_Dout 1 3 1 2300
-preplace netloc rst_ps7_0_fclk0_interconnect_aresetn 1 0 5 -200 1050 520 1420 1330 1530 NJ 1530 6670
-preplace netloc iop_arduino|Conn14 1 0 5 NJ 814 NJ 814 NJ 814 NJ 814 N
-preplace netloc iop_arduino|ps7_0_FCLK_CLK0 1 0 8 2930J 514 3130 354 3490 354 4000 724 4500 384 5140 354 5380 354 5740
+preplace netloc ps7_0_axi_periph_M06_AXI 1 1 2 550 -10 1230
+preplace netloc proc_sys_reset_fclk1_interconnect_aresetn 1 0 4 -210 1580 NJ 1580 NJ 1580 2240
+preplace netloc iop_arduino|Conn13 1 0 5 NJ 916 NJ 916 NJ 916 NJ 916 N
+preplace netloc iop_arduino|mb3_spi_subsystem_ip2intc_irpt1 1 2 6 3660 636 NJ 636 4480J 436 NJ 436 5350J 776 5950
+preplace netloc mb_1_reset_Dout 1 3 1 2310
+preplace netloc rst_ps7_0_fclk0_interconnect_aresetn 1 0 5 -200 1050 530 1450 1340 1530 NJ 1530 6880
+preplace netloc iop_arduino|Conn14 1 0 5 NJ 876 NJ 876 NJ 876 NJ 876 N
+preplace netloc iop_arduino|ps7_0_FCLK_CLK0 1 0 8 2990J 556 3190 366 3580 366 4130 616 4560 466 5100 466 5390 236 6020
 preplace netloc iop_arduino|io_switch_0_io_data_o 1 8 1 N
 preplace netloc Vaux6_1 1 0 4 -340J -200 NJ -200 NJ -200 2630
 preplace netloc ps7_0_axi_periph_1_M02_AXI 1 0 3 -190 -20 NJ -20 1260
-preplace netloc iop_pmodb_iop_pmodb_intr_req 1 3 2 2670 6750 6340
-preplace netloc iop_arduino|mb3_iic_subsystem_sda_o 1 8 1 6150
-preplace netloc iop_arduino|mb3_gpio_subsystem_ip2intc_irpt 1 2 6 3540 374 4010J 314 NJ 314 NJ 314 5360J 334 5740
-preplace netloc iop_arduino_GPIO 1 4 2 6380 -100 16220J
+preplace netloc iop_pmodb_iop_pmodb_intr_req 1 3 2 2660 7430 6570
+preplace netloc iop_arduino|mb3_iic_subsystem_sda_o 1 8 1 N
+preplace netloc iop_arduino|mb3_gpio_subsystem_ip2intc_irpt 1 2 6 3640 386 3960J 446 4450J 316 NJ 316 NJ 316 5950
+preplace netloc iop_arduino_GPIO 1 4 2 6580 -100 19460J
 preplace netloc ps7_0_axi_periph_M05_AXI 1 0 3 -240 -50 NJ -50 1240
-preplace netloc axi_gpio_video_gpio_io_o 1 1 5 380 1510 NJ 1510 NJ 1510 6440J -210 16250J
-preplace netloc constant_10bit_0_dout 1 4 1 6780
-preplace netloc iop_arduino|microblaze_0_axi_periph_M07_AXI 1 3 6 3910 -216 NJ -216 NJ -216 NJ -216 NJ -216 NJ
-preplace netloc iop_arduino|mb3_iic_subsystem_scl_o 1 8 1 6190
+preplace netloc axi_gpio_video_gpio_io_o 1 1 5 380 1510 NJ 1510 NJ 1510 6630J -210 19490J
+preplace netloc constant_10bit_0_dout 1 4 1 6970
+preplace netloc iop_arduino|spi_subsystem|microblaze_0_axi_periph_M06_AXI 1 0 1 5560
+preplace netloc iop_arduino|microblaze_0_axi_periph_M07_AXI 1 3 6 3990 -214 NJ -214 NJ -214 NJ -214 NJ -214 NJ
+preplace netloc iop_arduino|mb3_iic_subsystem_scl_o 1 8 1 N
 preplace netloc ps7_0_axi_periph_1_M03_AXI 1 0 3 -250 -80 NJ -80 1300
 preplace netloc ps7_0_axi_periph_1_M01_AXI 1 0 3 -220 -30 NJ -30 1270
-preplace netloc ps7_0_FCLK_RESET0_N 1 0 4 -190 1120 490 1450 1400 1470 2200
-preplace netloc iop_arduino|microblaze_0_debug 1 0 5 2960J 664 NJ 664 NJ 664 NJ 664 4410
-preplace netloc iop_arduino|BRAM_PORTB_1 1 5 1 5120
-preplace netloc iop_arduino|io_data_i_0_1 1 0 9 NJ 944 NJ 944 NJ 944 NJ 944 4410J 1104 NJ 1104 NJ 1104 NJ 1104 6130
-preplace netloc iop_arduino_io_tri_o_0 1 4 2 6660 -130 16040J
-preplace netloc audio_path_sel_Dout 1 4 2 6740 -220 15950
-preplace netloc iop_arduino|mb3_uartlite_d1_d0_interrupt 1 2 3 3530 -526 NJ -526 4410
-preplace netloc logic_1_dout 1 0 4 -310 -350 NJ -350 NJ -350 2260
-preplace netloc iop_pmoda_iop_pmoda_intr_req 1 3 2 2660 6740 6370
-preplace netloc iop_pmoda_io_data_o_0 1 4 2 6540 -180 16210J
-preplace netloc iop_arduino|spi_subsystem_SPI_0 1 7 1 5770
-preplace netloc iop_arduino|microblaze_0_axi_periph_M16_AXI 1 3 1 3990
-preplace netloc iop_arduino|mb3_iic_subsystem_sda_t 1 8 1 6140
-preplace netloc gpio_leds_GPIO 1 3 3 2380J 1180 6400J -110 16150
+preplace netloc ps7_0_FCLK_RESET0_N 1 0 4 -190 1120 450 1440 1420 1480 2200
+preplace netloc iop_arduino|microblaze_0_debug 1 0 5 3010J 726 NJ 726 NJ 726 NJ 726 4540
+preplace netloc iop_arduino|BRAM_PORTB_1 1 5 1 5090
+preplace netloc iop_arduino|io_data_i_0_1 1 0 9 3030J 716 NJ 716 NJ 716 NJ 716 4490J 416 NJ 416 5340J 816 NJ 816 6360
+preplace netloc iop_arduino_io_tri_o_0 1 4 2 6870 -130 19280J
+preplace netloc audio_path_sel_Dout 1 4 2 6930 -220 19190
+preplace netloc iop_arduino|mb3_uartlite_d1_d0_interrupt 1 2 3 3630 -524 NJ -524 4450
+preplace netloc logic_1_dout 1 0 4 -310 -350 NJ -350 NJ -350 2270
+preplace netloc iop_pmoda_iop_pmoda_intr_req 1 3 2 2640 7410 6620
+preplace netloc iop_pmoda_io_data_o_0 1 4 2 6750 -180 19450J
+preplace netloc iop_arduino|spi_subsystem_SPI_0 1 7 1 5960
+preplace netloc iop_arduino|microblaze_0_axi_periph_M16_AXI 1 3 1 4080
+preplace netloc iop_arduino|mb3_iic_subsystem_sda_t 1 8 1 N
+preplace netloc gpio_leds_GPIO 1 3 3 2400J 1210 6600J -110 19390
 preplace netloc Vaux1_1 1 0 4 -390J -230 NJ -230 NJ -230 2650
 preplace netloc ps7_0_axi_periph_1_M00_AXI 1 0 3 -230 -40 NJ -40 1280
-preplace netloc axi_mem_intercon_M00_AXI 1 1 2 410 1400 1380J
-preplace netloc iop_arduino|mb3_iic_subsystem_scl_t 1 8 1 6180
+preplace netloc axi_mem_intercon_M00_AXI 1 1 2 410 1400 1390J
+preplace netloc iop_arduino|mb3_iic_subsystem_scl_t 1 8 1 N
 preplace netloc Vaux9_1 1 0 4 -370J 140 400J -150 NJ -150 2610
-preplace netloc concat_arduino_dout 1 0 6 -280 1550 NJ 1550 NJ 1550 NJ 1550 NJ 1550 15970
-preplace netloc iop_arduino|microblaze_0_axi_periph_M14_AXI 1 3 1 3920
-preplace netloc iop_arduino|gpio_subsystem_GPIO 1 7 1 5750
-preplace netloc iop_arduino|io_switch_0_uart0_rx_i 1 4 4 4420J 144 NJ 144 NJ 144 5790
-preplace netloc swsleds_gpio_GPIO 1 1 5 470 -100 NJ -100 2440J 1230 6450J -30 16000J
-preplace netloc iop_arduino_spi_sw_shield 1 4 2 6390 -90 16060J
-preplace netloc btns_gpio_GPIO 1 5 1 16130
-preplace netloc mdm_1_MBDEBUG_1 1 3 1 2270
-preplace netloc audio_direct_0_pdm_clk 1 5 1 16030
-preplace netloc iop_arduino|microblaze_0_axi_periph_M13_AXI 1 3 1 3970
-preplace netloc video_TMDS1 1 1 5 390 1480 NJ 1480 NJ 1480 6590J -40 16110J
-preplace netloc mdm_1_MBDEBUG_2 1 3 1 2370
-preplace netloc axi_interconnect_0_M00_AXI 1 2 4 1420 1450 NJ 1450 NJ 1450 15990
-levelinfo -pg 1 -460 190 1058 1966 3130 15818 16270 -top -570 -bot 9840
-levelinfo -hier iop_arduino * 3060 3310 3720 4240 4860 5240 5560 5970 *
+preplace netloc concat_arduino_dout 1 0 6 -270 1520 NJ 1520 NJ 1520 NJ 1520 NJ 1520 19210
+preplace netloc iop_arduino|microblaze_0_axi_periph_M14_AXI 1 3 1 4030
+preplace netloc iop_arduino|gpio_subsystem_GPIO 1 7 1 5960
+preplace netloc iop_arduino|io_switch_0_uart0_rx_i 1 4 4 N 176 NJ 176 NJ 176 NJ
+preplace netloc swsleds_gpio_GPIO 1 1 5 480 -100 NJ -100 2440J 1270 6650J -30 19240J
+preplace netloc iop_arduino_spi_sw_shield 1 4 2 6590 -90 19300J
+preplace netloc btns_gpio_GPIO 1 5 1 19370
+preplace netloc mdm_1_MBDEBUG_1 1 3 1 2280
+preplace netloc audio_direct_0_pdm_clk 1 5 1 19270
+preplace netloc iop_arduino|microblaze_0_axi_periph_M13_AXI 1 3 1 4070
+preplace netloc video_TMDS1 1 1 5 390 1540 NJ 1540 NJ 1540 6820J -40 19350J
+preplace netloc mdm_1_MBDEBUG_2 1 3 1 2420
+preplace netloc axi_interconnect_0_M00_AXI 1 2 4 1430 1450 NJ 1450 NJ 1450 19230
+levelinfo -pg 1 -460 190 1058 1966 3130 19054 19510 -top -570 -bot 9840
+levelinfo -hier iop_arduino * 3120 3390 3800 4290 4820 5210 5650 6210 *
+levelinfo -hier iop_arduino|spi_subsystem * 5690 *
 ",
 }
 0

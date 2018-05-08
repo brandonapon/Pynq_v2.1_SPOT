@@ -115,15 +115,11 @@ int main()
    }
 
    char write_snap_cmd[1] = {1};
-   char go_cmd[1] = "a";
-   char stop_cmd[1] = "b";
    char write_data[4] = {0,1,2,3};
    char read_data[4] = {-1};
    int file_size;
-   int increment = 0;
    uint8_t *ddr_address;
    char send_cmd[1] = {0};
-   int flag = 1;
    char buffer_1[1024] = {};
    char buffer_2[64] = {};
    char stream_in[128] = {};
@@ -132,7 +128,6 @@ int main()
    int read_count = 0;
    gpio_write(gpio_device, 1); //set high
    int stream_size = 0;
-   int wait_counter;
    // Run application
    while(1){
      // wait and store valid command
