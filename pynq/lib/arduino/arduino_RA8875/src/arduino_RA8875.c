@@ -67,6 +67,8 @@
 #define SLOW_FILL				0x7
 #define DRAW_IMAGE				0x8
 #define FILL_COLOR				0x9
+#define LITTLE 					0xa
+#define EIGHT					0xb
 
 /* Pin Assignments */
 #define RX						0
@@ -438,7 +440,7 @@ void displayOn(int on){
       @args color[in] The RGB565 color to use when drawing the pixel
 */
 /**************************************************************************/
-void drawPixel(int16_t x, int16_t y, uint16_t color){
+void drawPixel(int16_t x, int16_t y, uint16_t color){ //maybe change input to two color inputs (each one half of the color)
 	writeReg(RA8875_CURH0, x);
 	writeReg(RA8875_CURH1, x >> 8);
 	writeReg(RA8875_CURV0, y);
@@ -450,9 +452,24 @@ void drawPixel(int16_t x, int16_t y, uint16_t color){
 //	w_buffer[1] = color >> 8;
 //	w_buffer[2] = color;
 	w_buffer[1] = (color & 0xFF00) >> 8;
-	w_buffer[2] = color;
+	w_buffer[2] = color & 0xFF; //mask this properly
 	gpio_write(gpio_device, start_transfer);
 	spi_transfer(spi_device, (const uint8_t*) w_buffer, (uint8_t*) r_buffer, 3);
+	gpio_write(gpio_device, end_transfer);
+}
+
+void drawPixel8bit(int16_t x, int16_t y, uint8_t color){ //maybe change input to two color inputs (each one half of the color)
+	writeReg(RA8875_CURH0, x);
+	writeReg(RA8875_CURH1, x >> 8);
+	writeReg(RA8875_CURV0, y);
+	writeReg(RA8875_CURV1, y >> 8);
+	writeCommand(RA8875_MRWC);
+	uint8_t w_buffer[4];
+	uint8_t r_buffer[4];
+	w_buffer[0] = RA8875_DATAWRITE;
+	w_buffer[1] = color;
+	gpio_write(gpio_device, start_transfer);
+	spi_transfer(spi_device, (const uint8_t*) w_buffer, (uint8_t*) r_buffer, 2);
 	gpio_write(gpio_device, end_transfer);
 }
 
@@ -652,6 +669,10 @@ int main(void)
     int16_t y_start = 0;
     uint16_t color_pixel = 0;
     uint16_t pixel = 0;
+    uint8_t *image;
+	int16_t x_size;
+	int16_t y_size;
+
     int index = 0;
 
     while(1) {
@@ -714,10 +735,9 @@ int main(void)
             case DRAW_IMAGE:
             	x_start = MAILBOX_DATA(0);
             	y_start = MAILBOX_DATA(1);
-            	uint8_t *image = MAILBOX_DATA(2) | 0x20000000;
-            	int16_t x_size = MAILBOX_DATA(3);
-            	int16_t y_size = MAILBOX_DATA(4);
-            	uint16_t test_output[5] = {0};
+            	image = MAILBOX_DATA(2) | 0x20000000;
+            	x_size = MAILBOX_DATA(3);
+            	y_size = MAILBOX_DATA(4);
             	index = 0;
             	for(x_pixel = x_start; x_pixel < x_size; x_pixel++){
             		for(y_pixel = y_start; y_pixel < y_size; y_pixel++){
@@ -737,6 +757,43 @@ int main(void)
 //            	for(int i = 0; i < 5; i++){
 //            		MAILBOX_DATA(i) = test_output[i];
 //            	}
+            	MAILBOX_CMD_ADDR = 0x0;
+            	break;
+
+            case LITTLE:
+            	x_start = MAILBOX_DATA(0);
+				y_start = MAILBOX_DATA(1);
+				image = MAILBOX_DATA(2) | 0x20000000;
+				x_size = MAILBOX_DATA(3);
+				y_size = MAILBOX_DATA(4);
+				index = 0;
+				for(x_pixel = x_start; x_pixel < x_size; x_pixel++){
+					for(y_pixel = y_start; y_pixel < y_size; y_pixel++){
+						pixel = ((uint16_t)image[index] << 8) | image[index+1];
+						drawPixel(x_pixel, y_pixel, pixel);
+						index += 2;
+					}
+				}
+				index = 0;
+				MAILBOX_DATA(0) = (image[0] << 8) | image[1];
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+            case EIGHT:
+            	x_start = MAILBOX_DATA(0);
+            	y_start = MAILBOX_DATA(1);
+            	image = MAILBOX_DATA(2) | 0x20000000;
+            	x_size = MAILBOX_DATA(3);
+            	y_size = MAILBOX_DATA(4);
+            	index = 0;
+            	for(x_pixel = x_start; x_pixel < x_size; x_pixel++){
+            		for(y_pixel = y_start; y_pixel < y_size; y_pixel++){
+            			pixel = image[index];
+            			drawPixel8bit(x_pixel, y_pixel, pixel);
+            			index += 1;
+            		}
+            	}
+            	index = 0;
+            	MAILBOX_DATA(0) = image[0];
             	MAILBOX_CMD_ADDR = 0x0;
             	break;
             default:
