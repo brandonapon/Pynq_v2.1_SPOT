@@ -641,10 +641,10 @@ int main(void)
      * reset = 1 -> not in reset state
      * dc = 0    -> in command mode
      */
-    reset_dc_d7_to_d0 = 0x000; //reset low (active low)
-    gpio_write(gpio_device, reset_dc_d7_to_d0);
-    reset_dc_d7_to_d0 = 0x200; //reset high
-    gpio_write(gpio_device, reset_dc_d7_to_d0);
+//    reset_dc_d7_to_d0 = 0x000; //reset low (active low)
+//    gpio_write(gpio_device, reset_dc_d7_to_d0);
+//    reset_dc_d7_to_d0 = 0x200; //reset high
+//    gpio_write(gpio_device, reset_dc_d7_to_d0);
 
     Xil_Out32(XPAR_IOP_ARDUINO_INTR_BASEADDR+4,0x0);
     Xil_Out32(XPAR_IOP_ARDUINO_INTR_BASEADDR,0x0);
@@ -740,17 +740,8 @@ int main(void)
             			index += 2;
             		}
             	}
-//            	for(int i = 0; i < 5; i++){
-//            		pixel = ((uint16_t)image[index] << 8) | (uint16_t)image[index+1];
-//					index += 2;
-//            		test_output[i] = pixel;
-//            	}
             	index = 0;
             	MAILBOX_DATA(0) = (image[0] << 8) | image[1];
-//            	MAILBOX_DATA(0) = pixel;
-//            	for(int i = 0; i < 5; i++){
-//            		MAILBOX_DATA(i) = test_output[i];
-//            	}
             	MAILBOX_CMD_ADDR = 0x0;
             	break;
 
@@ -765,9 +756,6 @@ int main(void)
 						++read_count;
 					}
 				}
-				MAILBOX_DATA(0) = read_count;
-				MAILBOX_DATA(1) = stream_size;
-
 				x_size = 320;
 				y_size = 240;
 				for(x_pixel = x_start; x_pixel < x_size; x_pixel++){
@@ -777,7 +765,6 @@ int main(void)
 						index += 2;
 					}
 				}
-
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 

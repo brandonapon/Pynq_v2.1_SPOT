@@ -56,6 +56,7 @@
 #include "xio_switch.h"
 #include "xil_cache.h"
 #include "xsysmon.h"
+#include "time.h"
 //#include "bmp.h"
 
 #define INIT				    0x1
@@ -67,8 +68,19 @@
 #define SLOW_FILL				0x7
 #define DRAW_IMAGE				0x8
 #define FILL_COLOR				0x9
-#define LITTLE 					0xa
+#define UNDEFINED				0xa
 #define EIGHT					0xb
+#define RECTANGLE				0xc
+#define CIRCLE					0xd
+#define	TRIANGLE				0xe
+#define ELLIPSE					0xf
+#define CURVE					0x10
+#define DRAWLINE				0x11
+#define FONT 					0x12
+#define TEXTMODE				0x13
+#define GRAPHICSMODE			0x14
+#define LAYER					0x15
+#define LAYERTRANS 				0x16
 
 /* Pin Assignments */
 #define RX						0
@@ -286,6 +298,14 @@
 #define RA8875_INTC2_TP         0x04
 #define RA8875_INTC2_BTE        0x02
 
+#define RA8875_DPCR				0X20
+#define RA8875_DPCR_ON			0x80 //0100 0000 |=
+#define RA8875_DPCR_OFF			0xBF //1011 1111 &=
+
+#define RA8875_MWCR1			0x02
+
+#define RA8875_LTPR1			0x53
+
 #define V_REF 3.33
 #define SYSMON_DEVICE_ID XPAR_SYSMON_0_DEVICE_ID
 
@@ -299,13 +319,13 @@ XSysMon *SysMonInstPtr = &SysMonInst;
 
 uint8_t writeBuffer[2], readBuffer[2];
 
-/*Functions*/
+/* shared variables */
+int textScale = 1;
+int currentLayer = 0;
+
+/* LOW LEVEL FUNCTIONS*/
 void writeCommand(uint8_t cmd){
 	gpio_write(gpio_device, start_transfer);
-//	writeBuffer[0] = RA8875_CMDWRITE;
-//	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 1);
-//	writeBuffer[0] = cmd;
-//	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 1);
 	writeBuffer[0] = RA8875_CMDWRITE;
 	writeBuffer[1] = cmd;
 	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 2);
@@ -314,10 +334,6 @@ void writeCommand(uint8_t cmd){
 
 void writeData(uint8_t d){
 	gpio_write(gpio_device, start_transfer);
-//	writeBuffer[0] = RA8875_DATAWRITE;
-//	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 1);
-//	writeBuffer[0] = d;
-//	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 1);
 	writeBuffer[0] = RA8875_DATAWRITE;
 	writeBuffer[1] = d;
 	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 2);
@@ -359,6 +375,36 @@ void slowWriteReg(uint8_t reg, uint8_t val){
 	slowWriteData(val);
 }
 
+uint8_t readData(void)
+{
+	gpio_write(gpio_device, start_transfer);
+    writeBuffer[0] = RA8875_DATAREAD;
+  spi_transfer(spi_device, writeBuffer, readBuffer, 1);
+  writeBuffer[0] = 0x0;
+  spi_transfer(spi_device, writeBuffer, readBuffer, 1);
+	gpio_write(gpio_device, end_transfer);
+  return readBuffer[0];
+}
+
+uint8_t readReg(uint8_t reg)
+{
+  writeCommand(reg);
+  return readData();
+}
+
+/* FUNCTIONS */
+
+int waitPoll(uint8_t regname, uint8_t waitflag) {
+  /* Wait for the command to finish */
+  while (1)
+  {
+    uint8_t temp = readReg(regname);
+    if (!(temp & waitflag))
+      return 1;
+  }
+  return 0; // MEMEFIX: yeah i know, unreached! - add timeout?
+}
+
 void PLLinit(void){ //Fixed to 800x480
 	//Initializes PLL on Chip
 	slowWriteReg(RA8875_PLLC1, RA8875_PLLC1_PLLDIV1 + 10);
@@ -370,7 +416,8 @@ void initialize(void){ //Fixed to 800x480
 	PLLinit();
 	//Change RA8875_SYSR_16BPP to RA8875_SYSR_8BPP to change from 64k to 256 colors. Allows for layers to be used
 	//RA8875_SYSR_MCU8 - 8 bit mode, RA8875_SYSR_MCU16 - 16 bit mode
-	slowWriteReg(RA8875_SYSR, RA8875_SYSR_16BPP | RA8875_SYSR_MCU8);
+//	slowWriteReg(RA8875_SYSR, RA8875_SYSR_16BPP | RA8875_SYSR_MCU8);
+	slowWriteReg(RA8875_SYSR, RA8875_SYSR_MCU8 | RA8875_SYSR_MCU8);
 
 	/* Timing values */
 	uint8_t pixclk;
@@ -431,6 +478,154 @@ void displayOn(int on){
 		slowWriteReg(RA8875_PWRR, RA8875_PWRR_NORMAL | RA8875_PWRR_DISPOFF);
 }
 
+/* DISPLAY MODES */
+
+void textMode(void){
+	writeCommand(RA8875_MWCR0);
+	uint8_t temp = readData();
+	temp |= RA8875_MWCR0_TXTMODE; // Set bit 7
+	writeData(temp);
+
+	/* Select the internal (ROM) font */
+	writeCommand(0x21);
+	temp = readData();
+	temp &= ~((1<<7) | (1<<5)); // Clear bits 7 and 5
+	writeData(temp);
+}
+
+void graphicsMode(void){
+	writeCommand(RA8875_MWCR0);
+	uint8_t temp = readData();
+	temp &= ~RA8875_MWCR0_TXTMODE; // bit #7
+	writeData(temp);
+}
+
+/* TEXT FUNCTIONS */
+
+void textSetCursor(uint16_t x, uint16_t y)
+{
+  /* Set cursor location */
+  writeCommand(0x2A);
+  writeData(x & 0xFF);
+  writeCommand(0x2B);
+  writeData(x >> 8);
+  writeCommand(0x2C);
+  writeData(y & 0xFF);
+  writeCommand(0x2D);
+  writeData(y >> 8);
+}
+
+void textColor(uint16_t foreColor, uint16_t bgColor)
+{
+  /* Set Fore Color */
+  writeCommand(0x63);
+  writeData((foreColor & 0xf800) >> 11);
+  writeCommand(0x64);
+  writeData((foreColor & 0x07e0) >> 5);
+  writeCommand(0x65);
+  writeData((foreColor & 0x001f));
+
+  /* Set Background Color */
+  writeCommand(0x60);
+  writeData((bgColor & 0xf800) >> 11);
+  writeCommand(0x61);
+  writeData((bgColor & 0x07e0) >> 5);
+  writeCommand(0x62);
+  writeData((bgColor & 0x001f));
+
+  /* Clear transparency flag */
+  writeCommand(0x22);
+  uint8_t temp = readData();
+  temp &= ~(1<<6); // Clear bit 6
+  writeData(temp);
+}
+
+void textTransparent(uint16_t foreColor)
+{
+  /* Set Fore Color */
+  writeCommand(0x63);
+  writeData((foreColor & 0xf800) >> 11);
+  writeCommand(0x64);
+  writeData((foreColor & 0x07e0) >> 5);
+  writeCommand(0x65);
+  writeData((foreColor & 0x001f));
+
+  /* Set transparency flag */
+  writeCommand(0x22);
+  uint8_t temp = readData();
+  temp |= (1<<6); // Set bit 6
+  writeData(temp);
+}
+
+void textEnlarge(uint8_t scale)
+{
+  if (scale > 3) scale = 3;
+
+  /* Set font size flags */
+  writeCommand(0x22);
+  uint8_t temp = readData();
+  temp &= ~(0xF); // Clears bits 0..3
+  temp |= scale << 2;
+  temp |= scale;
+  writeData(temp);
+
+  textScale = scale;
+}
+
+void textWrite(const char* buffer, uint16_t len)
+{
+	int counter = 0;
+	if (len == 0) len = strlen(buffer);
+		writeCommand(RA8875_MRWC);
+	for (uint16_t i=0;i<len;i++){
+		writeData(buffer[i]);
+		if(textScale > 1){ //if text enlarged, give more time to draw
+			for(int i=0; i<10000; ++i){
+				counter++;
+			}
+		}
+
+	}
+}
+
+/* layer functions */
+
+void useLayers(int on){
+	if(on == 1){ //turn layers on
+		writeCommand(RA8875_DPCR);
+		uint8_t temp = readData();
+		temp |= RA8875_DPCR_ON; // Set bit 7
+		writeData(temp);
+	}
+	else{ //turn off layers
+		writeCommand(RA8875_DPCR);
+		uint8_t temp = readData();
+		temp &= RA8875_DPCR_OFF; // Set bit 7
+		writeData(temp);
+	}
+}
+
+void writeTo(int layer){
+	uint8_t temp = readReg(RA8875_MWCR1);
+	if(layer == 0){
+		currentLayer = 0;
+		temp &= ~((1<<3) | (1<<2));// Clear bits 3 and 2
+		temp &= ~(1 << 0); //clear bit 0
+	}
+	else{
+		currentLayer = 1;
+		temp &= ~((1<<3) | (1<<2));// Clear bits 3 and 2
+		temp |= (1 << 0); //bit set 0
+	}
+}
+
+void layerTransparency(uint8_t layer1,uint8_t layer2)
+{
+	if (layer1 > 8) layer1 = 8;
+	if (layer2 > 8) layer2 = 8;
+	writeReg(RA8875_LTPR1, ((layer2 & 0xF) << 4) | (layer1 & 0xF));
+}
+
 /**************************************************************************/
 /*!
       Draws a single pixel at the specified location
@@ -471,6 +666,240 @@ void drawPixel8bit(int16_t x, int16_t y, uint8_t color){ //maybe change input to
 	gpio_write(gpio_device, start_transfer);
 	spi_transfer(spi_device, (const uint8_t*) w_buffer, (uint8_t*) r_buffer, 2);
 	gpio_write(gpio_device, end_transfer);
+}
+
+void rectHelper(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color, int filled){
+  /* Set X */
+  writeCommand(0x91);
+  writeData(x);
+  writeCommand(0x92);
+  writeData(x >> 8);
+
+  /* Set Y */
+  writeCommand(0x93);
+  writeData(y);
+  writeCommand(0x94);
+  writeData(y >> 8);
+
+  /* Set X1 */
+  writeCommand(0x95);
+  writeData(w);
+  writeCommand(0x96);
+  writeData((w) >> 8);
+
+  /* Set Y1 */
+  writeCommand(0x97);
+  writeData(h);
+  writeCommand(0x98);
+  writeData((h) >> 8);
+
+  /* Set Color */
+  writeCommand(0x63);
+  writeData((color & 0xf800) >> 11);
+  writeCommand(0x64);
+  writeData((color & 0x07e0) >> 5);
+  writeCommand(0x65);
+  writeData((color & 0x001f));
+
+  /* Draw! */
+  writeCommand(RA8875_DCR);
+  if (filled)
+  {
+    writeData(0xB0);
+  }
+  else
+  {
+    writeData(0x90);
+  }
+
+  /* Wait for the command to finish */
+  waitPoll(RA8875_DCR, RA8875_DCR_LINESQUTRI_STATUS);
+}
+
+void circleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t color, int filled)
+{
+  /* Set X */
+  writeCommand(0x99);
+  writeData(x0);
+  writeCommand(0x9a);
+  writeData(x0 >> 8);
+
+  /* Set Y */
+  writeCommand(0x9b);
+  writeData(y0);
+  writeCommand(0x9c);
+  writeData(y0 >> 8);
+
+  /* Set Radius */
+  writeCommand(0x9d);
+  writeData(r);
+
+  /* Set Color */
+  writeCommand(0x63);
+  writeData((color & 0xf800) >> 11);
+  writeCommand(0x64);
+  writeData((color & 0x07e0) >> 5);
+  writeCommand(0x65);
+  writeData((color & 0x001f));
+
+  /* Draw! */
+  writeCommand(RA8875_DCR);
+  if (filled)
+  {
+    writeData(RA8875_DCR_CIRCLE_START | RA8875_DCR_FILL);
+  }
+  else
+  {
+    writeData(RA8875_DCR_CIRCLE_START | RA8875_DCR_NOFILL);
+  }
+
+  /* Wait for the command to finish */
+  waitPoll(RA8875_DCR, RA8875_DCR_CIRCLE_STATUS);
+}
+
+void triangleHelper(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color, int filled)
+{
+  /* Set Point 0 */
+  writeCommand(0x91);
+  writeData(x0);
+  writeCommand(0x92);
+  writeData(x0 >> 8);
+  writeCommand(0x93);
+  writeData(y0);
+  writeCommand(0x94);
+  writeData(y0 >> 8);
+
+  /* Set Point 1 */
+  writeCommand(0x95);
+  writeData(x1);
+  writeCommand(0x96);
+  writeData(x1 >> 8);
+  writeCommand(0x97);
+  writeData(y1);
+  writeCommand(0x98);
+  writeData(y1 >> 8);
+
+  /* Set Point 2 */
+  writeCommand(0xA9);
+  writeData(x2);
+  writeCommand(0xAA);
+  writeData(x2 >> 8);
+  writeCommand(0xAB);
+  writeData(y2);
+  writeCommand(0xAC);
+  writeData(y2 >> 8);
+
+  /* Set Color */
+  writeCommand(0x63);
+  writeData((color & 0xf800) >> 11);
+  writeCommand(0x64);
+  writeData((color & 0x07e0) >> 5);
+  writeCommand(0x65);
+  writeData((color & 0x001f));
+
+  /* Draw! */
+  writeCommand(RA8875_DCR);
+  if (filled)
+  {
+    writeData(0xA1);
+  }
+  else
+  {
+    writeData(0x81);
+  }
+
+  /* Wait for the command to finish */
+  waitPoll(RA8875_DCR, RA8875_DCR_LINESQUTRI_STATUS);
+}
+
+void ellipseHelper(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint16_t color, int filled)
+{
+  /* Set Center Point */
+  writeCommand(0xA5);
+  writeData(xCenter);
+  writeCommand(0xA6);
+  writeData(xCenter >> 8);
+  writeCommand(0xA7);
+  writeData(yCenter);
+  writeCommand(0xA8);
+  writeData(yCenter >> 8);
+
+  /* Set Long and Short Axis */
+  writeCommand(0xA1);
+  writeData(longAxis);
+  writeCommand(0xA2);
+  writeData(longAxis >> 8);
+  writeCommand(0xA3);
+  writeData(shortAxis);
+  writeCommand(0xA4);
+  writeData(shortAxis >> 8);
+
+  /* Set Color */
+  writeCommand(0x63);
+  writeData((color & 0xf800) >> 11);
+  writeCommand(0x64);
+  writeData((color & 0x07e0) >> 5);
+  writeCommand(0x65);
+  writeData((color & 0x001f));
+
+  /* Draw! */
+  writeCommand(0xA0);
+  if (filled)
+  {
+    writeData(0xC0);
+  }
+  else
+  {
+    writeData(0x80);
+  }
+
+  /* Wait for the command to finish */
+  waitPoll(RA8875_ELLIPSE, RA8875_ELLIPSE_STATUS);
+}
+
+void curveHelper(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint8_t curvePart, uint16_t color, int filled)
+{
+  /* Set Center Point */
+  writeCommand(0xA5);
+  writeData(xCenter);
+  writeCommand(0xA6);
+  writeData(xCenter >> 8);
+  writeCommand(0xA7);
+  writeData(yCenter);
+  writeCommand(0xA8);
+  writeData(yCenter >> 8);
+
+  /* Set Long and Short Axis */
+  writeCommand(0xA1);
+  writeData(longAxis);
+  writeCommand(0xA2);
+  writeData(longAxis >> 8);
+  writeCommand(0xA3);
+  writeData(shortAxis);
+  writeCommand(0xA4);
+  writeData(shortAxis >> 8);
+
+  /* Set Color */
+  writeCommand(0x63);
+  writeData((color & 0xf800) >> 11);
+  writeCommand(0x64);
+  writeData((color & 0x07e0) >> 5);
+  writeCommand(0x65);
+  writeData((color & 0x001f));
+
+  /* Draw! */
+  writeCommand(0xA0);
+  if (filled)
+  {
+    writeData(0xD0 | (curvePart & 0x03));
+  }
+  else
+  {
+    writeData(0x90 | (curvePart & 0x03));
+  }
+
+  /* Wait for the command to finish */
+  waitPoll(RA8875_ELLIPSE, RA8875_ELLIPSE_STATUS);
 }
 
 /**************************************************************************/
@@ -521,62 +950,54 @@ void drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color){
 	writeData(0x80);
 }
 
-void drawRectangle(){
-//incomplete
+void drawRectangle(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color){
+	rectHelper(x, y, x+w, y+h, color, 0);
 }
 
-void rectHelper(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color, int filled){
-  /* Set X */
-  writeCommand(0x91);
-  writeData(x);
-  writeCommand(0x92);
-  writeData(x >> 8);
+void fillRectangle(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color){
+	rectHelper(x, y, x+w, y+h, color, 1);
+}
 
-  /* Set Y */
-  writeCommand(0x93);
-  writeData(y);
-  writeCommand(0x94);
-  writeData(y >> 8);
+void drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color){
+	circleHelper(x0, y0, r, color, 0);
+}
 
-  /* Set X1 */
-  writeCommand(0x95);
-  writeData(w);
-  writeCommand(0x96);
-  writeData((w) >> 8);
+void fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color){
+	circleHelper(x0, y0, r, color, 1);
+}
 
-  /* Set Y1 */
-  writeCommand(0x97);
-  writeData(h);
-  writeCommand(0x98);
-  writeData((h) >> 8);
+void drawTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color){
+	triangleHelper(x0, y0, x1, y1, x2, y2, color, 0);
+}
 
-  /* Set Color */
-  writeCommand(0x63);
-  writeData((color & 0xf800) >> 11);
-  writeCommand(0x64);
-  writeData((color & 0x07e0) >> 5);
-  writeCommand(0x65);
-  writeData((color & 0x001f));
+void fillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color){
+	triangleHelper(x0, y0, x1, y1, x2, y2, color, 1);
+}
 
-  /* Draw! */
-  writeCommand(RA8875_DCR);
-  if (filled)
-  {
-    writeData(0xB0);
-  }
-  else
-  {
-    writeData(0x90);
-  }
+void drawEllipse(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint16_t color){
+	ellipseHelper(xCenter, yCenter, longAxis, shortAxis, color, 0);
+}
 
-  /* Wait for the command to finish */
-  //waitPoll(RA8875_DCR, RA8875_DCR_LINESQUTRI_STATUS);
+void fillEllipse(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint16_t color){
+	ellipseHelper(xCenter, yCenter, longAxis, shortAxis, color, 1);
+}
+
+void drawCurve(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint8_t curvePart, uint16_t color){
+	curveHelper(xCenter, yCenter, longAxis, shortAxis, curvePart, color, 0);
+}
+
+void fillCurve(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint8_t curvePart, uint16_t color){
+	curveHelper(xCenter, yCenter, longAxis, shortAxis, curvePart, color, 1);
 }
 
 void fillScreen(uint16_t color)
 {
   rectHelper(0, 0, width-1, height-1, color, 1);
 }
+
+/* TEXT FUNCTIONS */
+
+
 
 //Backlight Functions
 void GPIOX(int on){
@@ -663,17 +1084,29 @@ int main(void)
 
     //Initialize Display
 
+    int16_t x0 = 0;
+    int16_t y0 = 0;
+    int16_t x1 = 0;
+	int16_t y1 = 0;
+	int16_t x2 = 0;
+	int16_t y2 = 0;
+
     int16_t x_pixel = 0;
     int16_t y_pixel = 0;
     int16_t x_start = 0;
     int16_t y_start = 0;
     uint16_t color_pixel = 0;
+    uint16_t color = 0;
     uint16_t pixel = 0;
     uint8_t *image;
 	int16_t x_size;
 	int16_t y_size;
-
+	uint8_t curve;
+	uint8_t layer0 = 0;
+	uint8_t layer1 = 0;
+	int fill = 0;
     int index = 0;
+    char* textBuffer = "Hey guys hwhats up?";
 
     while(1) {
         while(MAILBOX_CMD_ADDR==0);
@@ -684,9 +1117,6 @@ int main(void)
             	initialize();
 				MAILBOX_DATA(0) = 1;
                 // Assign default pin configurations - no operations needed
-                MAILBOX_CMD_ADDR = 0x0;
-                break;
-            case DISPLAY:
             	displayOn(1);
             	MAILBOX_DATA(0) = 2;
                 MAILBOX_CMD_ADDR = 0x0;
@@ -746,38 +1176,11 @@ int main(void)
             			index += 2;
             		}
             	}
-//            	for(int i = 0; i < 5; i++){
-//            		pixel = ((uint16_t)image[index] << 8) | (uint16_t)image[index+1];
-//					index += 2;
-//            		test_output[i] = pixel;
-//            	}
             	index = 0;
             	MAILBOX_DATA(0) = (image[0] << 8) | image[1];
-//            	MAILBOX_DATA(0) = pixel;
-//            	for(int i = 0; i < 5; i++){
-//            		MAILBOX_DATA(i) = test_output[i];
-//            	}
             	MAILBOX_CMD_ADDR = 0x0;
             	break;
 
-            case LITTLE:
-            	x_start = MAILBOX_DATA(0);
-				y_start = MAILBOX_DATA(1);
-				image = MAILBOX_DATA(2) | 0x20000000;
-				x_size = MAILBOX_DATA(3);
-				y_size = MAILBOX_DATA(4);
-				index = 0;
-				for(x_pixel = x_start; x_pixel < x_size; x_pixel++){
-					for(y_pixel = y_start; y_pixel < y_size; y_pixel++){
-						pixel = ((uint16_t)image[index] << 8) | image[index+1];
-						drawPixel(x_pixel, y_pixel, pixel);
-						index += 2;
-					}
-				}
-				index = 0;
-				MAILBOX_DATA(0) = (image[0] << 8) | image[1];
-				MAILBOX_CMD_ADDR = 0x0;
-				break;
             case EIGHT:
             	x_start = MAILBOX_DATA(0);
             	y_start = MAILBOX_DATA(1);
@@ -796,6 +1199,134 @@ int main(void)
             	MAILBOX_DATA(0) = image[0];
             	MAILBOX_CMD_ADDR = 0x0;
             	break;
+
+            case RECTANGLE:
+            	x_start = MAILBOX_DATA(0);
+            	y_start = MAILBOX_DATA(1);
+            	x_size = MAILBOX_DATA(2);
+				y_size = MAILBOX_DATA(3);
+				color = MAILBOX_DATA(4);
+            	fill = MAILBOX_DATA(5);
+				if(fill == 1){ //fill shape
+					fillRectangle(x_start, y_start, x_size, y_size, color);
+				}
+				else{
+					drawRectangle(x_start, y_start, x_size, y_size, color);
+				}
+            	MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case CIRCLE:
+            	x_start = MAILBOX_DATA(0);
+				y_start = MAILBOX_DATA(1);
+				x_size = MAILBOX_DATA(2); //actually radius
+				color = MAILBOX_DATA(3);
+				fill = MAILBOX_DATA(4);
+				if(fill){
+					fillCircle(x_start, y_start, x_size, color);
+				}
+				else{
+					drawCircle(x_start, y_start, x_size, color);
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case TRIANGLE:
+            	x0 = MAILBOX_DATA(0);
+            	y0 = MAILBOX_DATA(1);
+            	x1 = MAILBOX_DATA(2);
+            	y1 = MAILBOX_DATA(3);
+            	x2 = MAILBOX_DATA(4);
+            	y2 = MAILBOX_DATA(5);
+            	color = MAILBOX_DATA(6);
+            	fill = MAILBOX_DATA(7);
+            	if(fill){
+            		fillTriangle(x0, y0, x1, y1, x2, y2, color);
+            	}
+            	else{
+            		drawTriangle(x0, y0, x1, y1, x2, y2, color);
+            	}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case ELLIPSE:
+            	x0 = MAILBOX_DATA(0);
+            	y0 = MAILBOX_DATA(1);
+            	x_size = MAILBOX_DATA(2);
+            	y_size = MAILBOX_DATA(3);
+            	color = MAILBOX_DATA(4);
+            	fill = MAILBOX_DATA(5);
+            	if(fill){
+            		fillEllipse(x0, y0, x_size, y_size, color);
+            	}
+            	else{
+            		drawEllipse(x0, y0, x_size, y_size, color);
+            	}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case CURVE:
+            	x0 = MAILBOX_DATA(0);
+				y0 = MAILBOX_DATA(1);
+				x_size = MAILBOX_DATA(2);
+				y_size = MAILBOX_DATA(3);
+				curve = MAILBOX_DATA(4);
+				color = MAILBOX_DATA(5);
+				fill = MAILBOX_DATA(6);
+				if(fill){
+					fillCurve(x0, y0, x_size, y_size, curve, color);
+				}
+				else{
+					drawCurve(x0, y0, x_size, y_size, curve, color);
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case DRAWLINE:
+            	x0 = MAILBOX_DATA(0);
+				y0 = MAILBOX_DATA(1);
+				x1 = MAILBOX_DATA(2);
+				y1 = MAILBOX_DATA(3);
+				color = MAILBOX_DATA(4);
+				drawLine(x0, y0, x1, y1, color);
+            	MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case FONT:
+            	textSetCursor(240,0);
+            	textColor(0x0000, 0xffff);
+            	textWrite(textBuffer, 19);
+            	textEnlarge(3);
+            	textTransparent(0xffff);
+            	textSetCursor(0,0);
+            	textWrite(textBuffer, 19);
+            	MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case TEXTMODE:
+            	textMode();
+            	MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case GRAPHICSMODE:
+            	graphicsMode();
+            	MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case LAYER:
+            	useLayers(1);
+            	layer0 = MAILBOX_DATA(0);
+            	writeTo(layer0);
+            	MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case LAYERTRANS:
+            	layer0 = MAILBOX_DATA(0);
+            	layer1 = MAILBOX_DATA(1);
+            	layerTransparency(layer0, layer1);
+            	MAILBOX_CMD_ADDR = 0x0;
+            	break;
+
             default:
                 MAILBOX_CMD_ADDR = 0x0;
                 break;
