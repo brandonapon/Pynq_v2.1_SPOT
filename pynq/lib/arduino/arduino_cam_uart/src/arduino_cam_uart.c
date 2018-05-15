@@ -105,6 +105,9 @@ int main()
    //UART Init
    init_io_switch();
    uart_device = uart_open(TX, RX);
+//   set_pin(RX, UART1_RX);
+//   set_pin(TX, UART1_TX);
+//   uart_device = uart_open_device(0);
    gpio_device = gpio_open_device(0);
    gpio_device = gpio_configure(gpio_device, 2, 2, 1);
    gpio_set_direction(gpio_device, 0);
@@ -141,7 +144,7 @@ int main()
 
 			case WRITE:
 				uart_write(uart_device, write_data, 4);
-				MAILBOX_DATA(0) = 69;
+				MAILBOX_DATA(0) = uart_device;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 

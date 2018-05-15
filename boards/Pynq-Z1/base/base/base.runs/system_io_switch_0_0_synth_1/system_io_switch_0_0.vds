@@ -2,12 +2,12 @@
 # Vivado v2017.4 (64-bit)
 # SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
 # IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
-# Start of session at: Thu Feb 22 19:34:14 2018
-# Process ID: 9588
-# Current directory: D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.runs/system_io_switch_0_0_synth_1
+# Start of session at: Mon May 14 13:56:25 2018
+# Process ID: 2360
+# Current directory: D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/system_io_switch_0_0_synth_1
 # Command line: vivado.exe -log system_io_switch_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_io_switch_0_0.tcl
-# Log file: D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.runs/system_io_switch_0_0_synth_1/system_io_switch_0_0.vds
-# Journal file: D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.runs/system_io_switch_0_0_synth_1\vivado.jou
+# Log file: D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/system_io_switch_0_0_synth_1/system_io_switch_0_0.vds
+# Journal file: D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/system_io_switch_0_0_synth_1\vivado.jou
 #-----------------------------------------------------------
 source system_io_switch_0_0.tcl -notrace
 Command: synth_design -top system_io_switch_0_0 -part xc7z020clg400-1 -mode out_of_context
@@ -15,12 +15,12 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 10156 
+INFO: Helper process launched with PID 15420 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 362.371 ; gain = 101.523
+Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 364.527 ; gain = 105.840
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'system_io_switch_0_0' [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/synth/system_io_switch_0_0.v:57]
-INFO: [Synth 8-638] synthesizing module 'io_switch_v1_1' [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/hdl/io_switch_v1_1.v:4]
+INFO: [Synth 8-638] synthesizing module 'system_io_switch_0_0' [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/synth/system_io_switch_0_0.v:57]
+INFO: [Synth 8-638] synthesizing module 'io_switch_v1_1' [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/hdl/io_switch_v1_1.v:4]
 	Parameter C_INTERFACE_TYPE bound to: 3 - type: string 
 	Parameter C_IO_SWITCH_WIDTH bound to: 20 - type: integer 
 	Parameter C_NUM_PWMS bound to: 6 - type: integer 
@@ -28,7 +28,7 @@ INFO: [Synth 8-638] synthesizing module 'io_switch_v1_1' [d:/Pynq/PYNQ_V2.1/boar
 	Parameter C_NUM_SS bound to: 1 - type: integer 
 	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_S_AXI_ADDR_WIDTH bound to: 6 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'io_switch_v1_1_S_AXI' [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/hdl/io_switch_v1_1_S_AXI.v:4]
+INFO: [Synth 8-638] synthesizing module 'io_switch_v1_1_S_AXI' [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/hdl/io_switch_v1_1_S_AXI.v:4]
 	Parameter C_INTERFACE_TYPE bound to: 3 - type: string 
 	Parameter C_IO_SWITCH_WIDTH bound to: 20 - type: integer 
 	Parameter C_NUM_PWMS bound to: 6 - type: integer 
@@ -38,50 +38,50 @@ INFO: [Synth 8-638] synthesizing module 'io_switch_v1_1_S_AXI' [d:/Pynq/PYNQ_V2.
 	Parameter C_S_AXI_ADDR_WIDTH bound to: 6 - type: integer 
 	Parameter ADDR_LSB bound to: 2 - type: integer 
 	Parameter OPT_MEM_ADDR_BITS bound to: 3 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'io_switch' [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:7]
+INFO: [Synth 8-638] synthesizing module 'io_switch' [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:7]
 	Parameter C_IO_SWITCH_WIDTH bound to: 20 - type: integer 
 	Parameter C_NUM_PWMS bound to: 6 - type: integer 
 	Parameter C_NUM_TIMERS bound to: 8 - type: integer 
 	Parameter C_NUM_SS bound to: 1 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'io_switch_bit' [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch_bit.v:57]
+INFO: [Synth 8-638] synthesizing module 'io_switch_bit' [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch_bit.v:57]
 	Parameter C_NUM_PWMS bound to: 6 - type: integer 
 	Parameter C_NUM_TIMERS bound to: 8 - type: integer 
 	Parameter C_NUM_SS bound to: 1 - type: integer 
-WARNING: [Synth 8-324] index 1 out of range [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch_bit.v:164]
-INFO: [Synth 8-256] done synthesizing module 'io_switch_bit' (1#1) [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch_bit.v:57]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 10 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 10 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 10 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 18 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:451]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 18 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:469]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 18 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:469]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 18 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:469]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 18 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:469]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 29 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:487]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 29 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:487]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 29 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:509]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 29 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:509]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 19 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:531]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 19 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:531]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:548]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:548]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:561]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:561]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:561]
-WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:561]
-WARNING: [Synth 8-3848] Net uart1_rx_int in module/entity io_switch does not have driver. [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
-WARNING: [Synth 8-3848] Net sda0_int in module/entity io_switch does not have driver. [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
-WARNING: [Synth 8-3848] Net scl0_int in module/entity io_switch does not have driver. [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
-WARNING: [Synth 8-3848] Net sda1_int in module/entity io_switch does not have driver. [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
-WARNING: [Synth 8-3848] Net scl1_int in module/entity io_switch does not have driver. [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
-WARNING: [Synth 8-3848] Net sck1_int in module/entity io_switch does not have driver. [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
-WARNING: [Synth 8-3848] Net mosi1_int in module/entity io_switch does not have driver. [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
-WARNING: [Synth 8-3848] Net miso1_int in module/entity io_switch does not have driver. [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
-INFO: [Synth 8-256] done synthesizing module 'io_switch' (2#1) [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:7]
-WARNING: [Synth 8-6014] Unused sequential element slv_reg8_reg was removed.  [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/hdl/io_switch_v1_1_S_AXI.v:301]
-INFO: [Synth 8-256] done synthesizing module 'io_switch_v1_1_S_AXI' (3#1) [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/hdl/io_switch_v1_1_S_AXI.v:4]
-INFO: [Synth 8-256] done synthesizing module 'io_switch_v1_1' (4#1) [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/hdl/io_switch_v1_1.v:4]
-INFO: [Synth 8-256] done synthesizing module 'system_io_switch_0_0' (5#1) [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/synth/system_io_switch_0_0.v:57]
+WARNING: [Synth 8-324] index 1 out of range [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch_bit.v:164]
+INFO: [Synth 8-256] done synthesizing module 'io_switch_bit' (1#1) [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch_bit.v:57]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 10 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 10 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 10 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 18 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:451]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 18 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:469]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 18 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:469]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 18 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:469]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 18 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:469]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 29 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:487]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 29 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:487]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 29 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:509]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 29 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:509]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 19 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:531]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 19 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:531]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:548]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:548]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:561]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:561]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:561]
+WARNING: [Synth 8-350] instance 'd_i' of module 'io_switch_bit' requires 58 connections, but only 8 given [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:561]
+WARNING: [Synth 8-3848] Net uart1_rx_int in module/entity io_switch does not have driver. [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
+WARNING: [Synth 8-3848] Net sda0_int in module/entity io_switch does not have driver. [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
+WARNING: [Synth 8-3848] Net scl0_int in module/entity io_switch does not have driver. [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
+WARNING: [Synth 8-3848] Net sda1_int in module/entity io_switch does not have driver. [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
+WARNING: [Synth 8-3848] Net scl1_int in module/entity io_switch does not have driver. [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
+WARNING: [Synth 8-3848] Net sck1_int in module/entity io_switch does not have driver. [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
+WARNING: [Synth 8-3848] Net mosi1_int in module/entity io_switch does not have driver. [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
+WARNING: [Synth 8-3848] Net miso1_int in module/entity io_switch does not have driver. [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:94]
+INFO: [Synth 8-256] done synthesizing module 'io_switch' (2#1) [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:7]
+WARNING: [Synth 8-6014] Unused sequential element slv_reg8_reg was removed.  [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/hdl/io_switch_v1_1_S_AXI.v:301]
+INFO: [Synth 8-256] done synthesizing module 'io_switch_v1_1_S_AXI' (3#1) [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/hdl/io_switch_v1_1_S_AXI.v:4]
+INFO: [Synth 8-256] done synthesizing module 'io_switch_v1_1' (4#1) [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/hdl/io_switch_v1_1.v:4]
+INFO: [Synth 8-256] done synthesizing module 'system_io_switch_0_0' (5#1) [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/synth/system_io_switch_0_0.v:57]
 WARNING: [Synth 8-3331] design io_switch has unconnected port gpio_sel5[31]
 WARNING: [Synth 8-3331] design io_switch has unconnected port gpio_sel5[30]
 WARNING: [Synth 8-3331] design io_switch has unconnected port gpio_sel5[29]
@@ -184,7 +184,7 @@ WARNING: [Synth 8-3331] design io_switch has unconnected port sda0_t
 WARNING: [Synth 8-3331] design io_switch has unconnected port scl0_o
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 415.152 ; gain = 154.305
+Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 417.480 ; gain = 158.793
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -193,109 +193,109 @@ Report Check Netlist:
 +------+------------------+-------+---------+-------+------------------+
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:uart1_tx_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sck0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sck0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:miso0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:miso0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:mosi0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:mosi0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:ss0_o[0] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:ss0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sck1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sck1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:miso1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:miso1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:mosi1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:mosi1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:ss1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:ss1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sda0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sda0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:scl0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:scl0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sda1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sda1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:scl1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:scl1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[5] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[4] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[3] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[2] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[1] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[0] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[7] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[6] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[5] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[4] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[3] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[2] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[1] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[0] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:uart1_tx_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sck0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sck0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:miso0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:miso0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:mosi0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:mosi0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:ss0_o[0] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:ss0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sck1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sck1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:miso1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:miso1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:mosi1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:mosi1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:ss1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:ss1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sda0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sda0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:scl0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:scl0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sda1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sda1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:scl1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:scl1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[5] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[4] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[3] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[2] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[1] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[0] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[7] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[6] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[5] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[4] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[3] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[2] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[1] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[0] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:uart1_tx_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sck0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sck0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:miso0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:miso0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:mosi0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:mosi0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:ss0_o[0] to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:ss0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sck1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sck1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:miso1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:miso1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:mosi1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:mosi1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:ss1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:ss1_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sda0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sda0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:scl0_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:scl0_t to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
-WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sda1_o to constant 0 [d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:uart1_tx_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sck0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sck0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:miso0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:miso0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:mosi0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:mosi0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:ss0_o[0] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:ss0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sck1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sck1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:miso1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:miso1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:mosi1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:mosi1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:ss1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:ss1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sda0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sda0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:scl0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:scl0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sda1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:sda1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:scl1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:scl1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[5] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[4] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[3] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[2] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[1] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:pwm_o[0] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[7] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[6] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[5] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[4] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[3] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[2] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[1] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[0].d_i:timer_o[0] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:uart1_tx_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sck0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sck0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:miso0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:miso0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:mosi0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:mosi0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:ss0_o[0] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:ss0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sck1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sck1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:miso1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:miso1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:mosi1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:mosi1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:ss1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:ss1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sda0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sda0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:scl0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:scl0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sda1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:sda1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:scl1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:scl1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[5] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[4] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[3] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[2] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[1] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:pwm_o[0] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[7] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[6] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[5] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[4] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[3] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[2] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[1] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[1].d_i:timer_o[0] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:uart1_tx_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sck0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sck0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:miso0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:miso0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:mosi0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:mosi0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:ss0_o[0] to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:ss0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sck1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sck1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:miso1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:miso1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:mosi1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:mosi1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:ss1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:ss1_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sda0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sda0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:scl0_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:scl0_t to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
+WARNING: [Synth 8-3295] tying undriven pin genblk1_1.genblk1_1.io_switch_bit_2_0[2].d_i:sda1_o to constant 0 [d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ipshared/6c92/src/io_switch.v:437]
 INFO: [Common 17-14] Message 'Synth 8-3295' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 415.152 ; gain = 154.305
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 417.480 ; gain = 158.793
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7z020clg400-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -307,25 +307,25 @@ Completed Processing XDC Constraints
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.054 . Memory (MB): peak = 766.707 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.134 . Memory (MB): peak = 767.438 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 766.707 ; gain = 505.859
+Finished Constraint Validation : Time (s): cpu = 00:00:42 ; elapsed = 00:00:48 . Memory (MB): peak = 767.438 ; gain = 508.750
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 766.707 ; gain = 505.859
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:42 ; elapsed = 00:00:48 . Memory (MB): peak = 767.438 ; gain = 508.750
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 766.707 ; gain = 505.859
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:42 ; elapsed = 00:00:48 . Memory (MB): peak = 767.438 ; gain = 508.750
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:37 ; elapsed = 00:00:39 . Memory (MB): peak = 766.707 ; gain = 505.859
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:43 ; elapsed = 00:00:50 . Memory (MB): peak = 767.438 ; gain = 508.750
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -398,7 +398,7 @@ INFO: [Synth 8-3332] Sequential element (inst/io_switch_v1_1_S_AXI_inst/axi_arad
 INFO: [Synth 8-3332] Sequential element (inst/io_switch_v1_1_S_AXI_inst/axi_araddr_reg[0]) is unused and will be removed from module system_io_switch_0_0.
 INFO: [Synth 8-3332] Sequential element (inst/io_switch_v1_1_S_AXI_inst/axi_rresp_reg[1]) is unused and will be removed from module system_io_switch_0_0.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:48 ; elapsed = 00:00:51 . Memory (MB): peak = 766.707 ; gain = 505.859
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:56 ; elapsed = 00:01:05 . Memory (MB): peak = 767.438 ; gain = 508.750
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -410,13 +410,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:08 ; elapsed = 00:01:11 . Memory (MB): peak = 795.367 ; gain = 534.520
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:17 ; elapsed = 00:01:25 . Memory (MB): peak = 796.629 ; gain = 537.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:08 ; elapsed = 00:01:11 . Memory (MB): peak = 795.891 ; gain = 535.043
+Finished Timing Optimization : Time (s): cpu = 00:01:17 ; elapsed = 00:01:25 . Memory (MB): peak = 797.156 ; gain = 538.469
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -428,7 +428,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:08 ; elapsed = 00:01:12 . Memory (MB): peak = 821.609 ; gain = 560.762
+Finished Technology Mapping : Time (s): cpu = 00:01:17 ; elapsed = 00:01:26 . Memory (MB): peak = 823.082 ; gain = 564.395
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -452,7 +452,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:10 ; elapsed = 00:01:13 . Memory (MB): peak = 821.609 ; gain = 560.762
+Finished IO Insertion : Time (s): cpu = 00:01:19 ; elapsed = 00:01:28 . Memory (MB): peak = 823.082 ; gain = 564.395
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -465,7 +465,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:10 ; elapsed = 00:01:13 . Memory (MB): peak = 821.609 ; gain = 560.762
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:19 ; elapsed = 00:01:28 . Memory (MB): peak = 823.082 ; gain = 564.395
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -477,25 +477,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:10 ; elapsed = 00:01:14 . Memory (MB): peak = 821.609 ; gain = 560.762
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:19 ; elapsed = 00:01:28 . Memory (MB): peak = 823.082 ; gain = 564.395
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:10 ; elapsed = 00:01:14 . Memory (MB): peak = 821.609 ; gain = 560.762
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:19 ; elapsed = 00:01:28 . Memory (MB): peak = 823.082 ; gain = 564.395
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:10 ; elapsed = 00:01:14 . Memory (MB): peak = 821.609 ; gain = 560.762
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:19 ; elapsed = 00:01:28 . Memory (MB): peak = 823.082 ; gain = 564.395
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:10 ; elapsed = 00:01:14 . Memory (MB): peak = 821.609 ; gain = 560.762
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:19 ; elapsed = 00:01:28 . Memory (MB): peak = 823.082 ; gain = 564.395
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -531,14 +531,14 @@ Report Instance Areas:
 |3     |    io_switch_v1_1_S_AXI_inst |io_switch_v1_1_S_AXI |   959|
 +------+------------------------------+---------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:10 ; elapsed = 00:01:14 . Memory (MB): peak = 821.609 ; gain = 560.762
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:19 ; elapsed = 00:01:28 . Memory (MB): peak = 823.082 ; gain = 564.395
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 119 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:46 ; elapsed = 00:01:01 . Memory (MB): peak = 821.609 ; gain = 209.207
-Synthesis Optimization Complete : Time (s): cpu = 00:01:11 ; elapsed = 00:01:14 . Memory (MB): peak = 821.609 ; gain = 560.762
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:50 ; elapsed = 00:01:10 . Memory (MB): peak = 823.082 ; gain = 214.438
+Synthesis Optimization Complete : Time (s): cpu = 00:01:19 ; elapsed = 00:01:28 . Memory (MB): peak = 823.082 ; gain = 564.395
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 25 Unisim elements for replacement
-INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
@@ -547,11 +547,11 @@ No Unisim elements were transformed.
 INFO: [Common 17-83] Releasing license: Synthesis
 33 Infos, 230 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:14 ; elapsed = 00:01:17 . Memory (MB): peak = 821.609 ; gain = 572.234
-INFO: [Common 17-1381] The checkpoint 'D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.runs/system_io_switch_0_0_synth_1/system_io_switch_0_0.dcp' has been generated.
-INFO: [Coretcl 2-1482] Added synthesis output to IP cache for IP d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/system_io_switch_0_0.xci
+synth_design: Time (s): cpu = 00:01:22 ; elapsed = 00:01:31 . Memory (MB): peak = 823.082 ; gain = 572.328
+INFO: [Common 17-1381] The checkpoint 'D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/system_io_switch_0_0_synth_1/system_io_switch_0_0.dcp' has been generated.
+INFO: [Coretcl 2-1482] Added synthesis output to IP cache for IP d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/system_io_switch_0_0.xci
 INFO: [Coretcl 2-1174] Renamed 2 cell refs.
-INFO: [Common 17-1381] The checkpoint 'D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.runs/system_io_switch_0_0_synth_1/system_io_switch_0_0.dcp' has been generated.
+INFO: [Common 17-1381] The checkpoint 'D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/system_io_switch_0_0_synth_1/system_io_switch_0_0.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file system_io_switch_0_0_utilization_synth.rpt -pb system_io_switch_0_0_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.086 . Memory (MB): peak = 821.609 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Thu Feb 22 19:35:41 2018...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.050 . Memory (MB): peak = 823.082 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Mon May 14 13:58:07 2018...

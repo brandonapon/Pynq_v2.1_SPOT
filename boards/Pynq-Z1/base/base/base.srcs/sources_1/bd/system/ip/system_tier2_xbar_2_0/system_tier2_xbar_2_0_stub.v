@@ -1,10 +1,10 @@
 // Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
-// Date        : Thu Feb 22 19:43:07 2018
+// Date        : Mon May 14 15:56:30 2018
 // Host        : DESKTOP-PIC5S0G running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub -rename_top system_tier2_xbar_2_0 -prefix
-//               system_tier2_xbar_2_0_ system_tier2_xbar_2_0_stub.v
+// Command     : write_verilog -force -mode synth_stub
+//               d:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_tier2_xbar_2_0/system_tier2_xbar_2_0_stub.v
 // Design      : system_tier2_xbar_2_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z020clg400-1

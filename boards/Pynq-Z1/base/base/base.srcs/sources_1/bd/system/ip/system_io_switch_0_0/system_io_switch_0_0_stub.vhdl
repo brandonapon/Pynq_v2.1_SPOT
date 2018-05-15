@@ -1,10 +1,10 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
--- Date        : Thu Feb 22 19:35:40 2018
+-- Date        : Mon May 14 13:58:07 2018
 -- Host        : DESKTOP-PIC5S0G running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
---               d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/system_io_switch_0_0_stub.vhdl
+--               D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/system_io_switch_0_0_stub.vhdl
 -- Design      : system_io_switch_0_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z020clg400-1
@@ -22,6 +22,8 @@ entity system_io_switch_0_0 is
     gpio_tri_o : in STD_LOGIC_VECTOR ( 19 downto 0 );
     uart0_rx_i : out STD_LOGIC;
     uart0_tx_o : in STD_LOGIC;
+    uart1_rx_i : out STD_LOGIC;
+    uart1_tx_o : in STD_LOGIC;
     sck0_i : out STD_LOGIC;
     sck0_o : in STD_LOGIC;
     sck0_t : in STD_LOGIC;
@@ -65,7 +67,7 @@ architecture stub of system_io_switch_0_0 is
 attribute syn_black_box : boolean;
 attribute black_box_pad_pin : string;
 attribute syn_black_box of stub : architecture is true;
-attribute black_box_pad_pin of stub : architecture is "io_data_i[19:0],io_data_o[19:0],io_tri_o[19:0],gpio_data_i[19:0],gpio_data_o[19:0],gpio_tri_o[19:0],uart0_rx_i,uart0_tx_o,sck0_i,sck0_o,sck0_t,mosi0_i,mosi0_o,mosi0_t,miso0_i,miso0_o,miso0_t,ss0_o[0:0],ss0_t,pwm_o[5:0],timer_i[7:0],timer_o[7:0],s_axi_awaddr[5:0],s_axi_awprot[2:0],s_axi_awvalid,s_axi_awready,s_axi_wdata[31:0],s_axi_wstrb[3:0],s_axi_wvalid,s_axi_wready,s_axi_bresp[1:0],s_axi_bvalid,s_axi_bready,s_axi_araddr[5:0],s_axi_arprot[2:0],s_axi_arvalid,s_axi_arready,s_axi_rdata[31:0],s_axi_rresp[1:0],s_axi_rvalid,s_axi_rready,s_axi_aclk,s_axi_aresetn";
+attribute black_box_pad_pin of stub : architecture is "io_data_i[19:0],io_data_o[19:0],io_tri_o[19:0],gpio_data_i[19:0],gpio_data_o[19:0],gpio_tri_o[19:0],uart0_rx_i,uart0_tx_o,uart1_rx_i,uart1_tx_o,sck0_i,sck0_o,sck0_t,mosi0_i,mosi0_o,mosi0_t,miso0_i,miso0_o,miso0_t,ss0_o[0:0],ss0_t,pwm_o[5:0],timer_i[7:0],timer_o[7:0],s_axi_awaddr[5:0],s_axi_awprot[2:0],s_axi_awvalid,s_axi_awready,s_axi_wdata[31:0],s_axi_wstrb[3:0],s_axi_wvalid,s_axi_wready,s_axi_bresp[1:0],s_axi_bvalid,s_axi_bready,s_axi_araddr[5:0],s_axi_arprot[2:0],s_axi_arvalid,s_axi_arready,s_axi_rdata[31:0],s_axi_rresp[1:0],s_axi_rvalid,s_axi_rready,s_axi_aclk,s_axi_aresetn";
 attribute X_CORE_INFO : string;
 attribute X_CORE_INFO of stub : architecture is "io_switch_v1_1,Vivado 2017.4";
 begin

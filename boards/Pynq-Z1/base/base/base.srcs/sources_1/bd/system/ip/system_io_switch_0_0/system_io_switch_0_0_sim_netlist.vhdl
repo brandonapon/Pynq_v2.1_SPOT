@@ -1,10 +1,10 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
--- Date        : Thu Feb 22 19:35:40 2018
+-- Date        : Mon May 14 13:58:07 2018
 -- Host        : DESKTOP-PIC5S0G running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
---               d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/system_io_switch_0_0_sim_netlist.vhdl
+--               D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/system_io_switch_0_0_sim_netlist.vhdl
 -- Design      : system_io_switch_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -11013,6 +11013,8 @@ entity system_io_switch_0_0 is
     gpio_tri_o : in STD_LOGIC_VECTOR ( 19 downto 0 );
     uart0_rx_i : out STD_LOGIC;
     uart0_tx_o : in STD_LOGIC;
+    uart1_rx_i : out STD_LOGIC;
+    uart1_tx_o : in STD_LOGIC;
     sck0_i : out STD_LOGIC;
     sck0_o : in STD_LOGIC;
     sck0_t : in STD_LOGIC;
@@ -11090,6 +11092,8 @@ architecture STRUCTURE of system_io_switch_0_0 is
   attribute X_INTERFACE_INFO of ss0_t : signal is "xilinx.com:interface:spi:1.0 spi0 SS_T";
   attribute X_INTERFACE_INFO of uart0_rx_i : signal is "xilinx.com:interface:uart:1.0 uart0 RxD";
   attribute X_INTERFACE_INFO of uart0_tx_o : signal is "xilinx.com:interface:uart:1.0 uart0 TxD";
+  attribute X_INTERFACE_INFO of uart1_rx_i : signal is "xilinx.com:interface:uart:1.0 uart1 RxD";
+  attribute X_INTERFACE_INFO of uart1_tx_o : signal is "xilinx.com:interface:uart:1.0 uart1 TxD";
   attribute X_INTERFACE_INFO of gpio_data_i : signal is "xilinx.com:interface:gpio:1.0 gpio TRI_I";
   attribute X_INTERFACE_INFO of gpio_data_o : signal is "xilinx.com:interface:gpio:1.0 gpio TRI_O";
   attribute X_INTERFACE_INFO of gpio_tri_o : signal is "xilinx.com:interface:gpio:1.0 gpio TRI_T";
@@ -11111,6 +11115,7 @@ begin
   s_axi_bresp(0) <= \<const0>\;
   s_axi_rresp(1) <= \<const0>\;
   s_axi_rresp(0) <= \<const0>\;
+  uart1_rx_i <= \<const0>\;
 GND: unisim.vcomponents.GND
      port map (
       G => \<const0>\

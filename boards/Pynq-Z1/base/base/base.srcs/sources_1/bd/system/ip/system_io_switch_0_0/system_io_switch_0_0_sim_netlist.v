@@ -1,10 +1,10 @@
 // Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
-// Date        : Thu Feb 22 19:35:40 2018
+// Date        : Mon May 14 13:58:07 2018
 // Host        : DESKTOP-PIC5S0G running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
-//               d:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/system_io_switch_0_0_sim_netlist.v
+//               D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.srcs/sources_1/bd/system/ip/system_io_switch_0_0/system_io_switch_0_0_sim_netlist.v
 // Design      : system_io_switch_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -23,6 +23,8 @@ module system_io_switch_0_0
     gpio_tri_o,
     uart0_rx_i,
     uart0_tx_o,
+    uart1_rx_i,
+    uart1_tx_o,
     sck0_i,
     sck0_o,
     sck0_t,
@@ -66,6 +68,8 @@ module system_io_switch_0_0
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio TRI_T" *) input [19:0]gpio_tri_o;
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart0 RxD" *) output uart0_rx_i;
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart0 TxD" *) input uart0_tx_o;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart1 RxD" *) output uart1_rx_i;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart1 TxD" *) input uart1_tx_o;
   (* X_INTERFACE_INFO = "xilinx.com:interface:spi:1.0 spi0 SCK_I" *) output sck0_i;
   (* X_INTERFACE_INFO = "xilinx.com:interface:spi:1.0 spi0 SCK_O" *) input sck0_o;
   (* X_INTERFACE_INFO = "xilinx.com:interface:spi:1.0 spi0 SCK_T" *) input sck0_t;
@@ -147,6 +151,7 @@ module system_io_switch_0_0
   assign s_axi_bresp[0] = \<const0> ;
   assign s_axi_rresp[1] = \<const0> ;
   assign s_axi_rresp[0] = \<const0> ;
+  assign uart1_rx_i = \<const0> ;
   GND GND
        (.G(\<const0> ));
   system_io_switch_0_0_io_switch_v1_1 inst

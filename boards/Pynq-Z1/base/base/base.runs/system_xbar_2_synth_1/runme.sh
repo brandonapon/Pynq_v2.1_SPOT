@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='D:/Pynq/PYNQ_V2.1/boards/Pynq-Z1/base/base/base.runs/system_xbar_2_synth_1'
+HD_PWD='D:/Pynq/Pynq_v2.1_SPOT/boards/Pynq-Z1/base/base/base.runs/system_xbar_2_synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

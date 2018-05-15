@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="33">
   <CompositeFile CompositeFileTopName="system" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1525382596"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1525382596"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1525382596"/>
-    <Generation Name="HW_HANDOFF" State="STALE" Timestamp="1525739589"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1526338385"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1526338385"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1526338385"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1526338385"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip\system_audio_direct_0_0\system_audio_direct_0_0.xci" Type="IP">
         <Instance HierarchyPath="audio_direct_0"/>
@@ -1154,6 +1154,22 @@
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SIMULATION"/>
       </File>
+      <File Name="ip\system_util_vector_logic_0_0\system_util_vector_logic_0_0.xci" Type="IP">
+        <Instance HierarchyPath="iop_arduino/util_vector_logic_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\system_axi_uartlite_0_0\system_axi_uartlite_0_0.xci" Type="IP">
+        <Instance HierarchyPath="iop_arduino/axi_uartlite_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
       <File Name="ip\system_m00_regslice_8\system_m00_regslice_8.xci" Type="IP">
         <Instance HierarchyPath="video/axi_mem_intercon/m00_couplers/m00_regslice"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
@@ -1676,6 +1692,14 @@
       </File>
       <File Name="ip\system_tier2_xbar_2_0\system_tier2_xbar_2_0.xci" Type="IP">
         <Instance HierarchyPath="iop_arduino/microblaze_0_axi_periph/tier2_xbar_2"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\system_m17_regslice_0\system_m17_regslice_0.xci" Type="IP">
+        <Instance HierarchyPath="iop_arduino/microblaze_0_axi_periph/m17_couplers/m17_regslice"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>

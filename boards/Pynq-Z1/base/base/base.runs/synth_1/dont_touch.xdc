@@ -432,6 +432,12 @@ set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==system_xbar_1 |
 # IP: bd/system/ip/system_xbar_0/system_xbar_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==system_xbar_0 || ORIG_REF_NAME==system_xbar_0} -quiet] -quiet
 
+# IP: bd/system/ip/system_util_vector_logic_0_0/system_util_vector_logic_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==system_util_vector_logic_0_0 || ORIG_REF_NAME==system_util_vector_logic_0_0} -quiet] -quiet
+
+# IP: bd/system/ip/system_axi_uartlite_0_0/system_axi_uartlite_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==system_axi_uartlite_0_0 || ORIG_REF_NAME==system_axi_uartlite_0_0} -quiet] -quiet
+
 # IP: bd/system/ip/system_m00_regslice_8/system_m00_regslice_8.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==system_m00_regslice_8 || ORIG_REF_NAME==system_m00_regslice_8} -quiet] -quiet
 
@@ -629,6 +635,9 @@ set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==system_tier2_xb
 
 # IP: bd/system/ip/system_tier2_xbar_2_0/system_tier2_xbar_2_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==system_tier2_xbar_2_0 || ORIG_REF_NAME==system_tier2_xbar_2_0} -quiet] -quiet
+
+# IP: bd/system/ip/system_m17_regslice_0/system_m17_regslice_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==system_m17_regslice_0 || ORIG_REF_NAME==system_m17_regslice_0} -quiet] -quiet
 
 # IP: bd/system/ip/system_m16_regslice_0/system_m16_regslice_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==system_m16_regslice_0 || ORIG_REF_NAME==system_m16_regslice_0} -quiet] -quiet

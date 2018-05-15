@@ -63,6 +63,8 @@ module system_io_switch_0_0 (
   gpio_tri_o,
   uart0_rx_i,
   uart0_tx_o,
+  uart1_rx_i,
+  uart1_tx_o,
   sck0_i,
   sck0_o,
   sck0_t,
@@ -116,6 +118,10 @@ input wire [19 : 0] gpio_tri_o;
 output wire uart0_rx_i;
 (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart0 TxD" *)
 input wire uart0_tx_o;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart1 RxD" *)
+output wire uart1_rx_i;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart1 TxD" *)
+input wire uart1_tx_o;
 (* X_INTERFACE_INFO = "xilinx.com:interface:spi:1.0 spi0 SCK_I" *)
 output wire sck0_i;
 (* X_INTERFACE_INFO = "xilinx.com:interface:spi:1.0 spi0 SCK_O" *)
@@ -217,8 +223,8 @@ input wire s_axi_aresetn;
     .scl1_t(1'B1),
     .uart0_rx_i(uart0_rx_i),
     .uart0_tx_o(uart0_tx_o),
-    .uart1_rx_i(),
-    .uart1_tx_o(1'B0),
+    .uart1_rx_i(uart1_rx_i),
+    .uart1_tx_o(uart1_tx_o),
     .sck0_i(sck0_i),
     .sck0_o(sck0_o),
     .sck0_t(sck0_t),
