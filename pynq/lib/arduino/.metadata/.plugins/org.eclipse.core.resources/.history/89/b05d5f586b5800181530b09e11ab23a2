@@ -117,7 +117,7 @@ int main()
    init_io_switch();
 //   uart_device = uart_open(TX, RX);
    int status = 0;
-   uart_device = uart_open_device(XPAR_UARTLITE_0_BASEADDR);
+   uart_device = uart_open_device(0);
    if(uart_device == -1){
 	   status = -1;
    }
