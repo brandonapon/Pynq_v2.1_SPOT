@@ -81,6 +81,8 @@
 #define GRAPHICSMODE			0x14
 #define LAYER					0x15
 #define LAYERTRANS 				0x16
+#define LETTER					0x19
+#define LETTER_SETUP			0x20
 
 /* Pin Assignments */
 #define RX						0
@@ -1301,6 +1303,17 @@ int main(void)
             	textSetCursor(0,0);
             	textWrite(textBuffer, 19);
             	MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case LETTER_SETUP:
+				textSetCursor(240,240);
+				textTransparent(0xffff);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case LETTER:
+				textWrite("a", 1);
+				MAILBOX_CMD_ADDR = 0x0;
 				break;
 
             case TEXTMODE:

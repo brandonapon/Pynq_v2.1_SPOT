@@ -8,14 +8,17 @@ LD_SRCS += \
 
 C_SRCS += \
 ../src/arduino_RA8875.c \
+../src/gpio.c \
 ../src/spi_v2.c 
 
 OBJS += \
 ./src/arduino_RA8875.o \
+./src/gpio.o \
 ./src/spi_v2.o 
 
 C_DEPS += \
 ./src/arduino_RA8875.d \
+./src/gpio.d \
 ./src/spi_v2.d 
 
 

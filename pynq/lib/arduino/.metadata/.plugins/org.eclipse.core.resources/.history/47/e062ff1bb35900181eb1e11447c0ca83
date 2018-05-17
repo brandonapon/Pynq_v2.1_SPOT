@@ -684,10 +684,9 @@ void textWrite(const char* buffer, uint16_t len)
 /**************************************************************************/
 void scanDirection(int invertH,int invertV)
 {
-	uint8_t DPCR_Reg = 0;
-	invertH == 1 ? DPCR_Reg |= (1 << 3) : DPCR_Reg &= ~(1 << 3);
-	invertV == 1 ? DPCR_Reg |= (1 << 2) : DPCR_Reg &= ~(1 << 2);
-	writeRegister(RA8875_DPCR,_DPCR_Reg);
+	invertH == 1 ? RA8875_DPCR |= (1 << 3) : RA8875_DPCR &= ~(1 << 3);
+	invertV == 1 ? RA8875_DPCR |= (1 << 2) : RA8875_DPCR &= ~(1 << 2);
+	_writeRegister(RA8875_DPCR,_DPCR_Reg);
 }
 
 /* layer functions */

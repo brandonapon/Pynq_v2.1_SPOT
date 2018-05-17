@@ -1,2 +1,2 @@
    text	   data	    bss	    dec	    hex	filename
-  46860	    576	   3644	  51080	   c788	arduino_displaycam.elf
+  47880	    608	   3640	  52128	   cba0	arduino_displaycam.elf

@@ -8,16 +8,19 @@ LD_SRCS += \
 
 C_SRCS += \
 ../src/arduino_displaycam.c \
+../src/gpio.c \
 ../src/spi_v2.c \
 ../src/uart_v2.c 
 
 OBJS += \
 ./src/arduino_displaycam.o \
+./src/gpio.o \
 ./src/spi_v2.o \
 ./src/uart_v2.o 
 
 C_DEPS += \
 ./src/arduino_displaycam.d \
+./src/gpio.d \
 ./src/spi_v2.d \
 ./src/uart_v2.d 
 
