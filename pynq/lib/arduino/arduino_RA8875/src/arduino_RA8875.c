@@ -363,13 +363,11 @@ void slowWriteData(uint8_t d){
 void writeReg(uint8_t reg, uint8_t val){
 	writeCommand(reg);
 	writeData(val);
-	/*
-	gpio_write(gpio_device, start_transfer);
-	writeBuffer[0] = reg;
-	writeBuffer[1] = val;
-	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 2);
-	gpio_write(gpio_device, end_transfer);
-	*/
+//	gpio_write(gpio_device, start_transfer);
+//	writeBuffer[0] = reg;
+//	writeBuffer[1] = val;
+//	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 2);
+//	gpio_write(gpio_device, end_transfer);
 }
 
 void slowWriteReg(uint8_t reg, uint8_t val){

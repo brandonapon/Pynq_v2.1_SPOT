@@ -69,7 +69,7 @@
 #define SLOW_FILL				0x7
 #define DRAW_IMAGE				0x8
 #define FILL_COLOR				0x9
-#define UNDEFINED				0xa
+#define SIMPLE					0xa
 #define EIGHT					0xb
 #define RECTANGLE				0xc
 #define CIRCLE					0xd
@@ -86,6 +86,24 @@
 #define CAMERA2					0x18
 #define LETTER					0x19
 #define LETTER_SETUP			0x20
+#define FONT_SIZE 				0X21
+#define TEXT_TRANSPARENT		0x22
+#define BACKGROUND_COLOR		0x23
+#define TEXT_CURSOR				0x24
+#define TEXT_WRITE				0x25
+#define LAYER_MODE				0x26
+#define LAYER_EFFECT			0x27
+#define CLEAR_WINDOW			0x28
+#define CLEAR_MEM				0x29
+
+/* Layer Effects */
+#define LAYER1 					0
+#define LAYER2					1
+#define TRANSPARENT 			2
+#define LIGHTEN					3
+#define OR						4
+#define AND						5
+#define FLOATING 				6
 
 /* Pin Assignments */
 #define RX						0
@@ -307,8 +325,10 @@
 #define RA8875_DPCR_ON			0x80 //0100 0000 |=
 #define RA8875_DPCR_OFF			0xBF //1011 1111 &=
 
-#define RA8875_MWCR1			0x02
+#define RA8875_MWCR0            0x40
+#define RA8875_MWCR1			0x41
 
+#define RA8875_LTPR0            0x52
 #define RA8875_LTPR1			0x53
 
 #define V_REF 3.33
@@ -331,73 +351,28 @@ int currentLayer = 0;
 
 /* LOW LEVEL FUNCTIONS*/
 void writeCommand(uint8_t cmd){
-//	gpio_write(gpio_device, start_transfer);
-//	for(int i = 0; i < 50; ++i);
 	writeBuffer[0] = RA8875_CMDWRITE;
 	writeBuffer[1] = cmd;
 	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 2);
-//	for(int i = 0; i < 50; ++i);
-//	gpio_write(gpio_device, end_transfer);
 }
 
 void writeData(uint8_t d){
-//	gpio_write(gpio_device, start_transfer);
-//	for(int i = 0; i < 50; ++i);
 	writeBuffer[0] = RA8875_DATAWRITE;
 	writeBuffer[1] = d;
 	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 2);
-//	for(int i = 0; i < 50; ++i);
-//	gpio_write(gpio_device, end_transfer);
 }
-
-//void slowWriteCommand(uint8_t cmd){
-//	gpio_write(gpio_device, start_transfer);
-//	for(int i = 0; i < 50; ++i);
-//	writeBuffer[0] = RA8875_CMDWRITE;
-//	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 1);
-//	writeBuffer[0] = cmd;
-//	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 1);
-//	for(int i = 0; i < 50; ++i);
-//	gpio_write(gpio_device, end_transfer);
-//}
-
-//void slowWriteData(uint8_t d){
-//	gpio_write(gpio_device, start_transfer);
-//	for(int i = 0; i < 50; ++i);
-//	writeBuffer[0] = RA8875_DATAWRITE;
-//	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 1);
-//	writeBuffer[0] = d;
-//	spi_transfer(spi_device, (const uint8_t*) writeBuffer, (uint8_t*) readBuffer, 1);
-//	for(int i = 0; i < 50; ++i);
-//	gpio_write(gpio_device, end_transfer);
-//}
 
 void writeReg(uint8_t reg, uint8_t val){
 	writeCommand(reg);
 	writeData(val);
-	/*
-	gpio_write(gpio_device, start_transfer);
-	writeBuffer[0] = reg;
-	writeBuffer[1] = val;
-	spi_transfer(spi_device, (const char*) writeBuffer, (char*) readBuffer, 2);
-	gpio_write(gpio_device, end_transfer);
-	*/
 }
-
-//void slowWriteReg(uint8_t reg, uint8_t val){
-//	slowWriteCommand(reg);
-//	slowWriteData(val);
-//}
 
 uint8_t readData(void)
 {
-	gpio_write(gpio_device, start_transfer);
-    writeBuffer[0] = RA8875_DATAREAD;
-  spi_transfer(spi_device, writeBuffer, readBuffer, 1);
-  writeBuffer[0] = 0x0;
-  spi_transfer(spi_device, writeBuffer, readBuffer, 1);
-	gpio_write(gpio_device, end_transfer);
-  return readBuffer[0];
+	writeBuffer[0] = RA8875_DATAREAD;
+	writeBuffer[1] = 0x0;
+	spi_transfer(spi_device, writeBuffer, readBuffer, 2);
+  return readBuffer[1];
 }
 
 uint8_t readReg(uint8_t reg)
@@ -425,73 +400,6 @@ void PLLinit(void){ //Fixed to 800x480
 	writeReg(RA8875_PLLC2, RA8875_PLLC2_DIV4);
 }
 
-//void initialize(void){ //Fixed to 800x480
-//	//Initializes the driver IC (clock setup, etc.)
-//	PLLinit();
-//	//Change RA8875_SYSR_16BPP to RA8875_SYSR_8BPP to change from 64k to 256 colors. Allows for layers to be used
-//	//RA8875_SYSR_MCU8 - 8 bit mode, RA8875_SYSR_MCU16 - 16 bit mode
-////	slowWriteReg(RA8875_SYSR, RA8875_SYSR_16BPP | RA8875_SYSR_MCU8);
-//	slowWriteReg(RA8875_SYSR, RA8875_SYSR_MCU8 | RA8875_SYSR_MCU8);
-//
-//	/* Timing values */
-//	uint8_t pixclk;
-//	uint8_t hsync_start;
-//	uint8_t hsync_pw;
-//	uint8_t hsync_finetune;
-//	uint8_t hsync_nondisp;
-//	uint8_t vsync_pw;
-//	uint16_t vsync_nondisp;
-//	uint16_t vsync_start;
-//
-//	pixclk          = RA8875_PCSR_PDATL | RA8875_PCSR_2CLK;
-//	hsync_nondisp   = 26;
-//	hsync_start     = 32;
-//	hsync_pw        = 96;
-//	hsync_finetune  = 0;
-//	vsync_nondisp   = 32;
-//	vsync_start     = 23;
-//	vsync_pw        = 2;
-//
-//	slowWriteReg(RA8875_PCSR, pixclk);
-//
-//	/* Horizontal settings registers */
-//	slowWriteReg(RA8875_HDWR, (width / 8) - 1);                          // H width: (HDWR + 1) * 8 = 480
-//	slowWriteReg(RA8875_HNDFTR, RA8875_HNDFTR_DE_HIGH + hsync_finetune);
-//	slowWriteReg(RA8875_HNDR, (hsync_nondisp - hsync_finetune - 2)/8);    // H non-display: HNDR * 8 + HNDFTR + 2 = 10
-//	slowWriteReg(RA8875_HSTR, hsync_start/8 - 1);                         // Hsync start: (HSTR + 1)*8
-//	slowWriteReg(RA8875_HPWR, RA8875_HPWR_LOW + (hsync_pw/8 - 1));        // HSync pulse width = (HPWR+1) * 8
-//
-//	/* Vertical settings registers */
-//	slowWriteReg(RA8875_VDHR0, (uint16_t)(height - 1) & 0xFF);
-//	slowWriteReg(RA8875_VDHR1, (uint16_t)(height - 1) >> 8);
-//	slowWriteReg(RA8875_VNDR0, vsync_nondisp-1);                          // V non-display period = VNDR + 1
-//	slowWriteReg(RA8875_VNDR1, vsync_nondisp >> 8);
-//	slowWriteReg(RA8875_VSTR0, vsync_start-1);                            // Vsync start position = VSTR + 1
-//	slowWriteReg(RA8875_VSTR1, vsync_start >> 8);
-//	slowWriteReg(RA8875_VPWR, RA8875_VPWR_LOW + vsync_pw - 1);            // Vsync pulse width = VPWR + 1
-//
-//	/* Set active window X */
-//	slowWriteReg(RA8875_HSAW0, 0);                                        // horizontal start point
-//	slowWriteReg(RA8875_HSAW1, 0);
-//	slowWriteReg(RA8875_HEAW0, (uint16_t)(width - 1) & 0xFF);            // horizontal end point
-//	slowWriteReg(RA8875_HEAW1, (uint16_t)(width - 1) >> 8);
-//
-//	/* Set active window Y */
-//	slowWriteReg(RA8875_VSAW0, 0);                                        // vertical start point
-//	slowWriteReg(RA8875_VSAW1, 0);
-//	slowWriteReg(RA8875_VEAW0, (uint16_t)(height - 1) & 0xFF);           // horizontal end point
-//	slowWriteReg(RA8875_VEAW1, (uint16_t)(height - 1) >> 8);
-//
-//	 /* Clear the entire window */
-//	slowWriteReg(RA8875_MCLR, RA8875_MCLR_START | RA8875_MCLR_FULL);
-//}
-//void displayOn(int on){
-//	if (on)
-//		slowWriteReg(RA8875_PWRR, RA8875_PWRR_NORMAL | RA8875_PWRR_DISPON);
-//	else
-//		slowWriteReg(RA8875_PWRR, RA8875_PWRR_NORMAL | RA8875_PWRR_DISPOFF);
-//}
-
 //fast init
 void initialize(void){ //Fixed to 800x480
 	//Initializes the driver IC (clock setup, etc.)
@@ -499,7 +407,7 @@ void initialize(void){ //Fixed to 800x480
 	//Change RA8875_SYSR_16BPP to RA8875_SYSR_8BPP to change from 64k to 256 colors. Allows for layers to be used
 	//RA8875_SYSR_MCU8 - 8 bit mode, RA8875_SYSR_MCU16 - 16 bit mode
 //	writeReg(RA8875_SYSR, RA8875_SYSR_16BPP | RA8875_SYSR_MCU8);
-	writeReg(RA8875_SYSR, RA8875_SYSR_MCU8 | RA8875_SYSR_MCU8);
+	writeReg(RA8875_SYSR, RA8875_SYSR_8BPP | RA8875_SYSR_MCU8);
 
 	/* Timing values */
 	uint8_t pixclk;
@@ -559,6 +467,7 @@ void displayOn(int on){
 	else
 		writeReg(RA8875_PWRR, RA8875_PWRR_NORMAL | RA8875_PWRR_DISPOFF);
 }
+
 
 
 
@@ -664,9 +573,9 @@ void textWrite(const char* buffer, uint16_t len)
 	for (uint16_t i=0;i<len;i++){
 		writeData(buffer[i]);
 //		if(textScale > 1){ //if text enlarged, give more time to draw
-//			for(int i=0; i<10000; ++i){
-//				counter++;
-//			}
+	for(int i=0; i<1000; ++i){
+		counter++;
+	}
 //		}
 
 	}
@@ -682,29 +591,96 @@ void textWrite(const char* buffer, uint16_t len)
 	  invertV: true(inverted),false(normal) vertical
 */
 /**************************************************************************/
-void scanDirection(int invertH,int invertV)
-{
-	uint8_t DPCR_Reg = 0;
-	invertH == 1 ? DPCR_Reg |= (1 << 3) : DPCR_Reg &= ~(1 << 3);
-	invertV == 1 ? DPCR_Reg |= (1 << 2) : DPCR_Reg &= ~(1 << 2);
-	writeRegister(RA8875_DPCR,_DPCR_Reg);
-}
+//void scanDirection(int invertH,int invertV)
+//{
+//	uint8_t DPCR_Reg = 0;
+//	invertH == 1 ? DPCR_Reg |= (1 << 3) : DPCR_Reg &= ~(1 << 3);
+//	invertV == 1 ? DPCR_Reg |= (1 << 2) : DPCR_Reg &= ~(1 << 2);
+//	writeRegister(RA8875_DPCR,_DPCR_Reg);
+//}
 
 /* layer functions */
 
+void clearActiveWindow(int full)
+{
+	uint8_t temp;
+	temp = readReg(RA8875_MCLR);
+	if(full == 1){
+		temp &= ~(1 << 6);
+	}
+	else{
+		temp |= (1 << 6);
+	}
+	writeData(temp);
+}
+
+void clearMemory(int stop)
+{
+	uint8_t temp;
+	temp = readReg(RA8875_MCLR);
+	if(stop == 1){
+		temp &= ~(1 << 7);
+	}
+	else{
+		temp |= (1 << 7);
+	}
+	writeData(temp);
+}
+
+void layerEffect(int effect){
+	uint8_t	reg = 0b00000000;
+	switch(effect){
+		case LAYER1: //only layer 1 visible  [000]
+			//do nothing
+		break;
+		case LAYER2: //only layer 2 visible  [001]
+			reg |= (1 << 0);
+		break;
+		case TRANSPARENT: //transparent mode [011]
+			reg |= (1 << 0); reg |= (1 << 1);
+		break;
+		case LIGHTEN: //lighten-overlay mode [010]
+			reg |= (1 << 1);
+		break;
+		case OR: //boolean OR mode           [100]
+			reg |= (1 << 2);
+		break;
+		case AND: //boolean AND mode         [101]
+			reg |= (1 << 0); reg |= (1 << 2);
+		break;
+		case FLOATING: //floating windows    [110]
+			reg |= (1 << 1); reg |= (1 << 2);
+		break;
+		default:
+			//do nothing
+		break;
+	}
+	writeReg(RA8875_LTPR0,reg);
+}
+
 void useLayers(int on){
+//	if(on == 1){ //turn layers on
+//		writeCommand(RA8875_DPCR);
+//		uint8_t temp = readData();
+//		temp |= RA8875_DPCR_ON; // Set bit 7
+//		writeData(temp);
+//	}
+//	else{ //turn off layers
+//		writeCommand(RA8875_DPCR);
+//		uint8_t temp = readData();
+//		temp &= RA8875_DPCR_OFF; // Set bit 7
+//		writeData(temp);
+//	}
+	uint8_t _DPCR_Reg = 0;
 	if(on == 1){ //turn layers on
-		writeCommand(RA8875_DPCR);
-		uint8_t temp = readData();
-		temp |= RA8875_DPCR_ON; // Set bit 7
-		writeData(temp);
+		_DPCR_Reg |= (1 << 7);
+		clearActiveWindow(1);
 	}
 	else{ //turn off layers
-		writeCommand(RA8875_DPCR);
-		uint8_t temp = readData();
-		temp &= RA8875_DPCR_OFF; // Set bit 7
-		writeData(temp);
+		_DPCR_Reg &= ~(1 << 7);
+		clearActiveWindow(0);
 	}
+	writeReg(RA8875_DPCR, _DPCR_Reg);
 }
 
 void writeTo(int layer){
@@ -719,6 +695,7 @@ void writeTo(int layer){
 		temp &= ~((1<<3) | (1<<2));// Clear bits 3 and 2
 		temp |= (1 << 0); //bit set 0
 	}
+	writeData(temp);
 }
 
 void layerTransparency(uint8_t layer1,uint8_t layer2)
@@ -1150,9 +1127,12 @@ int main(void)
 //    spi_open(unsigned int spiclk, unsigned int miso, unsigned int mosi, unsigned int ss)
 //    spi_device = spi_open(13, 12, 11, 10);
     spi_device = spi_open_device(XPAR_SPI_0_DEVICE_ID);
-    spi_device = spi_configure(spi_device, 0, 0);
+    spi_device = spi_configure(spi_device, 1, 1);
 
     uart_device = uart_open(TX, RX);
+//	set_pin(TX, UART0_TX);
+//	set_pin(RX, UART0_RX);
+//	uart_device = uart_open_device(0);
 
     // SysMon Initialize
     SysMonConfigPtr = XSysMon_LookupConfig(SYSMON_DEVICE_ID);
@@ -1211,6 +1191,10 @@ int main(void)
 	int fill = 0;
     int index = 0;
     char* textBuffer = "Hey guys hwhats up?";
+    char* text;
+    uint16_t text_length = 0;
+
+    uint16_t text_val = 0;
 
     uint8_t* picAddr;
     int read_count = 0;
@@ -1218,6 +1202,11 @@ int main(void)
     int num_read = 0;
     char stream_in[10] = {};
     uint8_t pixel8bit;
+    int scale;
+    uint16_t foreground_color;
+    uint16_t background_color;
+
+    char write_snap_cmd[1] = {1};
 
     while(1) {
         while(MAILBOX_CMD_ADDR==0);
@@ -1240,7 +1229,7 @@ int main(void)
             case PWM:
             	PWM1config(1, RA8875_PWM_CLK_DIV1024); // PWM output for backlight
 				PWM1out(255);
-				MAILBOX_DATA(0) = 3;
+				MAILBOX_DATA(0) = uart_device;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
             case DRAW:
@@ -1435,8 +1424,13 @@ int main(void)
             	MAILBOX_CMD_ADDR = 0x0;
 				break;
 
+            case LAYER_MODE:
+            	layer0 = MAILBOX_DATA(0);
+            	useLayers(layer0);
+            	MAILBOX_CMD_ADDR = 0x0;
+            	break;
+
             case LAYER:
-            	useLayers(1);
             	layer0 = MAILBOX_DATA(0);
             	writeTo(layer0);
             	MAILBOX_CMD_ADDR = 0x0;
@@ -1448,6 +1442,24 @@ int main(void)
             	layerTransparency(layer0, layer1);
             	MAILBOX_CMD_ADDR = 0x0;
             	break;
+
+            case LAYER_EFFECT:
+            	layer0 = MAILBOX_DATA(0);
+            	layerEffect(layer0);
+            	MAILBOX_CMD_ADDR = 0x0;
+            	break;
+
+            case CLEAR_WINDOW:
+				layer0 = MAILBOX_DATA(0);
+				clearActiveWindow(layer0);
+            	MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case CLEAR_MEM:
+            	layer0 = MAILBOX_DATA(0);
+            	clearMemory(layer0);
+            	MAILBOX_CMD_ADDR = 0x0;
+				break;
 
             case CAMERA1:
             	//size of image - 153600 bytes
@@ -1484,6 +1496,85 @@ int main(void)
 					}
 				}
 				MAILBOX_DATA(0) = index;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case SIMPLE:
+            	uart_write(uart_device, write_snap_cmd, 1);
+				num_read = uart_read(uart_device, stream_in, 4);
+				MAILBOX_DATA(0) =  stream_in;
+				MAILBOX_DATA(1) = stream_in[0];
+				MAILBOX_DATA(2) = stream_in[1];
+				MAILBOX_DATA(3) = stream_in[2];
+				MAILBOX_DATA(4) = stream_in[3];
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+            case FONT_SIZE:
+				scale = MAILBOX_DATA(0);
+				textEnlarge(scale);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case TEXT_TRANSPARENT:
+				foreground_color = MAILBOX_DATA(0);
+				textTransparent(foreground_color);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case BACKGROUND_COLOR:
+				foreground_color = MAILBOX_DATA(0);
+				background_color = MAILBOX_DATA(1);
+				textColor(foreground_color, background_color);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case TEXT_CURSOR:
+				x_pixel = MAILBOX_DATA(0);
+				y_pixel = MAILBOX_DATA(1);
+				textSetCursor(x_pixel, y_pixel);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case TEXT_WRITE:
+				text_val = MAILBOX_DATA(0);
+				if(text_val == 0){
+					text = "ALERT!";
+					text_length = 6;
+				}
+				else if(text_val == 1){
+					text = "CANCEL";
+					text_length = 6;
+				}
+				else if(text_val == 2){
+					text = "MARK";
+					text_length = 4;
+				}
+				else if(text_val == 3){
+					text = "VIEW";
+					text_length = 4;
+				}
+				else if(text_val == 4){
+					text = "SELECT";
+					text_length = 6;
+				}
+				else if(text_val == 5){
+					text = "E";
+					text_length = 1;
+				}
+				else if(text_val == 6){
+					text = "W";
+					text_length = 1;
+				}
+				else if (text_val ==7){
+					text = "N";
+					text_length = 1;
+				}
+				else{
+					text = "S";
+					text_length = 1;
+				}
+				textWrite(text, text_length);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 
