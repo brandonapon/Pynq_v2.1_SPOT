@@ -9,8 +9,10 @@ from . import MAILBOX_OFFSET
 from . import MAILBOX_PY2IOP_CMD_OFFSET
 
 ARDUINO_RANGEFINDER_PROGRAM = "arduino_rangefinder.bin"
-TEST = 0x1
-TEST_2 = 0x2
+ON = 0x2
+OFF = 0x3
+POLL = 0x4
+DEVICE = 0x6
 
 class Arduino_Rangefinder(object):
     '''
@@ -28,7 +30,8 @@ class Arduino_Rangefinder(object):
         """
         self.microblaze = Arduino(mb_info, ARDUINO_RANGEFINDER_PROGRAM)
 
-    def test(self):
-        self.microblaze.write_blocking_command(TEST)
-        return self.microblaze.read_mailbox(0,1)
+    def poll(self):
+        self.microblaze.write_blocking_command(POLL)
+        values = self.microblaze.read_mailbox(0,5)
+        return values
 

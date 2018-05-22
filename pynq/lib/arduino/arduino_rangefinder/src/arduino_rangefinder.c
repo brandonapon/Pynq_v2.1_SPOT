@@ -91,22 +91,32 @@ char off[1] = {0};
 //unsigned int uart_get_num_devices(void);
 
 void readByte(char* byte){
-	uart_read(uart_device, byte, 1);
+	int num_read = 0;
+	while(num_read < 1){
+		num_read = uart_read(uart_device, byte, 1);
+	}
 }
 
-char range[10] = {42};
-void readRF(void){
-//	while(1){
-//		readByte(&range[0]);
-//		if(range[0] == 'R'){
-//			int i = 0;
-//			while(i < 5){
-//				readByte(&range[++i]);
-//			}
-//			break;
-//		}
-//	}
-	uart_read(uart_device, range, 10);
+char output[5] = {};
+void readRF(){
+	char range[1] = {42};
+	int num_read = 0;
+	int counter = 0;
+	while (counter < 5){
+		num_read = uart_read(uart_device, range, 1);
+		if((counter == 0) && (num_read == 1)){
+			if(range[0] == 'R'){
+				output[counter] = range[0];
+				++counter;
+			}
+		}
+		if((num_read == 1) && (counter > 0)){
+			if(range[0] != 'R'){
+				output[counter] = range[0];
+				++counter;
+			}
+		}
+	}
 }
 
 int main()
@@ -117,10 +127,15 @@ int main()
    init_io_switch();
 //   uart_device = uart_open(TX, RX);
    int status = 0;
-   uart_device = uart_open_device(XPAR_UARTLITE_0_BASEADDR);
+   uart_device = uart_open_device(XPAR_UARTLITE_0_DEVICE_ID);
    if(uart_device == -1){
 	   status = -1;
    }
+   else{
+	   status = uart_device;
+   }
+
+   char* range;
 
    // Run application
    while(1){
@@ -150,9 +165,11 @@ int main()
 
 			case POLL:
 				readRF();
-				for(int i = 0; i < 10; ++i){
-					MAILBOX_DATA(i) = (char) range[i];
+				for(int i = 0; i < 5; ++i){
+					MAILBOX_DATA(i) = (char) output[i];
+					output[i] = 0;
 				}
+
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 

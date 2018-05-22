@@ -1461,21 +1461,53 @@ int main(void)
             	MAILBOX_CMD_ADDR = 0x0;
 				break;
 
+//            case CAMERA1:
+//            	//size of image - 153600 bytes
+//            	//capture image and save to DDR
+//            	picAddr = MAILBOX_DATA(0) | 0x20000000;
+//            	uart_write(uart_device, write_snap_cmd, 1);
+//            	read_count = 0;
+//				while(read_count < stream_size){
+//					num_read = uart_read(uart_device, stream_in, 1);
+//					if(num_read == 1){
+//						picAddr[read_count]= stream_in[0];
+//						++read_count;
+//					}
+//				}
+//				MAILBOX_DATA(0) = read_count;
+//            	MAILBOX_CMD_ADDR = 0x0;
+//				break;
+
             case CAMERA1:
             	//size of image - 153600 bytes
             	//capture image and save to DDR
             	picAddr = MAILBOX_DATA(0) | 0x20000000;
+            	uart_write(uart_device, write_snap_cmd, 1);
             	read_count = 0;
+            	index = 0;
+            	x_pixel = 0;
+            	y_pixel = 0;
 				while(read_count < stream_size){
 					num_read = uart_read(uart_device, stream_in, 1);
 					if(num_read == 1){
 						picAddr[read_count]= stream_in[0];
 						++read_count;
+//						if(read_count % 2 == 0){
+//							pixel8bit = ((picAddr[index] & 0xE0) |  ((picAddr[index] & 0x07) << 2) | ((picAddr[index+1] & 0x18) >> 3));
+//							drawPixel8bit(x_pixel, y_pixel, pixel8bit);
+//							index += 2;
+//							x_pixel++;
+//							if(x_pixel == 320){
+//								x_pixel = 0;
+//								y_pixel++;
+//							}
+//						}
 					}
 				}
 				MAILBOX_DATA(0) = read_count;
             	MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 
             case CAMERA2:
             	//send to display
@@ -1485,8 +1517,8 @@ int main(void)
 				x_size = 320;
 				y_size = 240;
 				index = 0;
-				for(y_pixel = y_start; y_pixel < y_size; y_pixel++){
-					for(x_pixel = x_start; x_pixel < x_size; x_pixel++){
+				for(y_pixel = y_start; y_pixel < y_size+y_start; y_pixel++){
+					for(x_pixel = x_start; x_pixel < x_size+x_start; x_pixel++){
 						//convert rgb565 to rgb332
 						pixel8bit = ((picAddr[index] & 0xE0) |  ((picAddr[index] & 0x07) << 2) | ((picAddr[index+1] & 0x18) >> 3));
 						//convert rgb888 to rgb332
@@ -1538,41 +1570,92 @@ int main(void)
 
 			case TEXT_WRITE:
 				text_val = MAILBOX_DATA(0);
-				if(text_val == 0){
+				if(text_val == 0) {
 					text = "ALERT!";
 					text_length = 6;
 				}
-				else if(text_val == 1){
+				else if(text_val == 1) {
 					text = "CANCEL";
 					text_length = 6;
 				}
-				else if(text_val == 2){
+				else if(text_val == 2) {
 					text = "MARK";
 					text_length = 4;
 				}
-				else if(text_val == 3){
+				else if(text_val == 3) {
 					text = "VIEW";
 					text_length = 4;
 				}
-				else if(text_val == 4){
+				else if(text_val == 4) {
 					text = "SELECT";
 					text_length = 6;
 				}
-				else if(text_val == 5){
+				else if(text_val == 5) {
 					text = "E";
 					text_length = 1;
 				}
-				else if(text_val == 6){
+				else if(text_val == 6) {
 					text = "W";
 					text_length = 1;
 				}
-				else if (text_val ==7){
+				else if(text_val == 7) {
 					text = "N";
 					text_length = 1;
 				}
-				else{
+				else if(text_val == 8) {
 					text = "S";
 					text_length = 1;
+				}
+				else if(text_val == 9) {
+					text = "HOME";
+					text_length = 4;
+				}
+				else if(text_val == 10) {
+					text = "GO BACK";
+					text_length = 7;
+				}
+				else if(text_val == 11) {
+					text = "Tag: ";
+					text_length = 5;
+				}
+				else if(text_val == 12) {
+					text = "Created By: ";
+					text_length = 12;
+				}
+				else if(text_val == 13) {
+					text = "Distance: ";
+					text_length = 10;
+				}
+				else if(text_val == 14) {
+					text = "OBJECT";
+					text_length = 6;
+				}
+				else if(text_val == 15) {
+					text = "CONFIRM";
+					text_length = 7;
+				}
+				else if(text_val == 16) {
+					text = "Direction: ";
+					text_length = 11;
+				}
+				else if(text_val == 17) {
+					text = "POINT TOWARDS";
+					text_length = 13;
+				}
+				else if(text_val == 18) {
+					text = "POINT OF INTEREST NEARBY";
+					text_length = 24;
+				}
+				else if(text_val == 19) {
+					text = "DANGER NEARBY";
+					text_length = 13;
+				}
+				else if(text_val == 20) {
+					text = "DISMISS";
+					text_length = 7;
+				} else {
+					text = "DEFAULT";
+					text_length = 7;
 				}
 				textWrite(text, text_length);
 				MAILBOX_CMD_ADDR = 0x0;
