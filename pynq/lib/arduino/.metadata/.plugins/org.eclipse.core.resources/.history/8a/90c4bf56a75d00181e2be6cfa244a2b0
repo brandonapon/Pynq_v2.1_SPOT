@@ -1506,8 +1506,8 @@ int main(void)
 					}
 				}
 				while((int)(pixel_count/320) < 240){
-					pixel8bit = ((picAddr[pixel_count*2] & 0xE0) |  ((picAddr[pixel_count*2] & 0x07) << 2) | (((picAddr[(pixel_count*2)+1]) & 0x18) >> 3));
-					drawPixel8bit((pixel_count%320), (int)(pixel_count/320), pixel8bit);
+					pixel8bit = ((picAddr[index] & 0xE0) |  ((picAddr[index] & 0x07) << 2) | ((picAddr[index+1]) & 0x18) >> 3);
+					drawPixel8bit((pixel_count%320), (int)(pixel_count/320), picAddr[pixel_count*2]);
 					++pixel_count;
 				}
 				MAILBOX_DATA(0) = read_count;

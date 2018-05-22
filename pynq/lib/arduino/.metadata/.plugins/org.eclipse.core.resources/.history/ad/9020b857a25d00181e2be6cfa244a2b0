@@ -1197,7 +1197,6 @@ int main(void)
     uint8_t* picAddr;
     uint8_t* drawAddr;
     int read_count = 0;
-    int pixel_count = 0;
     int stream_size = 153600;
     int num_read = 0;
     char stream_in[10] = {};
@@ -1485,7 +1484,6 @@ int main(void)
             	drawAddr = MAILBOX_DATA(1) | 0x20000000;
             	uart_write(uart_device, write_snap_cmd, 1);
             	read_count = 0;
-            	pixel_count = 0;
             	index = 0;
 				while(read_count < stream_size){
 					num_read = uart_read(uart_device, stream_in, 1);
@@ -1493,25 +1491,20 @@ int main(void)
 						picAddr[read_count]= stream_in[0];
 						++read_count;
 						if(read_count % 3 == 0){ //
-							drawPixel8bit((pixel_count%320), (int)(pixel_count/320), drawAddr[pixel_count]);
-							++pixel_count;
+							++index;
+
+							pixel8bit = (pixel8bit | ((stream_in[0] & 0x18) >> 3));
 						}
 						else if(read_count % 3 == 1){
 							pixel8bit = (picAddr[index] & 0xE0) |  ((picAddr[index] & 0x07) << 2);
 						}
 						else{
-							drawAddr[pixel_count] = (pixel8bit | ((picAddr[index+1]) & 0x18) >> 3);
-							index += 2;
+							drawAddr = (pixel8bit | ((picAddr[index+1])) & 0x18) >> 3));
 						}
 					}
 				}
-				while((int)(pixel_count/320) < 240){
-					pixel8bit = ((picAddr[pixel_count*2] & 0xE0) |  ((picAddr[pixel_count*2] & 0x07) << 2) | (((picAddr[(pixel_count*2)+1]) & 0x18) >> 3));
-					drawPixel8bit((pixel_count%320), (int)(pixel_count/320), pixel8bit);
-					++pixel_count;
-				}
+				while(index )
 				MAILBOX_DATA(0) = read_count;
-				MAILBOX_DATA(1) = pixel_count;
             	MAILBOX_CMD_ADDR = 0x0;
 				break;
 
