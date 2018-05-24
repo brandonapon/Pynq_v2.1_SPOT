@@ -1660,7 +1660,20 @@ int main(void)
 				else if(text_val == 20) {
 					text = "DISMISS";
 					text_length = 7;
-				} else {
+				}
+				else if(text_val == 21){
+					text = "10M";
+					text_length = 3;
+				}
+				else if(text_val == 22){
+					text = "20M";
+					text_length = 3;
+				}
+				else if(text_val == 23){
+					text = "30M";
+					text_length = 3;
+				}
+				else {
 					text = "DEFAULT";
 					text_length = 7;
 				}

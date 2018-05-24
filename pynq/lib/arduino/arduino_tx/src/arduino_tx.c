@@ -132,18 +132,15 @@ void startListening() {
 }
 
 void stopListening() {
-
-	setRegister(NRF_CONFIG, getRegister(NRF_CONFIG) & ~BV(PRIM_RX));
-
 	gpio_write(gpio_device, 0);
-
-	delay_us(450);
+	delay_us(200);
 
 	if(getRegister(FEATURE) & BV(EN_ACK_PAY)) {
 		delay_us(200);
 		flushTX();
 	}
 
+	setRegister(NRF_CONFIG, getRegister(NRF_CONFIG) & ~BV(PRIM_RX));
 	setRegister(EN_RXADDR, getRegister(EN_RXADDR) | BV(child_pipe_enable[0]));
 }
 
@@ -191,7 +188,9 @@ void initTX(u8 address) {
 
 	pipe0_reading_address[0] = 0;
 
-	delay_us(5000);
+	gpio_write(gpio_device, 0);
+
+	delay_ms(5);
 
 	setRegister(NRF_CONFIG, 0b00001100);
 
@@ -237,11 +236,14 @@ bool writePayload(u8* messageToSend) {
 	}
 	spi_transfer(spi_device, (const char*)messageToSendFinal, (char*)NULL, 33);
 	gpio_write(gpio_device, 1);
-	delay_us(450);
+	
+	while(!(getStatus() & (BV(TX_DS) | BV(MAX_RT))));
+
 	gpio_write(gpio_device, 0);
 
+	u8 status = getRegister(NRF_STATUS);
 	setRegister(NRF_STATUS, BV(RX_DR) | BV(TX_DS) | BV(MAX_RT));
-	if(getRegister(NRF_STATUS) & BV(MAX_RT)) {
+	if(status & BV(MAX_RT)) {
 		flushTX();
 		return false;
 	}
@@ -259,10 +261,6 @@ bool writeMessage(u8 sendAddress, u8* message, u8 len) {
 	for(int i = 0; i < len; i = i + 1) {
 		packetToSend[i + 2] = message[i];
 	}
-	u8 spaceLeft = 30 - len;
-	for(int i = 0; i < spaceLeft; i = i + 1) {
-		packetToSend[i + len + 2] = 0;
-	}
 	openWritingPipe((BASE_ADDRESS + ((myAddress + ((MAX_NODES + 1) * sendAddress)))));
 	success = writePayload(packetToSend);
 	if(success == false) {
@@ -277,28 +275,27 @@ bool writeMessage(u8 sendAddress, u8* message, u8 len) {
 }
 
 void readMessage_payload(u8* buf) {
-	writeBuffer[0] = R_RX_PAYLOAD;
+	u8 readFromBuffer[32];
+	readFromBuffer[0] = R_RX_PAYLOAD;
 	for(int i = 1; i < 32; ++i) {
-		writeBuffer[i] = NOP;
+		readFromBuffer[i] = NOP;
 	}
-	spi_transfer(spi_device, (const char*)writeBuffer, (char*)buf, 32); // readBuffer now has all data
+	spi_transfer(spi_device, (const char*)(readFromBuffer), (char*)(buf), 33);
 	setRegister(NRF_STATUS, BV(RX_DR) | BV(TX_DS) | BV(MAX_RT));
 }
 
-u8* readMessage(u8* buf) {
+bool readMessage(u8* buf) {
 	stopListening();
 	while(hasMessages()) {
 		readMessage_payload(buf);
-		if(getFromRX[1] != RXpacketCounters[readBuffer[0]]) { // NOT Duplicate
-			RXpacketCounters[getFromRX[0]] = ((RXpacketCounters[getFromRX[0]] + 1) & (PACKET_CNTER - 1));
+		if(buf[2] != RXpacketCounters[buf[1]]) { // NOT Duplicate
+			RXpacketCounters[buf[1]] = ((RXpacketCounters[buf[1]] + 1) & (PACKET_CNTER - 1));
 			startListening();
-			return buf;
+			return true;
 		}
 	}
 	startListening();
-	returnBuff[0] = 15;
-	returnBuff[1] = 15;
-	return returnBuff;
+	return false;
 }
 
 int main(void) {
@@ -315,7 +312,6 @@ int main(void) {
 	init_io_switch();
 	spi_device = spi_open(13, 12, 11, 10);
 	spi_device = spi_configure(spi_device, 0, 0);
-
 
 	gpio_device = gpio_open_device(0);
 	gpio_device = gpio_configure(gpio_device, 2, 2, 1);
@@ -342,7 +338,7 @@ int main(void) {
 	u8 returnMessage[32];
 	bool readSuccess;
 	u8 registerValue;
-	u8* registerAll;
+	u8 registerAll[33];
 	u8* whatWrite;
 
 	initTX(1);
@@ -372,7 +368,7 @@ int main(void) {
 
 			case READ_FROM: // ONLY CALL AFTER HAS_MESSAGES
 				readMessage(registerAll); // ADD STRLEN
-				for(int i = 0; i < 32; ++i) {
+				for(int i = 0; i < 33; ++i) {
 					MAILBOX_DATA(i) = registerAll[i];
 				}
 				MAILBOX_CMD_ADDR = 0x0;
@@ -384,8 +380,11 @@ int main(void) {
 				for(int i = 0; i < messageLength; ++i) {
 					messageToSend[i] = MAILBOX_DATA((i + 2));
 				}
-				readSuccess = writeMessage(sendToAddress, messageToSend, messageLength);
+				readSuccess = writeMessage(sendToAddress, messageToSend, 30);
 				MAILBOX_DATA(0) = readSuccess;
+				for(int i = 0; i < messageLength; ++i) {
+					messageToSend[i] = 0;
+				}
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 

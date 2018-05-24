@@ -7,13 +7,16 @@ LD_SRCS += \
 ../src/lscript.ld 
 
 C_SRCS += \
-../src/arduino_button.c 
+../src/arduino_button.c \
+../src/gpio.c 
 
 OBJS += \
-./src/arduino_button.o 
+./src/arduino_button.o \
+./src/gpio.o 
 
 C_DEPS += \
-./src/arduino_button.d 
+./src/arduino_button.d \
+./src/gpio.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

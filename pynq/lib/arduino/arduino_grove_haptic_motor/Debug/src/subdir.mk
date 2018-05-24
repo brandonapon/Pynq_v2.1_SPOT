@@ -7,13 +7,16 @@ LD_SRCS += \
 ../src/lscript.ld 
 
 C_SRCS += \
-../src/arduino_grove_haptic_motor.c 
+../src/arduino_grove_haptic_motor.c \
+../src/i2c.c 
 
 OBJS += \
-./src/arduino_grove_haptic_motor.o 
+./src/arduino_grove_haptic_motor.o \
+./src/i2c.o 
 
 C_DEPS += \
-./src/arduino_grove_haptic_motor.d 
+./src/arduino_grove_haptic_motor.d \
+./src/i2c.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

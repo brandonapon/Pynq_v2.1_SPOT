@@ -11,7 +11,10 @@ C_SRCS += \
 ../src/arduino_rangefinder.c \
 ../src/gps_module.c \
 ../src/haptic_module.c \
+../src/i2c.c \
 ../src/main.c \
+../src/spi_v2.c \
+../src/timer.c \
 ../src/uart_v2.c 
 
 OBJS += \
@@ -19,7 +22,10 @@ OBJS += \
 ./src/arduino_rangefinder.o \
 ./src/gps_module.o \
 ./src/haptic_module.o \
+./src/i2c.o \
 ./src/main.o \
+./src/spi_v2.o \
+./src/timer.o \
 ./src/uart_v2.o 
 
 C_DEPS += \
@@ -27,7 +33,10 @@ C_DEPS += \
 ./src/arduino_rangefinder.d \
 ./src/gps_module.d \
 ./src/haptic_module.d \
+./src/i2c.d \
 ./src/main.d \
+./src/spi_v2.d \
+./src/timer.d \
 ./src/uart_v2.d 
 
 

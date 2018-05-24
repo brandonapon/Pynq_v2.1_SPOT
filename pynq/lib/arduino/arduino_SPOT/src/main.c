@@ -13,27 +13,31 @@
 #define BYTES_AVAILABLE_LOW		0xFE
 #define DATA_REG				0xFF
 
+/*
+ * COMMAND VALUES
+ */
 #define CONFIG_IOP_SWITCH       0x1
-#define START_WAVEFORM          0x2
-#define STOP_WAVEFORM           0x3
-#define READ_IS_PLAYING         0x4
-#define GET_ACCL_DATA           0x5
-#define GET_GYRO_DATA           0x6
-#define GET_COMPASS_DATA        0x7
-#define GET_EULER_VECTOR		0x8
-#define GET_TEMPERATURE         0x9
-#define RESET                   0xA
-#define CMD_BYTES_AVAILABLE		0xB
-#define TEST_CMD_ONE_BYTE		0xC
-#define STREAM_TEST				0xD
-#define RANGE_ON				0xE
-#define RANGE_OFF				0xF
-#define RANGE_POLL 				0x10
-#define RANGE_NOTHING			0x11
-#define RANGE_DEVICE			0x12
+//HAPTIC COMMANDS
+#define START_WAVEFORM          0x1000
+#define STOP_WAVEFORM           0x1001
+#define READ_IS_PLAYING         0x1002
 
-#define NUM_BYTES				5
-#define NUM_SAMPLES             100
+//IMU COMMANDS
+#define GET_ACCL_DATA           0x2000
+#define GET_GYRO_DATA           0x2001
+#define GET_COMPASS_DATA        0x2002
+#define GET_EULER_VECTOR		0x2003
+#define GET_TEMPERATURE         0x2004
+#define RESET                   0x2005
+
+//GPS COMMANDS
+#define GPS_READ				0x3000
+
+//RANGEFINDER COMMANDS
+#define RANGE_ON				0x4000
+#define RANGE_OFF				0x4001
+#define RANGE_POLL 				0x4002
+#define RANGE_DEVICE			0x4003
 
 #define RX						0
 #define TX						1
@@ -119,145 +123,115 @@ int main(void)
         cmd = MAILBOX_CMD_ADDR;
 
         switch(cmd){
-            case CONFIG_IOP_SWITCH:
-                // use dedicated I2C - no operation needed
-            	bno_init();
-                auto_calibrate_hapt();
-                MAILBOX_CMD_ADDR = 0x0;
-                break;
-            case START_WAVEFORM:
-                // read waveforms from mailbox
-                for(i=0; i<8; i++)
-                    waveforms[i] = MAILBOX_DATA(i) & 0xff;
-                play_hapt(waveforms);
-                MAILBOX_CMD_ADDR = 0x0;
-                break;
-            case STOP_WAVEFORM:
-                stop_hapt();
-                MAILBOX_CMD_ADDR = 0x0;
-                break;
-            case READ_IS_PLAYING:
-                MAILBOX_DATA(0) = is_playing_hapt();
-                MAILBOX_CMD_ADDR = 0x0;
-                break;
-            case TEST_CMD_ONE_BYTE:
+			case CONFIG_IOP_SWITCH:
+				// use dedicated I2C - no operation needed
+				bno_init();
+				auto_calibrate_hapt();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+			case START_WAVEFORM:
+				// read waveforms from mailbox
+				for(i=0; i<8; i++)
+					waveforms[i] = MAILBOX_DATA(i) & 0xff;
+				play_hapt(waveforms);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+			case STOP_WAVEFORM:
+				stop_hapt();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+			case READ_IS_PLAYING:
+				MAILBOX_DATA(0) = is_playing_hapt();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+			case GPS_READ:
 
-                bytesLow = read_gps(BYTES_AVAILABLE_LOW);
-                bytesHigh = read_gps(BYTES_AVAILABLE_HIGH);
+				bytesLow = read_gps(BYTES_AVAILABLE_LOW);
+				bytesHigh = read_gps(BYTES_AVAILABLE_HIGH);
 
-                MAILBOX_DATA(0) = bytesHigh;
-                MAILBOX_DATA(1) = bytesLow;
-                // Write data to mailbox
-                while(1) {
-                    char readBit = read_gps(DATA_REG);
-                    int intBit = readBit - '0';
-                    appendToCharArray(gpsOutput, readBit);
-                    if(intBit == '255') {
-                        break;
-                    }
-                    else if(readBit == '\n') {
-                        if(getBitPosition(gpsOutput, 5) == 'L') {
-                            for(int i = 0; i < strlen(gpsOutput); i++) {
-                                MAILBOX_DATA(i) = getBitPosition(gpsOutput, i);
-                            }
-                            break;
-                        }
-                        else {
-                            clearArray(gpsOutput);
-                        }
-                    }
-                }
+				MAILBOX_DATA(0) = bytesHigh;
+				MAILBOX_DATA(1) = bytesLow;
+				// Write data to mailbox
+				while(1) {
+					char readBit = read_gps(DATA_REG);
+					int intBit = readBit - '0';
+					appendToCharArray(gpsOutput, readBit);
+					if(intBit == '255') {
+						break;
+					}
+					else if(readBit == '\n') {
+						if(getBitPosition(gpsOutput, 5) == 'L') {
+							for(int i = 0; i < strlen(gpsOutput); i++) {
+								MAILBOX_DATA(i) = getBitPosition(gpsOutput, i);
+							}
+							break;
+						}
+						else {
+							clearArray(gpsOutput);
+						}
+					}
+				}
 
-                MAILBOX_CMD_ADDR = 0x0;
-                break;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
 
-            case CMD_BYTES_AVAILABLE:
+			case GET_ACCL_DATA:
+				getVector(VECTOR_ACCELEROMETER);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
 
-                bytesLow = read_gps(BYTES_AVAILABLE_LOW);
-                bytesHigh = read_gps(BYTES_AVAILABLE_HIGH);
-                MAILBOX_DATA(0) = bytesHigh;
-                MAILBOX_DATA(4) = bytesLow;
+			case GET_GYRO_DATA:
+				getVector(VECTOR_GYROSCOPE);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
 
-                MAILBOX_CMD_ADDR = 0x0;
-                break;
+			case GET_COMPASS_DATA:
+				getVector(VECTOR_MAGNETOMETER);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
 
-            case STREAM_TEST:
+			case GET_EULER_VECTOR:
+				getVector(VECTOR_EULER);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
 
-                while(1) {
-                    u8 gpsData = read_gps(DATA_REG);
-                    if(gpsData == 255) { // 0xFF
-                        break;
-                    }
-                    MAILBOX_DATA(counter) = gpsData;
-                    counter = counter + 1;
-                }
-                counter = 0;
+			case GET_TEMPERATURE:
+				getTemp();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
 
-                MAILBOX_CMD_ADDR = 0x0;
-                break;
+			case RESET:
+			//            mpu_reset();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
 
-         case GET_ACCL_DATA:
-            getVector(VECTOR_ACCELEROMETER);
-            MAILBOX_CMD_ADDR = 0x0; 
-            break;
-            
-         case GET_GYRO_DATA:
-          getVector(VECTOR_GYROSCOPE);
-          MAILBOX_CMD_ADDR = 0x0; 
-            break;
-            
-         case GET_COMPASS_DATA:
-          getVector(VECTOR_MAGNETOMETER);
-          MAILBOX_CMD_ADDR = 0x0;
-            break;
-            
-         case GET_EULER_VECTOR:
-          getVector(VECTOR_EULER);
-          MAILBOX_CMD_ADDR = 0x0;
-           break;
-
-         case GET_TEMPERATURE:
-            getTemp();
-            MAILBOX_CMD_ADDR = 0x0;
-            break;
-            
-         case RESET:
-//            mpu_reset();
-            MAILBOX_CMD_ADDR = 0x0; 
-            break;
-
-       	 case RANGE_DEVICE:
+			case RANGE_DEVICE:
 				MAILBOX_DATA(0) = status;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 
-		case RANGE_ON:
-			uart_write(uart_device, on, 1);
-			MAILBOX_CMD_ADDR = 0x0;
-			break;
+			case RANGE_ON:
+				uart_write(uart_device, on, 1);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
 
-		case RANGE_OFF:
-			uart_write(uart_device, off, 1);
-			MAILBOX_CMD_ADDR = 0x0;
-			break;
+			case RANGE_OFF:
+				uart_write(uart_device, off, 1);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
 
-		case RANGE_POLL:
-			range = readRF();
-			for(int i = 0; i < 5; ++i){
-				MAILBOX_DATA(i) = (char) range[i];
+			case RANGE_POLL:
+				range = readRF();
+				for(int i = 0; i < 5; ++i){
+					MAILBOX_DATA(i) = (char) range[i];
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			default:
+				MAILBOX_CMD_ADDR = 0x0; // reset command
+				break;
 			}
-			MAILBOX_CMD_ADDR = 0x0;
-			break;
-
-		case RANGE_NOTHING:
-			MAILBOX_DATA(0) = 100;
-			MAILBOX_CMD_ADDR = 0x0;
-			break;
-
-        default:
-            MAILBOX_CMD_ADDR = 0x0; // reset command
-            break;
-        }
     }
     return 0;
 }

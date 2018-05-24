@@ -27,7 +27,7 @@ static XSysMon SysMonInst;
 XSysMon_Config *SysMonConfigPtr;
 XSysMon *SysMonInstPtr = &SysMonInst;
 
-unsigned int mask = 0x1; //mask off rest of bits
+unsigned int mask = 0x3; //mask off rest of bits
 int button_press(gpio device){
 	int data_int = gpio_read(device);
 	return data_int & mask;
@@ -114,13 +114,13 @@ int main(void)
      * Configure A0-A5 as GPIO, D0-D9 as GPIO
      * set the direction for all signals of channel 1 to be output
      */
-//    gpio_device_1 = gpio_open_device(0);
-    gpio_device_2 = gpio_open_device(0);
-//    gpio_device_1 = gpio_configure(gpio_device_1, 0, 0, 1);
-//    gpio_set_direction(gpio_device_1, 1);
+    gpio_device_1 = gpio_open_device(0);
+//    gpio_device_2 = gpio_open_device(0);
+    gpio_device_1 = gpio_configure(gpio_device_1, 2, 3, 1);
+    gpio_set_direction(gpio_device_1, 1);
 
-    gpio_device_2 = gpio_configure(gpio_device_2, 0, 2, 1);
-    gpio_set_direction(gpio_device_2, 1);
+//    gpio_device_2 = gpio_configure(gpio_device_2, 0, 2, 1);
+//    gpio_set_direction(gpio_device_2, 1);
 
     Xil_Out32(XPAR_IOP_ARDUINO_INTR_BASEADDR+4,0x0);
     Xil_Out32(XPAR_IOP_ARDUINO_INTR_BASEADDR,0x0);
@@ -139,12 +139,12 @@ int main(void)
                 break;
 
             case READ:
-            	MAILBOX_DATA(0) = button_press(gpio_device_2);
+            	MAILBOX_DATA(0) = button_press(gpio_device_1);
             	MAILBOX_CMD_ADDR = 0x0;
             	break;
 
             case ROTARY:
-            	MAILBOX_DATA(0) = rotary_enc(gpio_device_2);
+            	MAILBOX_DATA(0) = rotary_enc(gpio_device_1);
             	MAILBOX_CMD_ADDR = 0x0;
             	break;
 

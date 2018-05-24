@@ -56,7 +56,7 @@
 #include "i2c.h"
 
 
-// Mailbox commands
+// Mailbox commandsd 
 // bit 1 always needs to be sets
 #define CONFIG_IOP_SWITCH      0x1
 #define START_WAVEFORM         0x2
@@ -132,16 +132,16 @@ void auto_calibrate_hapt()
     u8 temp = 0x00;
 
     /*set rated voltage*/
-    write_hapt(RATED_VOLTAGE_Reg, 0x50);
+    write_hapt(RATED_VOLTAGE_Reg, 0xEA); //previously 0x50
 
     /*set overdrive voltage*/
-    write_hapt(OD_CLAMP_Reg, 0x89);
+    write_hapt(OD_CLAMP_Reg, 0xEA); //previously 0x89
 
     /*Setup feedback and control*/
-    write_hapt(FB_CON_Reg,0xB6);
+    write_hapt(FB_CON_Reg,0x3D);
     write_hapt(CONTRL1_Reg,0x93);
     write_hapt(CONTRL2_Reg,0xF5);
-    write_hapt(CONTRL3_Reg,0x80);
+    write_hapt(CONTRL3_Reg,0xA0);
 
     /*Set autocalibration mode*/
     write_hapt(MODE_Reg,0x07);
@@ -183,7 +183,7 @@ int main(void)
     int i;
     u8 waveforms[8];
 
-    device = i2c_open_device(0);
+    device = i2c_open_device(XPAR_XIICPS_0_DEVICE_ID);
 
     // Run application
     while(1){

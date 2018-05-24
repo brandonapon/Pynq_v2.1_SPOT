@@ -1,2 +1,7 @@
 1526975910098	Delete 2 resources
 1526975918338	Delete 2 resources
+1527061882253	Delete resource 'arduino_button/src/bmp.h'
+1527063560416	Delete resource 'arduino_tx/arduino_tx.c'
+1527063597319	Delete resource 'arduino_tx/src/arduino_tx.c'
+1527063691500	Delete resource 'arduino_tx/Debug/src/arduino_tx.o'
+1527063730072	Delete resource 'arduino_tx'
