@@ -58,8 +58,8 @@ uart uart_open(unsigned int tx, unsigned int rx){
 #endif
 
 
-void uart_read(uart dev_id, char* read_data, unsigned int length){
-    XUartLite_Recv(&xuart[dev_id], read_data, length);
+unsigned int uart_read(uart dev_id, char* read_data, unsigned int length){
+    return XUartLite_Recv(&xuart[dev_id], read_data, length);
 }
 
 

@@ -9,6 +9,9 @@ LD_SRCS += \
 C_SRCS += \
 ../src/Adafruit_BNO055.c \
 ../src/arduino_rangefinder.c \
+../src/arduino_tx.c \
+../src/display_cam.c \
+../src/gpio.c \
 ../src/gps_module.c \
 ../src/haptic_module.c \
 ../src/i2c.c \
@@ -20,6 +23,9 @@ C_SRCS += \
 OBJS += \
 ./src/Adafruit_BNO055.o \
 ./src/arduino_rangefinder.o \
+./src/arduino_tx.o \
+./src/display_cam.o \
+./src/gpio.o \
 ./src/gps_module.o \
 ./src/haptic_module.o \
 ./src/i2c.o \
@@ -31,6 +37,9 @@ OBJS += \
 C_DEPS += \
 ./src/Adafruit_BNO055.d \
 ./src/arduino_rangefinder.d \
+./src/arduino_tx.d \
+./src/display_cam.d \
+./src/gpio.d \
 ./src/gps_module.d \
 ./src/haptic_module.d \
 ./src/i2c.d \

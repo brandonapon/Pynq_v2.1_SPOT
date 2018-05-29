@@ -4,7 +4,6 @@
 char on[1] = {1};
 char off[1] = {0};
 
-void readByte(char* byte);
 char* readRF();
 
 

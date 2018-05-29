@@ -75,7 +75,6 @@
 #define DEVICE					0x6
 
 #define RX						41
-#define TX						40
 
 uart uart_device;
 
@@ -97,8 +96,8 @@ void readByte(char* byte){
 	}
 }
 
-char output[5] = {};
-void readRF(){
+char* readRF(char* output){
+//	char output[5] = {};
 	char range[1] = {42};
 	int num_read = 0;
 	int counter = 0;
@@ -117,6 +116,7 @@ void readRF(){
 			}
 		}
 	}
+	return output;
 }
 
 int main()
@@ -136,6 +136,7 @@ int main()
    }
 
    char* range;
+   char output[5] = {42};
 
    // Run application
    while(1){
@@ -164,17 +165,12 @@ int main()
 				break;
 
 			case POLL:
-				readRF();
+				readRF(output);
 				for(int i = 0; i < 5; ++i){
 					MAILBOX_DATA(i) = (char) output[i];
 					output[i] = 0;
 				}
 
-				MAILBOX_CMD_ADDR = 0x0;
-				break;
-
-			case NOTHING:
-				MAILBOX_DATA(0) = 100;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 

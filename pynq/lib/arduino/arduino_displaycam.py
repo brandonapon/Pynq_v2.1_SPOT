@@ -182,11 +182,12 @@ class Arduino_Displaycam(object):
 
 
     def drawUpperButton(self):
+        color = 0x01c0
         self.microblaze.write_mailbox(0, 600)
         self.microblaze.write_mailbox(4, 50)
         self.microblaze.write_mailbox(8, 150)
         self.microblaze.write_mailbox(12, 100)
-        self.microblaze.write_mailbox(16, 0x001f)
+        self.microblaze.write_mailbox(16, color)
         self.microblaze.write_mailbox(20, 0) #unfilled
         self.microblaze.write_blocking_command(RECTANGLE)
 
@@ -198,7 +199,7 @@ class Arduino_Displaycam(object):
         self.microblaze.write_mailbox(12, 150)
         self.microblaze.write_mailbox(16, 800)
         self.microblaze.write_mailbox(20, 100)
-        self.microblaze.write_mailbox(24, 0x001f)
+        self.microblaze.write_mailbox(24, color)
         self.microblaze.write_mailbox(28, 0) #unfilled
         self.microblaze.write_blocking_command(TRIANGLE)
 
@@ -215,11 +216,12 @@ class Arduino_Displaycam(object):
 
 
     def drawLowerButton(self):
+        color = 0x01c0
         self.microblaze.write_mailbox(0, 600) # x coordinate of top left corner
         self.microblaze.write_mailbox(4, 330) # y coordinate of top left corner
         self.microblaze.write_mailbox(8, 150) # width
         self.microblaze.write_mailbox(12, 100) # height
-        self.microblaze.write_mailbox(16, 0x001f) # color
+        self.microblaze.write_mailbox(16, color) # color
         self.microblaze.write_mailbox(20, 0) #unfilled (1 is filled)
         self.microblaze.write_blocking_command(RECTANGLE)
 
@@ -231,7 +233,7 @@ class Arduino_Displaycam(object):
         self.microblaze.write_mailbox(12, 430)
         self.microblaze.write_mailbox(16, 800)
         self.microblaze.write_mailbox(20, 380)
-        self.microblaze.write_mailbox(24, 0x001f)
+        self.microblaze.write_mailbox(24, color)
         self.microblaze.write_mailbox(28, 0) #unfilled
         self.microblaze.write_blocking_command(TRIANGLE)
 
@@ -248,11 +250,12 @@ class Arduino_Displaycam(object):
 
 
     def drawMarkArrow(self):
+        color = 0x01c0
         self.microblaze.write_mailbox(0, 100) # x coordinate top left
         self.microblaze.write_mailbox(4, 200) # y coordinate top left
         self.microblaze.write_mailbox(8, 300) # width
         self.microblaze.write_mailbox(12, 80) # length
-        self.microblaze.write_mailbox(16, 0x07FF)
+        self.microblaze.write_mailbox(16, color)
         self.microblaze.write_mailbox(20, 1) # filled
         self.microblaze.write_blocking_command(RECTANGLE)
 
@@ -264,7 +267,7 @@ class Arduino_Displaycam(object):
         self.microblaze.write_mailbox(12, 150) # point 2 y
         self.microblaze.write_mailbox(16, 550) # point 3 x
         self.microblaze.write_mailbox(20, 240) # point 3 y
-        self.microblaze.write_mailbox(24, 0x7FF)
+        self.microblaze.write_mailbox(24, color)
         self.microblaze.write_mailbox(28, 1)
         self.microblaze.write_blocking_command(TRIANGLE)
 
@@ -292,7 +295,7 @@ class Arduino_Displaycam(object):
         self.write_MARK(655, 365)
 
     # Main->View
-    def drawViewScreen(self):
+    def drawViewScreen(self): #unnecessary to redraw background for VIEW
         self.drawRadar()
         self.drawUpperButton()
         self.drawLowerButton()
@@ -308,7 +311,7 @@ class Arduino_Displaycam(object):
         self.write_TAG(100, 290)
         self.write_DISTANCE(100, 340)
         self.write_CB(100, 390)
-        self.write_HOME(655, 86)
+        # self.write_HOME(655, 86)
         self.write_GOBACK(635, 365)
 
     # Main->Mark
@@ -333,7 +336,7 @@ class Arduino_Displaycam(object):
         self.write_CONFIRM(635, 365)
 
     # Alert (Interest)
-    def drawAlertInterest(self):
+    def drawAlertInterest(self): 
         self.write_ALERT(240, 85)
         self.write_POINEAR(100, 120)
         self.write_DISTANCE(150, 250)
@@ -395,7 +398,7 @@ class Arduino_Displaycam(object):
     def write_CANCEL(self, x, y):
         self.textMode()
         self.fontSize(2)
-        self.transparentBackground(0xf700)
+        self.transparentBackground(0xffff)
         self.textCursor(x, y)
         self.writeText(1)
         self.graphicsMode()
@@ -403,7 +406,7 @@ class Arduino_Displaycam(object):
     def write_MARK(self, x, y):
         self.textMode()
         self.fontSize(2)
-        self.transparentBackground(0xf700)
+        self.transparentBackground(0xffff)
         self.textCursor(x, y)
         self.writeText(2)
         self.graphicsMode()
@@ -411,7 +414,7 @@ class Arduino_Displaycam(object):
     def write_VIEW(self, x, y):
         self.textMode()
         self.fontSize(2)
-        self.transparentBackground(0xf700)
+        self.transparentBackground(0xffff)
         self.textCursor(x, y)
         self.writeText(3)
         self.graphicsMode()
@@ -419,29 +422,37 @@ class Arduino_Displaycam(object):
     def write_SELECT(self, x, y):
         self.textMode()
         self.fontSize(2)
-        self.transparentBackground(0xf700)
+        self.transparentBackground(0xffff)
         self.textCursor(x, y)
         self.writeText(4)
         self.graphicsMode()
 
     def write_COMPASS(self):
         self.textMode()
-        self.fontSize(2)
-        self.transparentBackground(0xf700)
+        self.transparentBackground(0x01c0)
+        self.fontSize(1)
         self.textCursor(256, 0)
-        self.writeText(7)
-        self.textCursor(486, 225)
-        self.writeText(5)
+        self.writeText(7) #N
+        self.textCursor(481, 225)
+        self.writeText(5) #E
         self.textCursor(256, 445)
-        self.writeText(8)
-        self.textCursor(30, 225)
-        self.writeText(6)
+        self.writeText(8) #S
+        self.textCursor(35, 225)
+        self.writeText(6) #W
+        self.transparentBackground(0xffff)
+        self.fontSize(0)
+        self.textCursor(296, 260)
+        self.writeText(21) #10M
+        self.textCursor(346, 310)
+        self.writeText(22) #20M
+        self.textCursor(396, 360)
+        self.writeText(23) #30M
         self.graphicsMode()
 
     def write_HOME(self, x, y):
         self.textMode()
         self.fontSize(2)
-        self.transparentBackground(0xf700)
+        self.transparentBackground(0xffff)
         self.textCursor(x, y)
         self.writeText(9)
         self.graphicsMode()
@@ -449,7 +460,7 @@ class Arduino_Displaycam(object):
     def write_GOBACK(self, x, y):
         self.textMode()
         self.fontSize(2)
-        self.transparentBackground(0xf700)
+        self.transparentBackground(0xffff)
         self.textCursor(x, y)
         self.writeText(10)
         self.graphicsMode()
@@ -580,12 +591,14 @@ class Arduino_Displaycam(object):
         buf0 = self.buf_manager.cma_alloc(stream_size, data_type="uint8_t")
         buf1 = self.buf_manager.cma_get_buffer(buf0, stream_size)
         phy_addr = self.buf_manager.cma_get_phy_addr(buf0)
+
+        buf2 = self.buf_manager.cma_alloc(stream_size, data_type="uint8_t")
+        buf3 = self.buf_manager.cma_get_buffer(buf2, stream_size)
+        draw_addr = self.buf_manager.cma_get_phy_addr(buf2)
+
         self.microblaze.write_mailbox(0, phy_addr)
-        self.microblaze.write_blocking_command(CAMERA1) 
-        self.microblaze.write_mailbox(0, x_start)
-        self.microblaze.write_mailbox(4, y_start)
-        self.microblaze.write_mailbox(8, phy_addr)
-        self.microblaze.write_blocking_command(CAMERA2)
+        self.microblaze.write_mailbox(4, draw_addr)
+        self.microblaze.write_blocking_command(CAMERA1)
 
     def drawRect(self, x_start, y_start, x_size, y_size, color, fill):
         self.microblaze.write_mailbox(0, x_start)
@@ -647,3 +660,4 @@ class Arduino_Displaycam(object):
 
     def drawPoint(self, x, y, size, color):
         self.drawCircle(x, y, size, color, 1)
+

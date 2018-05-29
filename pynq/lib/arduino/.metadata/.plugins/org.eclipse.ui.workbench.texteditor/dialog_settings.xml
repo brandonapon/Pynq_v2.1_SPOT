@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="NUM_BYTES" key="selection"/>
+		<item value="messageToSend" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="NUM_BYTES"/>
-			<item value="NUM_SAMPLES"/>
-			<item value="READ_IS_PLAYING"/>
-			<item value="i2c"/>
-			<item value="writePayload"/>
-			<item value="interrupt"/>
-			<item value="flush"/>
-			<item value="RA8875_MWCR1"/>
+			<item value="messageToSEnd"/>
+			<item value="MAX_SEND_LEN"/>
+			<item value="camera"/>
+			<item value="picAddr"/>
+			<item value="gpio_device"/>
+			<item value="transceiver"/>
+			<item value="spi_device"/>
+			<item value="gpio"/>
 		</list>
 		<list key="replacehistory">
+			<item value="transceiver"/>
 			<item value="writeReg"/>
 			<item value="Write"/>
 		</list>
@@ -25,8 +26,8 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="391" key="DIALOG_HEIGHT"/>
-		<item value="1092" key="DIALOG_X_ORIGIN"/>
-		<item value="202" key="DIALOG_Y_ORIGIN"/>
+		<item value="474" key="DIALOG_HEIGHT"/>
+		<item value="1061" key="DIALOG_X_ORIGIN"/>
+		<item value="135" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

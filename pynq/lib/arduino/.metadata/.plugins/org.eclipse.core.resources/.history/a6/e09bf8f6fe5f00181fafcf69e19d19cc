@@ -1,0 +1,814 @@
+#include "circular_buffer.h"
+#include "timer.h"
+#include "i2c.h"
+#include <string.h>
+#include "spi_v2.h"
+
+#include "Adafruit_BNO055.h"
+#include "gps_module.h"
+#include "haptic_module.h"
+#include "arduino_rangefinder.h"
+#include "uart_v2.h"
+#include "display_cam.h"
+#include "gpio.h"
+
+#include "arduino_tx.h"
+
+//GPS REGISTERS
+#define DATA_REG				0xFF
+
+/*
+ * COMMAND VALUES
+ */
+#define CONFIG_IOP_SWITCH       0x1
+//HAPTIC COMMANDS
+#define START_WAVEFORM          0x1000
+#define STOP_WAVEFORM           0x1001
+#define READ_IS_PLAYING         0x1002
+
+//IMU COMMANDS
+#define GET_ACCL_DATA           0x2000
+#define GET_GYRO_DATA           0x2001
+#define GET_COMPASS_DATA        0x2002
+#define GET_EULER_VECTOR		0x2003
+#define GET_TEMPERATURE         0x2004
+#define RESET                   0x2005
+
+//GPS COMMANDS
+#define GPS_READ				0x3000
+
+//RANGEFINDER COMMANDS
+#define RANGE_ON				0x4000
+#define RANGE_OFF				0x4001
+#define RANGE_POLL 				0x4002
+#define RANGE_DEVICE			0x4003
+
+//CAMERA COMMANDS
+#define CAMERA					0x5000
+
+//DISPLAY COMMANDS
+#define INIT				    0x6000
+#define DRAW 					0x6001
+#define DISPLAY					0x6002
+#define GPIO					0x6003
+#define PWM						0x6004
+#define FILL 					0x6005
+#define FILL_COLOR				0x6006
+#define EIGHT					0x6007
+#define RECTANGLE				0x6008
+#define CIRCLE					0x6009
+#define	TRIANGLE				0x600a
+#define ELLIPSE					0x600b
+#define CURVE					0x600c
+#define DRAWLINE				0x600d
+#define FONT 					0x600e
+#define TEXTMODE				0x600f
+#define GRAPHICSMODE			0x6010
+#define LAYER					0x6011
+#define LAYERTRANS 				0x6012
+#define FONT_SIZE 				0X6013
+#define TEXT_TRANSPARENT		0x6014
+#define BACKGROUND_COLOR		0x6015
+#define TEXT_CURSOR				0x6016
+#define TEXT_WRITE				0x6017
+#define LAYER_MODE				0x6018
+#define LAYER_EFFECT			0x6019
+#define CLEAR_WINDOW			0x601a
+#define CLEAR_MEM				0x601b
+//TRANSCEIVER COMMANDS
+#define READ_FROM				0x7001
+#define WRITE_TO				0x7002
+#define HAS_MESSAGES			0x7003
+#define GET_SETUP				0x7004
+#define READ_REG				0x7005
+#define DEVICE					0x7006
+#define BEGIN_TX				0x7009
+#define WRITE_CAMERA			0x7010
+
+//TRANSCEIVER DEFINES
+#define MAX_NODES 		6
+#define PACKET_CNTER 	32
+#define BASE_ADDRESS 	0xDEADBEEF00
+#define TIMEOUT 		5
+#define DELAY_TIME		450
+#define MESSAGE_LEN		153600
+#define MAX_SEND_LEN	29
+
+#define RX						0
+#define TX						1
+
+#define RF_RX					41
+
+
+uart uart_device;
+static i2c device;
+spi spi_device;
+uart camera;
+gpio gpio_device;
+
+int main(void)
+{
+    u32 cmd;
+
+    //Haptic variables
+    int i;
+    u8 waveforms[8];
+
+    //GPS variables
+    char gpsOutput[1024];
+
+    //IMU variables
+    uint8_t id;
+    uint8_t data = 0x20;
+    uint8_t zeros = 0;
+    uint8_t powerMode = POWER_MODE_NORMAL;
+
+    //RANGEFINDER variables
+    char output[5] = {42};
+
+    init_io_switch();
+   //RANGEFINDER UART INIT
+    int status_RF = 0;
+	uart_device = uart_open_device(XPAR_UARTLITE_0_DEVICE_ID);
+	if(uart_device == -1){
+		status_RF = -1;
+	}
+	else{
+		status_RF = uart_device;
+	}
+
+	//CAMERA INIT
+	camera = uart_open(TX, RX);
+
+	//DISPLAY INIT
+	spi_device = spi_open_device(XPAR_SPI_0_DEVICE_ID);
+	spi_device = spi_configure(spi_device, 1, 1);
+//    gpio_device = gpio_open_device(0);
+//    gpio_device = gpio_configure(gpio_device, 2, 9, 1);
+//    gpio_set_direction(gpio_device, 0);
+
+	//DISPLAY VARIABLES
+	uint8_t writeBuffer[2], readBuffer[2];
+
+	int16_t x0 = 0;
+	int16_t y0 = 0;
+	int16_t x1 = 0;
+	int16_t y1 = 0;
+	int16_t x2 = 0;
+	int16_t y2 = 0;
+
+	int16_t x_pixel = 0;
+	int16_t y_pixel = 0;
+	int16_t x_start = 0;
+	int16_t y_start = 0;
+	uint16_t color_pixel = 0;
+	uint16_t color = 0;
+	uint16_t pixel = 0;
+	uint8_t *image;
+	int16_t x_size;
+	int16_t y_size;
+	uint8_t curve;
+	uint8_t layer0 = 0;
+	uint8_t layer1 = 0;
+	int fill = 0;
+	int index = 0;
+	char* textBuffer = "Hey guys hwhats up?";
+	char* text;
+	uint16_t text_length = 0;
+
+	uint16_t text_val = 0;
+
+	uint8_t* picAddr;
+	uint8_t* drawAddr;
+	int read_count = 0;
+	int pixel_count = 0;
+	int stream_size = 153600;
+	int num_read = 0;
+	char stream_in[10] = {};
+	uint8_t pixel8bit;
+	int scale;
+	uint16_t foreground_color;
+	uint16_t background_color;
+
+	char write_snap_cmd[1] = {1};
+
+	/* TX VARIABLES*/
+	u8 messageLength;
+	u8 sendToAddress;
+	u8 messageToSend[32];
+	u8 returnMessage[32];
+	bool readSuccess;
+	u8 registerValue;
+	u8 registerAll[33];
+	u8* whatWrite;
+	u8* cameraArray;
+	u16 numberOfMessages;
+	u8 numberToRead;
+	u8 counter;
+	u8 mailboxCounter;
+	u16 CAMERA_ADDR = 0;
+
+    device = i2c_open_device(XPAR_IIC_0_DEVICE_ID);
+
+      bno_init();
+
+    id = bno_readByte(BNO055_CHIP_ID_ADDR);
+        if(id != BNO055_ID)
+        { 
+            delay_ms(1000); // hold on for boot
+            id = bno_readByte(BNO055_CHIP_ID_ADDR);
+            if(id != BNO055_ID) {
+            return false;  // still not? ok bail
+        }
+    }
+
+    setMode(OPERATION_MODE_CONFIG);
+
+    iic_writeByte(_address,BNO055_SYS_TRIGGER_ADDR, &data);
+    while (id != BNO055_ID)
+    {
+        delay_ms(10);
+        id = bno_readByte(BNO055_CHIP_ID_ADDR);
+    }
+    delay_ms(50);
+
+    iic_writeByte(_address, BNO055_PWR_MODE_ADDR, &powerMode);
+    delay_ms(10);
+
+    iic_writeByte(_address, BNO055_PAGE_ID_ADDR, &zeros);
+
+    iic_writeByte(_address, BNO055_SYS_TRIGGER_ADDR, 0x0);
+    delay_ms(10);
+
+    setMode(OPERATION_MODE_NDOF);
+    delay_ms(20);
+
+    delay_ms(1000);
+
+    setExtCrystalUse(true);
+
+    // Run application
+    while(1){
+        // wait and store valid command
+        while((MAILBOX_CMD_ADDR)==0);
+
+        cmd = MAILBOX_CMD_ADDR;
+
+        switch(cmd){
+			case CONFIG_IOP_SWITCH:
+				// use dedicated I2C - no operation needed
+				bno_init();
+				auto_calibrate_hapt();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+			case START_WAVEFORM:
+				// read waveforms from mailbox
+				for(i=0; i<8; i++)
+					waveforms[i] = MAILBOX_DATA(i) & 0xff;
+				play_hapt(waveforms);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+			case STOP_WAVEFORM:
+				stop_hapt();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+			case READ_IS_PLAYING:
+				MAILBOX_DATA(0) = is_playing_hapt();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+			case GPS_READ:
+				while(1) {
+					char readBit = read_gps(DATA_REG, device);
+					int intBit = readBit - '0';
+					appendToCharArray(gpsOutput, readBit);
+					MAILBOX_DATA(0) = intBit;
+					if(intBit == '255') {
+						MAILBOX_DATA(2) = 1;
+						break;
+					}
+					else if(readBit == '\n') {
+						MAILBOX_DATA(2) = 2;
+						if(getBitPosition(gpsOutput, 5) == 'L') {
+							MAILBOX_DATA(3) = 1;
+							for(int i = 0; i < strlen(gpsOutput); i++) {
+								MAILBOX_DATA(i) = getBitPosition(gpsOutput, i);
+							}
+							break;
+						}
+						else {
+							MAILBOX_DATA(3) = 2;
+							clearArray(gpsOutput);
+						}
+					}
+					MAILBOX_DATA(1) = readBit;
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case GET_ACCL_DATA:
+				getVector(VECTOR_ACCELEROMETER);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case GET_GYRO_DATA:
+				getVector(VECTOR_GYROSCOPE);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case GET_COMPASS_DATA:
+				getVector(VECTOR_MAGNETOMETER);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case GET_EULER_VECTOR:
+				getVector(VECTOR_EULER);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case GET_TEMPERATURE:
+				getTemp();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case RESET:
+			//            mpu_reset();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case RANGE_DEVICE:
+				MAILBOX_DATA(0) = status_RF;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case RANGE_ON:
+				uart_write(uart_device, on, 1);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case RANGE_OFF:
+				uart_write(uart_device, off, 1);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case RANGE_POLL:
+				readRF(output);
+				for(int i = 0; i < 5; ++i){
+					MAILBOX_DATA(i) = (char) output[i];
+					output[i] = 0;
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case INIT:
+				initialize();
+				MAILBOX_DATA(0) = 1;
+				// Assign default pin configurations - no operations needed
+				displayOn(1);
+				MAILBOX_DATA(0) = 2;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case GPIO:
+				GPIOX(1);
+				MAILBOX_DATA(0) = 3;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case PWM:
+				PWM1config(1, RA8875_PWM_CLK_DIV1024); // PWM output for backlight
+				PWM1out(255);
+				MAILBOX_DATA(0) = spi_device;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case DRAW:
+				//Communicates SPI commands
+				x_pixel = MAILBOX_DATA(0);
+				y_pixel = MAILBOX_DATA(1);
+				color_pixel = (uint16_t)MAILBOX_DATA(2);
+				drawPixel(x_pixel, y_pixel, color_pixel);
+				//drawLine(1,1,750, 450, RA8875_CYAN);
+				MAILBOX_DATA(0) = color_pixel;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case FILL_COLOR:
+				color_pixel = (uint16_t) MAILBOX_DATA(0);
+				fillScreen(color_pixel);
+				MAILBOX_DATA(0) = color_pixel;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case EIGHT:
+				x_start = MAILBOX_DATA(0);
+				y_start = MAILBOX_DATA(1);
+				image = MAILBOX_DATA(2) | 0x20000000;
+				x_size = MAILBOX_DATA(3);
+				y_size = MAILBOX_DATA(4);
+				index = 0;
+				for(x_pixel = x_start; x_pixel < x_size; x_pixel++){
+					for(y_pixel = y_start; y_pixel < y_size; y_pixel++){
+						pixel = image[index];
+						drawPixel8bit(x_pixel, y_pixel, pixel);
+						index += 1;
+					}
+				}
+				index = 0;
+				MAILBOX_DATA(0) = image[0];
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case RECTANGLE:
+				x_start = MAILBOX_DATA(0);
+				y_start = MAILBOX_DATA(1);
+				x_size = MAILBOX_DATA(2);
+				y_size = MAILBOX_DATA(3);
+				color = MAILBOX_DATA(4);
+				fill = MAILBOX_DATA(5);
+				if(fill == 1){ //fill shape
+					fillRectangle(x_start, y_start, x_size, y_size, color);
+				}
+				else{
+					drawRectangle(x_start, y_start, x_size, y_size, color);
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case CIRCLE:
+				x_start = MAILBOX_DATA(0);
+				y_start = MAILBOX_DATA(1);
+				x_size = MAILBOX_DATA(2); //actually radius
+				color = MAILBOX_DATA(3);
+				fill = MAILBOX_DATA(4);
+				if(fill){
+					fillCircle(x_start, y_start, x_size, color);
+				}
+				else{
+					drawCircle(x_start, y_start, x_size, color);
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case TRIANGLE:
+				x0 = MAILBOX_DATA(0);
+				y0 = MAILBOX_DATA(1);
+				x1 = MAILBOX_DATA(2);
+				y1 = MAILBOX_DATA(3);
+				x2 = MAILBOX_DATA(4);
+				y2 = MAILBOX_DATA(5);
+				color = MAILBOX_DATA(6);
+				fill = MAILBOX_DATA(7);
+				if(fill){
+					fillTriangle(x0, y0, x1, y1, x2, y2, color);
+				}
+				else{
+					drawTriangle(x0, y0, x1, y1, x2, y2, color);
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case ELLIPSE:
+				x0 = MAILBOX_DATA(0);
+				y0 = MAILBOX_DATA(1);
+				x_size = MAILBOX_DATA(2);
+				y_size = MAILBOX_DATA(3);
+				color = MAILBOX_DATA(4);
+				fill = MAILBOX_DATA(5);
+				if(fill){
+					fillEllipse(x0, y0, x_size, y_size, color);
+				}
+				else{
+					drawEllipse(x0, y0, x_size, y_size, color);
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case CURVE:
+				x0 = MAILBOX_DATA(0);
+				y0 = MAILBOX_DATA(1);
+				x_size = MAILBOX_DATA(2);
+				y_size = MAILBOX_DATA(3);
+				curve = MAILBOX_DATA(4);
+				color = MAILBOX_DATA(5);
+				fill = MAILBOX_DATA(6);
+				if(fill){
+					fillCurve(x0, y0, x_size, y_size, curve, color);
+				}
+				else{
+					drawCurve(x0, y0, x_size, y_size, curve, color);
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case DRAWLINE:
+				x0 = MAILBOX_DATA(0);
+				y0 = MAILBOX_DATA(1);
+				x1 = MAILBOX_DATA(2);
+				y1 = MAILBOX_DATA(3);
+				color = MAILBOX_DATA(4);
+				drawLine(x0, y0, x1, y1, color);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case FONT:
+				textSetCursor(240,0);
+				textColor(0x0000, 0xffff);
+				textWrite(textBuffer, 19);
+				textEnlarge(3);
+				textTransparent(0xffff);
+				textSetCursor(0,0);
+				textWrite(textBuffer, 19);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case TEXTMODE:
+				textMode();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case GRAPHICSMODE:
+				graphicsMode();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case LAYER_MODE:
+				layer0 = MAILBOX_DATA(0);
+				useLayers(layer0);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case LAYER:
+				layer0 = MAILBOX_DATA(0);
+				writeTo(layer0);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case LAYERTRANS:
+				layer0 = MAILBOX_DATA(0);
+				layer1 = MAILBOX_DATA(1);
+				layerTransparency(layer0, layer1);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case LAYER_EFFECT:
+				layer0 = MAILBOX_DATA(0);
+				layerEffect(layer0);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case CLEAR_WINDOW:
+				layer0 = MAILBOX_DATA(0);
+				clearActiveWindow(layer0);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case CLEAR_MEM:
+				layer0 = MAILBOX_DATA(0);
+				clearMemory(layer0);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case CAMERA:
+				//size of image - 153600 bytes
+				//capture image and save to DDR
+				picAddr = MAILBOX_DATA(0) | 0x20000000;
+				drawAddr = MAILBOX_DATA(1) | 0x20000000;
+				uart_write(camera, write_snap_cmd, 1);
+				read_count = 0;
+				pixel_count = 0;
+				index = 0;
+				while(read_count < stream_size){
+					num_read = uart_read(camera, stream_in, 1);
+					if(num_read == 1){
+						picAddr[read_count]= stream_in[0];
+						++read_count;
+						if(read_count % 3 == 0){ //
+							drawPixel8bit((pixel_count%320), (int)(pixel_count/320), drawAddr[pixel_count]);
+							++pixel_count;
+						}
+						else if(read_count % 3 == 1){
+							pixel8bit = (picAddr[index] & 0xE0) |  ((picAddr[index] & 0x07) << 2);
+						}
+						else{
+							drawAddr[pixel_count] = (pixel8bit | ((picAddr[index+1]) & 0x18) >> 3);
+							index += 2;
+						}
+					}
+				}
+				while((int)(pixel_count/320) < 240){
+					pixel8bit = ((picAddr[pixel_count*2] & 0xE0) |  ((picAddr[pixel_count*2] & 0x07) << 2) | (((picAddr[(pixel_count*2)+1]) & 0x18) >> 3));
+					drawPixel8bit((pixel_count%320), (int)(pixel_count/320), pixel8bit);
+					++pixel_count;
+				}
+				MAILBOX_DATA(0) = read_count;
+				MAILBOX_DATA(1) = pixel_count;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case FONT_SIZE:
+				scale = MAILBOX_DATA(0);
+				textEnlarge(scale);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case TEXT_TRANSPARENT:
+				foreground_color = MAILBOX_DATA(0);
+				textTransparent(foreground_color);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case BACKGROUND_COLOR:
+				foreground_color = MAILBOX_DATA(0);
+				background_color = MAILBOX_DATA(1);
+				textColor(foreground_color, background_color);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case TEXT_CURSOR:
+				x_pixel = MAILBOX_DATA(0);
+				y_pixel = MAILBOX_DATA(1);
+				textSetCursor(x_pixel, y_pixel);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case TEXT_WRITE:
+				text_val = MAILBOX_DATA(0);
+				if(text_val == 0) {
+					text = "ALERT!";
+					text_length = 6;
+				}
+				else if(text_val == 1) {
+					text = "CANCEL";
+					text_length = 6;
+				}
+				else if(text_val == 2) {
+					text = "MARK";
+					text_length = 4;
+				}
+				else if(text_val == 3) {
+					text = "VIEW";
+					text_length = 4;
+				}
+				else if(text_val == 4) {
+					text = "SELECT";
+					text_length = 6;
+				}
+				else if(text_val == 5) {
+					text = "E";
+					text_length = 1;
+				}
+				else if(text_val == 6) {
+					text = "W";
+					text_length = 1;
+				}
+				else if(text_val == 7) {
+					text = "N";
+					text_length = 1;
+				}
+				else if(text_val == 8) {
+					text = "S";
+					text_length = 1;
+				}
+				else if(text_val == 9) {
+					text = "HOME";
+					text_length = 4;
+				}
+				else if(text_val == 10) {
+					text = "GO BACK";
+					text_length = 7;
+				}
+				else if(text_val == 11) {
+					text = "Tag: ";
+					text_length = 5;
+				}
+				else if(text_val == 12) {
+					text = "Created By: ";
+					text_length = 12;
+				}
+				else if(text_val == 13) {
+					text = "Distance: ";
+					text_length = 10;
+				}
+				else if(text_val == 14) {
+					text = "OBJECT";
+					text_length = 6;
+				}
+				else if(text_val == 15) {
+					text = "CONFIRM";
+					text_length = 7;
+				}
+				else if(text_val == 16) {
+					text = "Direction: ";
+					text_length = 11;
+				}
+				else if(text_val == 17) {
+					text = "POINT TOWARDS";
+					text_length = 13;
+				}
+				else if(text_val == 18) {
+					text = "POINT OF INTEREST NEARBY";
+					text_length = 24;
+				}
+				else if(text_val == 19) {
+					text = "DANGER NEARBY";
+					text_length = 13;
+				}
+				else if(text_val == 20) {
+					text = "DISMISS";
+					text_length = 7;
+				}
+				else if(text_val == 21){
+					text = "10M";
+					text_length = 3;
+				}
+				else if(text_val == 22){
+					text = "20M";
+					text_length = 3;
+				}
+				else if(text_val == 23){
+					text = "30M";
+					text_length = 3;
+				}
+				else {
+					text = "DEFAULT";
+					text_length = 7;
+				}
+				textWrite(text, text_length);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case BEGIN_TX:
+				initTX(MAILBOX_DATA(0));
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case READ_REG:
+				registerValue = MAILBOX_DATA(0);
+				MAILBOX_DATA(0) = getRegister(registerValue);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case HAS_MESSAGES:
+				MAILBOX_DATA(0) = hasMessages();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case READ_FROM: // ONLY CALL AFTER HAS_MESSAGES
+				readMessage(registerAll); // ADD STRLEN
+				for(int i = 0; i < 33; ++i) {
+					MAILBOX_DATA(i) = registerAll[i];
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case WRITE_TO:
+				messageLength = MAILBOX_DATA(0);
+				sendToAddress = MAILBOX_DATA(1);
+				for(int i = 0; i < messageLength; ++i) {
+					messageToSend[i] = MAILBOX_DATA((i + 2));
+				}
+				readSuccess = writeMessage(sendToAddress, messageToSend, 30);
+				MAILBOX_DATA(0) = readSuccess;
+				for(int i = 0; i < messageLength; ++i) {
+					messageToSend[i] = 0;
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case DEVICE:
+				MAILBOX_DATA(0) = spi_device;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case WRITE_CAMERA:
+				sendToAddress = MAILBOX_DATA(0);
+				cameraArray = CAMERA_ADDR | 0x20000000;
+				numberOfMessages = ceil(MESSAGE_LEN / MAX_SEND_LEN);
+				mailboxCounter = 0;
+				for(int i = 0; i < numberOfMessages; ++i) {
+					if(MESSAGE_LEN >= ((i * 1) * MAX_SEND_LEN)) {
+						numberToRead = MAX_SEND_LEN;
+					}
+					else {
+						numberToRead = MESSAGE_LEN % MAX_SEND_LEN;
+					}
+					counter = 0;
+					for(int j = (i * MAX_SEND_LEN); j < ((i * MAX_SEND_LEN) + numberToRead); ++j) {
+						messageToSend[counter] = cameraArray[j];
+						++counter;
+					}
+					readSuccess = writeMessage(sendToAddress, messageToSend, 30);
+					MAILBOX_DATA(mailboxCounter * 4) = readSuccess;
+					++mailboxCounter;
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+
+			default:
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+        }
+    }
+    return 0;
+}

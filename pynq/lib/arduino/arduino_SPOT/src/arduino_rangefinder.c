@@ -62,101 +62,27 @@
 #include "xil_cache.h"
 #include "xsysmon.h"
 
-#define NUM_SAMPLES              100
-//#define BIT9600DELAY			104
-//#define HALFBIT9600DELAY		52
-#define NUM_BYTES			5
-
-#define RX						0
-#define TX						1
-
 uart uart_device;
 
-char range[5] = {42};
-
-// UART functions
-//uart uart_open_device(unsigned int device);
-//uart uart_open(unsigned int tx, unsigned int rx);
-//void uart_read(uart dev_id, char* read_data, unsigned int length);
-//void uart_write(uart dev_id, char* write_data, unsigned int length);
-//void uart_close(uart dev_id);
-//unsigned int uart_get_num_devices(void);
-
-void readByte(char* byte){
-	uart_read(uart_device, byte, 1);
+char* readRF(char* output){
+//	char output[5] = {};
+	char range[1] = {42};
+	int num_read = 0;
+	int counter = 0;
+	while (counter < 5){
+		num_read = uart_read(uart_device, range, 1);
+		if((counter == 0) && (num_read == 1)){
+			if(range[0] == 'R'){
+				output[counter] = range[0];
+				++counter;
+			}
+		}
+		if((num_read == 1) && (counter > 0)){
+			if(range[0] != 'R'){
+				output[counter] = range[0];
+				++counter;
+			}
+		}
+	}
+	return output;
 }
-
-char* readRF(void){
-//	while(1){
-//		readByte(&range[0]);
-//		if(range[0] == 'R'){
-//			int i = 0;
-//			while(i < 5){
-//				readByte(&range[++i]);
-//			}
-//			break;
-//		}
-//	}
-	uart_read(uart_device, range, 5);
-	return range;
-}
-
-//int main()
-//{
-//   int cmd;
-//
-//   //UART Init
-//   init_io_switch();
-//   uart_device = uart_open(TX, RX);
-//   int status = 0;
-////   uart_device = uart_open_device(0);
-//   if(uart_device == -1){
-//	   status = -1;
-//   }
-//
-//   // Run application
-//   while(1){
-//     // wait and store valid command
-//      while((MAILBOX_CMD_ADDR)==0);
-//      cmd = MAILBOX_CMD_ADDR;
-//
-//		switch(cmd){
-//			case CONFIG_IOP_SWITCH:
-//				MAILBOX_CMD_ADDR = 0x0;
-//				break;
-//
-//			case DEVICE:
-//				MAILBOX_DATA(0) = status;
-//				MAILBOX_CMD_ADDR = 0x0;
-//				break;
-//
-//			case ON:
-//				uart_write(uart_device, on, 1);
-//				MAILBOX_CMD_ADDR = 0x0;
-//				break;
-//
-//			case OFF:
-//				uart_write(uart_device, off, 1);
-//				MAILBOX_CMD_ADDR = 0x0;
-//				break;
-//
-//			case POLL:
-//				readRF();
-//				for(int i = 0; i < 10; ++i){
-//					MAILBOX_DATA(i) = (char) range[i];
-//				}
-//				MAILBOX_CMD_ADDR = 0x0;
-//				break;
-//
-//			case NOTHING:
-//				MAILBOX_DATA(0) = 100;
-//				MAILBOX_CMD_ADDR = 0x0;
-//				break;
-//
-//			default:
-//				MAILBOX_CMD_ADDR = 0x0;
-//				break;
-//		}
-//   }
-//   return 0;
-//}

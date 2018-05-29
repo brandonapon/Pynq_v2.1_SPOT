@@ -116,9 +116,10 @@ spi spi_configure(spi dev_id, unsigned int clk_phase,
 }
 
 
-void spi_transfer(spi dev_id, const char* write_data, char* read_data,
+void spi_transfer(spi dev_id, const uint8_t* write_data, uint8_t* read_data,
                   unsigned int length){
     unsigned int i;
+    unsigned int count;
     unsigned volatile char j;
     unsigned int base_address = xspi[dev_id].BaseAddr;
 
@@ -137,6 +138,38 @@ void spi_transfer(spi dev_id, const char* write_data, char* read_data,
     }
     XSpi_WriteReg(base_address, XSP_SSR_OFFSET, 0xff);
 }
+
+void spi_transfer_slow(spi dev_id, const uint8_t* write_data, uint8_t* read_data,
+                  unsigned int length){
+    unsigned int i;
+    unsigned int count;
+    unsigned volatile char j;
+    unsigned int base_address = xspi[dev_id].BaseAddr;
+
+    XSpi_WriteReg(base_address, XSP_SSR_OFFSET, 0xfe);
+//    for(i=0; i < 2; i++){
+//    	++count;
+//    }
+//    count = 0;
+    for (i=0; i<length; i++){
+        XSpi_WriteReg(base_address, XSP_DTR_OFFSET, write_data[i]);
+    }
+    while(((XSpi_ReadReg(base_address, XSP_SR_OFFSET) & 0x04)) != 0x04);
+
+    // delay for 10 clock cycles
+    j = 10;
+    while(j--);
+
+    for(i=0; i<length; i++){
+       read_data[i] = XSpi_ReadReg(base_address, XSP_DRR_OFFSET);
+    }
+    for(i=0; i < 15; i++){
+		++count;
+	}
+	count = 0;
+    XSpi_WriteReg(base_address, XSP_SSR_OFFSET, 0xff);
+}
+
 
 void spi_transfer_mod(spi dev_id, const char* write_data, char* read_data, unsigned int length_write, unsigned int length_read){
 	unsigned int i;

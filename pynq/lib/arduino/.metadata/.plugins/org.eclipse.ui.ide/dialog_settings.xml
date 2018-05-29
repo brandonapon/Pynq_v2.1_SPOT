@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="D:\github_repos\Vivado\Pynq_SPOT_Overlays\Custom\base.sdk"/>
+		<item value="D:\Pynq\Pynq_v2.1_SPOT\pynq\lib\arduino\arduino_gps"/>
 		<item value="D:\Pynq\Pynq_v2.1_SPOT\pynq\lib\arduino\arduino_grove_haptic_motor"/>
 		<item value="D:\Pynq\Pynq_v2.1_SPOT\pynq\lib\arduino\arduino_SPOT"/>
 		<item value="D:\Pynq\Pynq_v2.1_SPOT\pynq\lib\arduino\arduino_tx"/>

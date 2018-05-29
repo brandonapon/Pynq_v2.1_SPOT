@@ -1,0 +1,58 @@
+/*
+ * display_cam.h
+ *
+ *  Created on: May 24, 2018
+ *      Author: Brandon
+ */
+
+#ifndef SRC_DISPLAY_CAM_H_
+#define SRC_DISPLAY_CAM_H_
+
+void writeCommand(uint8_t cmd);
+void writeData(uint8_t d);
+void writeReg(uint8_t reg, uint8_t val);
+uint8_t readData(void);
+uint8_t readReg(uint8_t reg);
+int waitPoll(uint8_t regname, uint8_t waitflag);
+void PLLinit(void);
+void initialize(void);
+void displayOn(int on);
+void textMode(void);
+void graphicsMode(void);
+void textSetCursor(uint16_t x, uint16_t y);
+void textColor(uint16_t foreColor, uint16_t bgColor);
+void textTransparent(uint16_t foreColor);
+void textEnlarge(uint8_t scale);
+void textWrite(const char* buffer, uint16_t len);
+void clearActiveWindow(int full);
+void clearMemory(int stop);
+void layerEffect(int effect);
+void useLayers(int on);
+void writeTo(int layer);
+void layerTransparency(uint8_t layer1,uint8_t layer2);
+void drawPixel(int16_t x, int16_t y, uint16_t color);
+void drawPixel8bit(int16_t x, int16_t y, uint8_t color);
+void rectHelper(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color, int filled);
+void circleHelper(int16_t x0, int16_t y0, int16_t r, uint16_t color, int filled);
+void triangleHelper(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color, int filled);
+void ellipseHelper(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint16_t color, int filled);
+void curveHelper(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint8_t curvePart, uint16_t color, int filled);
+void drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color);
+void drawRectangle(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
+void fillRectangle(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
+void drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color);
+void fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color);
+void drawTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color);
+void fillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color);
+void drawEllipse(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint16_t color);
+void fillEllipse(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint16_t color);
+void drawCurve(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint8_t curvePart, uint16_t color);
+void fillCurve(int16_t xCenter, int16_t yCenter, int16_t longAxis, int16_t shortAxis, uint8_t curvePart, uint16_t color);
+void fillScreen(uint16_t color);
+void GPIOX(int on);
+void PWM1config(int on, uint8_t clock);
+void PWM2config(int on, uint8_t clock);
+void PWM1out(uint8_t p);
+void PWM2out(uint8_t p);
+
+#endif /* SRC_DISPLAY_CAM_H_ */

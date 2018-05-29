@@ -1229,7 +1229,7 @@ int main(void)
             case PWM:
             	PWM1config(1, RA8875_PWM_CLK_DIV1024); // PWM output for backlight
 				PWM1out(255);
-				MAILBOX_DATA(0) = uart_device;
+				MAILBOX_DATA(0) = spi_device;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
             case DRAW:
