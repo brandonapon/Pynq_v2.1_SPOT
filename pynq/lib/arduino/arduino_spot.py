@@ -1,4 +1,5 @@
 from math import ceil
+from statistics import median
 import asyncio
 import os
 import time
@@ -886,6 +887,39 @@ class Arduino_SPOT(object):
 		self.writeText(20)
 		self.graphicsMode()
 
+	def displayDistance(self, textDistance):
+		numBytes = len(str(textDistance))
+		self.microblaze.write_mailbox(0, textDistance)
+		self.microblaze.write_mailbox(4, numBytes)
+		self.textMode()
+		self.fontSize(2)
+		self.transparentBackground(0xf700)
+		self.textCursor(120, 360)
+		self.writeText(99)
+		self.graphicsMode()
+
+	def displayCreatedBy(self, textCreatedBy):
+		numBytes = len(str(textCreatedBy))
+		self.microblaze.write_mailbox(0, textCreatedBy)
+		self.microblaze.write_mailbox(4, numBytes)
+		self.textMode()
+		self.fontSize(2)
+		self.transparentBackground(0xf700)
+		self.textCursor(120, 410)
+		self.writeText(99)
+		self.graphicsMode()
+
+	def displayTag(self, textTag):
+		numBytes = len(str(textTag))
+		self.microblaze.write_mailbox(0, textTag)
+		self.microblaze.write_mailbox(4, numBytes)
+		self.textMode()
+		self.fontSize(2)
+		self.transparentBackground(0xf700)
+		self.textCursor(120, 310)
+		self.writeText(99)
+		self.graphicsMode()
+
 	def transparentBackground(self, font_color):
 		self.microblaze.write_mailbox(0, font_color)
 		self.microblaze.write_blocking_command(TEXT_TRANSPARENT)
@@ -928,12 +962,11 @@ class Arduino_SPOT(object):
 		self.microblaze.write_blocking_command(CLEAR_WINDOW)
 
 	def snapPic(self, x_start, y_start):
-		stream_size = 153600
-		buf2 = self.buf_manager.cma_alloc(stream_size, data_type="uint8_t")
-		buf3 = self.buf_manager.cma_get_buffer(buf2, stream_size)
-		draw_addr = self.buf_manager.cma_get_phy_addr(buf2)
+		# stream_size = 153600
+		# buf2 = self.buf_manager.cma_alloc(stream_size, data_type="uint8_t")
+		# buf3 = self.buf_manager.cma_get_buffer(buf2, stream_size)
+		# draw_addr = self.buf_manager.cma_get_phy_addr(self.buf565)
 		# self.microblaze.write_mailbox(0, phy_addr)
-		self.microblaze.write_mailbox(4, draw_addr)
 		self.microblaze.write_blocking_command(CAMERA)
 
 	def drawRect(self, x_start, y_start, x_size, y_size, color, fill):
@@ -989,15 +1022,18 @@ class Arduino_SPOT(object):
 		self.drawLine(x+size, y-size, x-size, y+size, color)
 		self.drawLine(x+size, y-size+1, x-size, y+size+1, color)
 		self.drawLine(x+size, y-size-1, x-size, y+size-1, color)
+		time.sleep(0.01)
 
 	def drawTrianglePoint(self, x, y, size, color): # Interest
 		self.drawTriangle(x-size, y+size, x+size, y+size, x, y-size, color, 1)
+		time.sleep(0.01)
 		# self.drawTriangle(x-size+1, y+size-1, x+size-1, y+size-1, x, y-size+1, color, 1)
 
 	def drawPoint(self, x, y, size, color): # Breadcrumbs
 		self.drawCircle(x, y, size, color, 1)
+		time.sleep(0.01)
 
-	def drawAlert(self, x, y, color):
+	def drawDanger(self, x, y, color):
 		self.layer(0)
 		time.sleep(delay)
 		self.draw2X(x, y, 15, color)
@@ -1084,8 +1120,14 @@ class Arduino_SPOT(object):
 		buf2 = self.buf_manager.cma_alloc(transceiver_size, data_type="uint8_t")
 		buf3 = self.buf_manager.cma_get_buffer(buf2, transceiver_size)
 		tx_addr = self.buf_manager.cma_get_phy_addr(buf2)
+
+		buf4 = self.buf_manager.cma_alloc(stream_size, data_type="uint8_t")
+		buf5 = self.buf_manager.cma_get_buffer(buf0, stream_size)
+		draw_addr = self.buf_manager.cma_get_phy_addr(buf4)
+
 		self.microblaze.write_mailbox(0, phy_addr)
-		self.microblaze.write_mailbox(4, tx_addr)
+		self.microblaze.write_mailbox(4, draw_addr)
+		self.microblaze.write_mailbox(8, tx_addr)
 		self.microblaze.write_blocking_command(IMAGE_ADDRESS)
 		self.buf565 = buf1
 		self.buf888 = buf3
@@ -1134,10 +1176,12 @@ class Arduino_SPOT(object):
 		time.sleep(delay)
 
 	def prepareToSend(self):
-		self.beginTX(1)
-		gpsVal = self.parseGPS(self.readFromGPS())
+		# self.beginTX(1)
+		gpsVal = None
+		# while(gpsVal == None):
+		# 	gpsVal = self.parseGPS(self.readFromGPS())
 		imuVal = self.parseIMU(self.get_euler())
-		rangeVal = self.parseRange(self.range_poll())
+		rangeVal = self.parseRange()
 		tag = "t,Big Rock!"
 		# self.writeToTX(4, gpsVal)
 		self.writeToTX(4, imuVal)
@@ -1155,8 +1199,19 @@ class Arduino_SPOT(object):
 			returnString += (str(x) + ",")
 		return "v," + returnString[0:-1]
 
-	def parseRange(self, val):
+	def parseRange(self):
+		return "r," + str(self.medianRange())
+
+	def parseRangeChr(self, val):
 		returnString = ""
 		for x in val:
-			returnString += (str(x))
-		return "r," + returnString[1:]
+			returnString += (chr(x))
+		return int(returnString[1:])
+
+	def medianRange(self):
+		count = 0
+		medianList = []
+		while(count < 20):
+			medianList.append(self.parseRangeChr(self.range_poll()))
+			count+=1
+		return median(medianList)

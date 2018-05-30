@@ -10,6 +10,9 @@
 #include "arduino_rangefinder.h"
 #include "uart_v2.h"
 #include "display_cam.h"
+#include "gpio.h"
+
+#include "arduino_tx.h"
 
 //GPS REGISTERS
 #define DATA_REG				0xFF
@@ -73,6 +76,26 @@
 #define CLEAR_WINDOW			0x601a
 #define CLEAR_MEM				0x601b
 //TRANSCEIVER COMMANDS
+#define READ_FROM				0x7001
+#define WRITE_TO				0x7002
+#define HAS_MESSAGES			0x7003
+#define GET_SETUP				0x7004
+#define READ_REG				0x7005
+#define DEVICE					0x7006
+#define BEGIN_TX				0x7009
+#define WRITE_CAMERA			0x7010
+
+//MISCELLANEOUS
+#define IMAGE_ADDRESS			0x8000
+
+//TRANSCEIVER DEFINES
+#define MAX_NODES 		6
+#define PACKET_CNTER 	32
+#define BASE_ADDRESS 	0xDEADBEEF00
+#define TIMEOUT 		5
+#define DELAY_TIME		450
+#define MESSAGE_LEN		230400
+#define MAX_SEND_LEN	28
 
 #define RX						0
 #define TX						1
@@ -83,7 +106,9 @@
 uart uart_device;
 static i2c device;
 spi spi_device;
+spi transceiver;
 uart camera;
+gpio gpio_device;
 
 int main(void)
 {
@@ -122,6 +147,19 @@ int main(void)
 	//DISPLAY INIT
 	spi_device = spi_open_device(XPAR_SPI_0_DEVICE_ID);
 	spi_device = spi_configure(spi_device, 1, 1);
+	setSPIDisplay(spi_device);
+//    gpio_device = gpio_open_device(0);
+//    gpio_device = gpio_configure(gpio_device, 2, 9, 1);
+//    gpio_set_direction(gpio_device, 0);
+
+	//TRANSCEIVER INIT
+	transceiver = spi_open(13, 12, 11, 10);
+	transceiver = spi_configure(transceiver, 0, 0);
+	setSPI(transceiver);
+
+	gpio_device = gpio_open_device(0);
+	gpio_device = gpio_configure(gpio_device, 2, 2, 1);
+	gpio_set_direction(gpio_device, 0);
 
 	//DISPLAY VARIABLES
 	uint8_t writeBuffer[2], readBuffer[2];
@@ -156,6 +194,7 @@ int main(void)
 
 	uint8_t* picAddr;
 	uint8_t* drawAddr;
+	uint8_t* txAddr;
 	int read_count = 0;
 	int pixel_count = 0;
 	int stream_size = 153600;
@@ -167,6 +206,22 @@ int main(void)
 	uint16_t background_color;
 
 	char write_snap_cmd[1] = {1};
+
+	/* TX VARIABLES*/
+	u8 messageLength;
+	u8 sendToAddress;
+	u8 messageToSend[32];
+	u8 returnMessage[32];
+	bool readSuccess;
+	u8 registerValue;
+	u8 registerAll[33];
+	u8* whatWrite;
+	u8* cameraArray;
+	u16 numberOfMessages;
+	u8 numberToRead;
+	u8 counter;
+	u8 mailboxCounter;
+	u16 CAMERA_ADDR = 0;
 
     device = i2c_open_device(XPAR_IIC_0_DEVICE_ID);
 
@@ -253,6 +308,7 @@ int main(void)
 							for(int i = 0; i < strlen(gpsOutput); i++) {
 								MAILBOX_DATA(i) = getBitPosition(gpsOutput, i);
 							}
+							clearArray(gpsOutput);
 							break;
 						}
 						else {
@@ -318,6 +374,7 @@ int main(void)
 				}
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case INIT:
 				initialize();
 				MAILBOX_DATA(0) = 1;
@@ -326,17 +383,20 @@ int main(void)
 				MAILBOX_DATA(0) = 2;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case GPIO:
 				GPIOX(1);
 				MAILBOX_DATA(0) = 3;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case PWM:
 				PWM1config(1, RA8875_PWM_CLK_DIV1024); // PWM output for backlight
 				PWM1out(255);
 				MAILBOX_DATA(0) = spi_device;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case DRAW:
 				//Communicates SPI commands
 				x_pixel = MAILBOX_DATA(0);
@@ -347,12 +407,14 @@ int main(void)
 				MAILBOX_DATA(0) = color_pixel;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case FILL_COLOR:
 				color_pixel = (uint16_t) MAILBOX_DATA(0);
 				fillScreen(color_pixel);
 				MAILBOX_DATA(0) = color_pixel;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case EIGHT:
 				x_start = MAILBOX_DATA(0);
 				y_start = MAILBOX_DATA(1);
@@ -371,6 +433,7 @@ int main(void)
 				MAILBOX_DATA(0) = image[0];
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case RECTANGLE:
 				x_start = MAILBOX_DATA(0);
 				y_start = MAILBOX_DATA(1);
@@ -386,6 +449,7 @@ int main(void)
 				}
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case CIRCLE:
 				x_start = MAILBOX_DATA(0);
 				y_start = MAILBOX_DATA(1);
@@ -400,6 +464,7 @@ int main(void)
 				}
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case TRIANGLE:
 				x0 = MAILBOX_DATA(0);
 				y0 = MAILBOX_DATA(1);
@@ -417,6 +482,7 @@ int main(void)
 				}
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case ELLIPSE:
 				x0 = MAILBOX_DATA(0);
 				y0 = MAILBOX_DATA(1);
@@ -432,6 +498,7 @@ int main(void)
 				}
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case CURVE:
 				x0 = MAILBOX_DATA(0);
 				y0 = MAILBOX_DATA(1);
@@ -448,6 +515,7 @@ int main(void)
 				}
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case DRAWLINE:
 				x0 = MAILBOX_DATA(0);
 				y0 = MAILBOX_DATA(1);
@@ -457,6 +525,7 @@ int main(void)
 				drawLine(x0, y0, x1, y1, color);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case FONT:
 				textSetCursor(240,0);
 				textColor(0x0000, 0xffff);
@@ -467,56 +536,65 @@ int main(void)
 				textWrite(textBuffer, 19);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case TEXTMODE:
 				textMode();
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case GRAPHICSMODE:
 				graphicsMode();
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case LAYER_MODE:
 				layer0 = MAILBOX_DATA(0);
 				useLayers(layer0);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case LAYER:
 				layer0 = MAILBOX_DATA(0);
 				writeTo(layer0);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case LAYERTRANS:
 				layer0 = MAILBOX_DATA(0);
 				layer1 = MAILBOX_DATA(1);
 				layerTransparency(layer0, layer1);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case LAYER_EFFECT:
 				layer0 = MAILBOX_DATA(0);
 				layerEffect(layer0);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case CLEAR_WINDOW:
 				layer0 = MAILBOX_DATA(0);
 				clearActiveWindow(layer0);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case CLEAR_MEM:
 				layer0 = MAILBOX_DATA(0);
 				clearMemory(layer0);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case CAMERA:
 				//size of image - 153600 bytes
 				//capture image and save to DDR
-				picAddr = MAILBOX_DATA(0) | 0x20000000;
-				drawAddr = MAILBOX_DATA(1) | 0x20000000;
+//				picAddr = MAILBOX_DATA(0) | 0x20000000;
+//				drawAddr = MAILBOX_DATA(1) | 0x20000000;
 				uart_write(camera, write_snap_cmd, 1);
 				read_count = 0;
 				pixel_count = 0;
 				index = 0;
 				while(read_count < stream_size){
-					num_read = uart_read(uart_device, stream_in, 1);
+					num_read = uart_read(camera, stream_in, 1);
 					if(num_read == 1){
 						picAddr[read_count]= stream_in[0];
 						++read_count;
@@ -542,28 +620,33 @@ int main(void)
 				MAILBOX_DATA(1) = pixel_count;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case FONT_SIZE:
 				scale = MAILBOX_DATA(0);
 				textEnlarge(scale);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case TEXT_TRANSPARENT:
 				foreground_color = MAILBOX_DATA(0);
 				textTransparent(foreground_color);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case BACKGROUND_COLOR:
 				foreground_color = MAILBOX_DATA(0);
 				background_color = MAILBOX_DATA(1);
 				textColor(foreground_color, background_color);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case TEXT_CURSOR:
 				x_pixel = MAILBOX_DATA(0);
 				y_pixel = MAILBOX_DATA(1);
 				textSetCursor(x_pixel, y_pixel);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
 			case TEXT_WRITE:
 				text_val = MAILBOX_DATA(0);
 				if(text_val == 0) {
@@ -669,6 +752,82 @@ int main(void)
 				textWrite(text, text_length);
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
+
+			case BEGIN_TX:
+				initTX(MAILBOX_DATA(0));
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case READ_REG:
+				registerValue = MAILBOX_DATA(0);
+				MAILBOX_DATA(0) = getRegister(registerValue);
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case HAS_MESSAGES:
+				MAILBOX_DATA(0) = hasMessages();
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case READ_FROM: // ONLY CALL AFTER HAS_MESSAGES
+				readMessage(registerAll); // ADD STRLEN
+				for(int i = 0; i < 33; ++i) {
+					MAILBOX_DATA(i) = registerAll[i];
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case WRITE_TO:
+				messageLength = MAILBOX_DATA(0);
+				sendToAddress = MAILBOX_DATA(1);
+				for(int i = 0; i < messageLength; ++i) {
+					messageToSend[i] = MAILBOX_DATA((i + 2));
+				}
+				readSuccess = writeMessage(sendToAddress, messageToSend, 30);
+				MAILBOX_DATA(0) = readSuccess;
+				for(int i = 0; i < messageLength; ++i) {
+					messageToSend[i] = 0;
+				}
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case DEVICE:
+				MAILBOX_DATA(0) = transceiver;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case WRITE_CAMERA:
+				sendToAddress = MAILBOX_DATA(0);
+				cameraArray = txAddr;
+				numberOfMessages = ceil((double)MESSAGE_LEN / (double)MAX_SEND_LEN);
+				mailboxCounter = 0;
+				for(int i = 0; i < numberOfMessages; ++i) {
+					if(MESSAGE_LEN >= ((i * 1) * MAX_SEND_LEN)) {
+						numberToRead = MAX_SEND_LEN;
+					}
+					else {
+						numberToRead = MESSAGE_LEN % MAX_SEND_LEN;
+					}
+					messageToSend[0] = (u8)'c';
+					counter = 1;
+					for(int j = (i * MAX_SEND_LEN); j < ((i * MAX_SEND_LEN) + numberToRead); ++j) {
+						messageToSend[counter] = cameraArray[j];
+						++counter;
+					}
+					readSuccess = writeMessage(sendToAddress, messageToSend, 30);
+					MAILBOX_DATA(mailboxCounter * 4) = readSuccess;
+					++mailboxCounter;
+				}
+				MAILBOX_DATA(0) = numberOfMessages;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
+			case IMAGE_ADDRESS:
+				picAddr = MAILBOX_DATA(0) | 0x20000000;
+				txAddr = MAILBOX_DATA(1) | 0x20000000;
+				MAILBOX_CMD_ADDR = 0x0;
+				break;
+
 			default:
 				MAILBOX_CMD_ADDR = 0x0;
 				break;

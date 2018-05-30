@@ -587,7 +587,8 @@ int main(void)
 			case CAMERA:
 				//size of image - 153600 bytes
 				//capture image and save to DDR
-				drawAddr = MAILBOX_DATA(1) | 0x20000000;
+//				picAddr = MAILBOX_DATA(0) | 0x20000000;
+//				drawAddr = MAILBOX_DATA(1) | 0x20000000;
 				uart_write(camera, write_snap_cmd, 1);
 				read_count = 0;
 				pixel_count = 0;
@@ -744,6 +745,10 @@ int main(void)
 					text = "30M";
 					text_length = 3;
 				}
+				else if(text_val == 99) {
+					text = MAILBOX_DATA(0);
+					text_length = MAILBOX_DATA(1);
+				}
 				else {
 					text = "DEFAULT";
 					text_length = 7;
@@ -823,7 +828,8 @@ int main(void)
 
 			case IMAGE_ADDRESS:
 				picAddr = MAILBOX_DATA(0) | 0x20000000;
-				txAddr = MAILBOX_DATA(1) | 0x20000000;
+				drawAddr = MAILBOX_DATA(1) | 0x20000000;
+				txAddr = MAILBOX_DATA(2) | 0x20000000;
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 

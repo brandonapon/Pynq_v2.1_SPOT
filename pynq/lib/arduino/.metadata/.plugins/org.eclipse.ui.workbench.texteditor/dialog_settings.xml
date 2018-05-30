@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="messageToSend" key="selection"/>
+		<item value="drawAddr" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="messageToSEnd"/>
-			<item value="MAX_SEND_LEN"/>
+			<item value="drawAddr"/>
+			<item value="image_address"/>
 			<item value="camera"/>
 			<item value="picAddr"/>
+			<item value="snap"/>
+			<item value="messageToSEnd"/>
+			<item value="MAX_SEND_LEN"/>
 			<item value="gpio_device"/>
-			<item value="transceiver"/>
-			<item value="spi_device"/>
-			<item value="gpio"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="transceiver"/>
 			<item value="writeReg"/>
 			<item value="Write"/>
