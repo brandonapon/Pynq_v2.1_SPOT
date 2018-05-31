@@ -589,7 +589,7 @@ class Arduino_SPOT(object):
 
 
 	def drawLoadPicScreen(self):
-		self.microblaze.write_mailbox(0, 0)
+		self.microblaze.write_mailbox(0, 32)
 		self.microblaze.write_mailbox(4, 0)
 		self.microblaze.write_mailbox(8, 320)
 		self.microblaze.write_mailbox(12, 240)
@@ -601,9 +601,9 @@ class Arduino_SPOT(object):
 
 	# Full UI's with graphics and text
 	def drawMainScreen(self):
-		self.layerMode(1)
-		self.layerEffect(2)
-		self.layer(0)
+		# self.layerMode(1)
+		# self.layerEffect(2)
+		self.layer(1)
 		time.sleep(delay)
 		self.drawRadar()
 		self.drawUpperButton()
@@ -614,9 +614,9 @@ class Arduino_SPOT(object):
 
 	# Main->View
 	def drawViewScreen(self):
-		self.layerMode(1)
-		self.layerEffect(2)
-		self.layer(0)
+		# self.layerMode(1)
+		# self.layerEffect(2)
+		self.layer(1)
 		time.sleep(delay)
 		self.drawRadar()
 		self.drawUpperButton()
@@ -626,14 +626,15 @@ class Arduino_SPOT(object):
 		self.write_SELECT(640, 365)
 
 	# Main->View->Select
-	def drawSelectView(self):
-		self.layerMode(1)
-		self.layerEffect(2)
-		self.layer(0)
+	def drawSelectView(self, type):
+		# self.layerMode(1)
+		# self.layerEffect(2)
+		self.layer(1)
 		time.sleep(delay)
 		self.drawLoadPicScreen()
 		self.drawUpperButton()
 		self.drawLowerButton()
+		self.write_TYPE()
 		self.write_TAG(100, 290)
 		self.write_DISTANCE(100, 340)
 		self.write_CB(100, 390)
@@ -642,9 +643,9 @@ class Arduino_SPOT(object):
 
 	# Main->Mark
 	def drawMarkScreen(self):
-		self.layerMode(1)
-		self.layerEffect(2)
-		self.layer(0)
+		# self.layerMode(1)
+		# self.layerEffect(2)
+		self.layer(1)
 		time.sleep(delay)
 		self.drawMarkArrow()
 		self.write_POINTTOWARDS(200, 85)
@@ -656,14 +657,15 @@ class Arduino_SPOT(object):
 
 	# Main->Mark->Mark
 	def drawAfterMark(self):
-		self.layerMode(1)
-		self.layerEffect(2)
-		self.layer(0)
+		# self.layerMode(1)
+		# self.layerEffect(2)
+		self.layer(1)
 		time.sleep(delay)
 		self.drawLoadPicScreen()
 		self.write_TAG(100, 310)
 		self.write_DISTANCE(100, 360)
 		self.write_CB(100, 410)
+		self.write_TYPE()
 		self.drawUpperButton()
 		self.drawLowerButton()
 		self.write_CANCEL(640, 86)
@@ -671,15 +673,16 @@ class Arduino_SPOT(object):
 
 	# Alert (Interest)
 	def drawAlertInterest(self):
-		self.layerMode(1)
-		self.layerEffect(2)
-		self.layer(0)
+		# self.layerMode(1)
+		# self.layerEffect(2)
+		self.layer(1)
 		time.sleep(delay)
 		self.write_ALERT(240, 85)
 		self.write_POINEAR(100, 120)
 		self.write_DISTANCE(150, 250)
 		self.write_DIRECTION(150, 300)
 		self.write_TAG(150, 350)
+		self.write_TYPE()
 		self.drawUpperButton()
 		self.drawLowerButton()
 		self.write_DISMISS(635, 86)
@@ -696,6 +699,7 @@ class Arduino_SPOT(object):
 		self.write_DISTANCE(150, 250)
 		self.write_DIRECTION(150, 300)
 		self.write_TAG(150, 350)
+		self.write_TYPE()
 		self.drawUpperButton()
 		self.drawLowerButton()
 		self.write_DISMISS(635, 86)
@@ -813,6 +817,22 @@ class Arduino_SPOT(object):
 		self.transparentBackground(0xf700)
 		self.textCursor(x, y)
 		self.writeText(11)
+		self.graphicsMode()
+
+	def write_TYPE(self):
+		self.textMode()
+		self.fontSize(2)
+		self.transparentBackground(0xf700)
+		self.textCursor(100, 265)
+		word = "Type: "
+		numBytes = len(word)
+		print('numBytes = ',numBytes)
+		self.microblaze.write_mailbox(4, numBytes)
+		for i in range(0, numBytes):
+			# self.microblaze.write_mailbox((i+1)*4, 0)
+			self.microblaze.write_mailbox((i+2)*4, ord(word[i]))
+		self.writeText(99)
+		print('c-side numBytes = ', self.microblaze.read_mailbox(0))
 		self.graphicsMode()
 
 	def write_CB(self, x, y):
@@ -967,6 +987,8 @@ class Arduino_SPOT(object):
 		# buf3 = self.buf_manager.cma_get_buffer(buf2, stream_size)
 		# draw_addr = self.buf_manager.cma_get_phy_addr(self.buf565)
 		# self.microblaze.write_mailbox(0, phy_addr)
+		self.microblaze.write_mailbox(0, x_start)
+		self.microblaze.write_mailbox(4, y_start)
 		self.microblaze.write_blocking_command(CAMERA)
 
 	def drawRect(self, x_start, y_start, x_size, y_size, color, fill):
@@ -1133,6 +1155,9 @@ class Arduino_SPOT(object):
 		self.buf888 = buf3
 		return buf1, buf3
 
+	'''
+	565 to 888
+	'''
 	def conversion(self):
 		counter = 0
 		for i in range(0,153600,2):
@@ -1182,7 +1207,7 @@ class Arduino_SPOT(object):
 		# 	gpsVal = self.parseGPS(self.readFromGPS())
 		imuVal = self.parseIMU(self.get_euler())
 		rangeVal = self.parseRange()
-		tag = "t,Big Rock!"
+		tag = "t,Big Boi!"
 		# self.writeToTX(4, gpsVal)
 		self.writeToTX(4, imuVal)
 		self.writeToTX(4, rangeVal)

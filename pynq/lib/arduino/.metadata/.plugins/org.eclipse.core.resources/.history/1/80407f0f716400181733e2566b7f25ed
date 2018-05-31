@@ -320,6 +320,8 @@ void textWrite(const char* buffer, uint16_t len)
 	}
 }
 
+
+
 /**************************************************************************/
 /*!
       Change the beam scan direction on display

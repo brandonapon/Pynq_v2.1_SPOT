@@ -158,7 +158,7 @@ int main(void)
 	setSPI(transceiver);
 
 	gpio_device = gpio_open_device(0);
-	gpio_device = gpio_configure(gpio_device, 8, 8, 1);
+	gpio_device = gpio_configure(gpio_device, 2, 2, 1);
 	gpio_set_direction(gpio_device, 0);
 
 	//DISPLAY VARIABLES
@@ -747,15 +747,14 @@ int main(void)
 					text_length = 3;
 				}
 				else if(text_val == 99) {
-					text_length = MAILBOX_DATA(1);
+					text_length = MAILBOX_DATA(0);
 					for(int i = 0; i < text_length; ++i){
-						textInput[i] = (char)(MAILBOX_DATA(i+2));
+						textInput[i] = (char)(MAILBOX_DATA(i+1));
 					}
 					textWrite(textInput, text_length);
-//					for(int i = 0; i < 16; ++i){
-//						textInput[i] = 0;
-//					}
-					MAILBOX_DATA(0) = text_length;
+					for(int i = 0; i < 16; ++i){
+						textInput[i] = ' ';
+					}
 					MAILBOX_CMD_ADDR = 0x0;
 					break;
 				}

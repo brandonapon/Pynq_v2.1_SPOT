@@ -158,7 +158,7 @@ int main(void)
 	setSPI(transceiver);
 
 	gpio_device = gpio_open_device(0);
-	gpio_device = gpio_configure(gpio_device, 8, 8, 1);
+	gpio_device = gpio_configure(gpio_device, 2, 2, 1);
 	gpio_set_direction(gpio_device, 0);
 
 	//DISPLAY VARIABLES
@@ -206,7 +206,6 @@ int main(void)
 	uint16_t background_color;
 
 	char write_snap_cmd[1] = {1};
-	char textInput[16] = {0};
 
 	/* TX VARIABLES*/
 	u8 messageLength;
@@ -600,7 +599,7 @@ int main(void)
 						picAddr[read_count]= stream_in[0];
 						++read_count;
 						if(read_count % 3 == 0){ //
-							drawPixel8bit((pixel_count%320) + x_start, (int)(pixel_count/320) + y_start, drawAddr[pixel_count]);
+							drawPixel8bit((pixel_count%320), (int)(pixel_count/320), drawAddr[pixel_count]);
 							++pixel_count;
 						}
 						else if(read_count % 3 == 1){
@@ -614,7 +613,7 @@ int main(void)
 				}
 				while((int)(pixel_count/320) < 240){
 					pixel8bit = ((picAddr[pixel_count*2] & 0xE0) |  ((picAddr[pixel_count*2] & 0x07) << 2) | (((picAddr[(pixel_count*2)+1]) & 0x18) >> 3));
-					drawPixel8bit((pixel_count%320) + x_start, (int)(pixel_count/320) + y_start, pixel8bit);
+					drawPixel8bit((pixel_count%320), (int)(pixel_count/320), pixel8bit);
 					++pixel_count;
 				}
 				MAILBOX_DATA(0) = read_count;
@@ -747,17 +746,8 @@ int main(void)
 					text_length = 3;
 				}
 				else if(text_val == 99) {
+					text = MAILBOX_DATA(0);
 					text_length = MAILBOX_DATA(1);
-					for(int i = 0; i < text_length; ++i){
-						textInput[i] = (char)(MAILBOX_DATA(i+2));
-					}
-					textWrite(textInput, text_length);
-//					for(int i = 0; i < 16; ++i){
-//						textInput[i] = 0;
-//					}
-					MAILBOX_DATA(0) = text_length;
-					MAILBOX_CMD_ADDR = 0x0;
-					break;
 				}
 				else {
 					text = "DEFAULT";

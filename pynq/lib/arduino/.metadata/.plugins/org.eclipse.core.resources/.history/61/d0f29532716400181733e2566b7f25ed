@@ -320,6 +320,15 @@ void textWrite(const char* buffer, uint16_t len)
 	}
 }
 
+void textArray(uint16_t len){
+	char* text[len] = {0};
+	for(int i = 0; i < text_length; ++i){
+		textInput[i] = (char)(MAILBOX_DATA(i+1));
+	}
+}
+
+
+
 /**************************************************************************/
 /*!
       Change the beam scan direction on display
