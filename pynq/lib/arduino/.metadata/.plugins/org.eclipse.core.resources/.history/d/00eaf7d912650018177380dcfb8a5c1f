@@ -75,8 +75,6 @@
 #define LAYER_EFFECT			0x6019
 #define CLEAR_WINDOW			0x601a
 #define CLEAR_MEM				0x601b
-#define DRAW_IMAGE				0x601c
-
 //TRANSCEIVER COMMANDS
 #define READ_FROM				0x7001
 #define WRITE_TO				0x7002
@@ -616,7 +614,6 @@ int main(void)
 				}
 				while((int)(pixel_count/320) < 240){
 					pixel8bit = ((picAddr[pixel_count*2] & 0xE0) |  ((picAddr[pixel_count*2] & 0x07) << 2) | (((picAddr[(pixel_count*2)+1]) & 0x18) >> 3));
-					drawAddr[pixel_count] = pixel8bit;
 					drawPixel8bit((pixel_count%320) + x_start, (int)(pixel_count/320) + y_start, pixel8bit);
 					++pixel_count;
 				}
@@ -635,6 +632,7 @@ int main(void)
 						++i;
 					}
 				}
+				drawPixel8bit(x_start, y_start, )
 				MAILBOX_CMD_ADDR = 0x0;
 				break;
 

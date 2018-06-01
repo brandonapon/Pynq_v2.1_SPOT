@@ -68,6 +68,8 @@ LAYER_MODE = 0x6018
 LAYER_EFFECT = 0x6019
 CLEAR_WINDOW = 0x601a
 CLEAR_MEM = 0x601b
+DRAW_IMAGE = 0x601c
+
 """Transceiver specific commands 0x7xxx"""
 READ_FROM       =   0x7001
 WRITE_TO        =   0x7002
@@ -142,6 +144,7 @@ class Arduino_SPOT(object):
 		self.buf_manager = Xlnk()
 		self.buf565 = []
 		self.buf888 = []
+		self.drawAddr = []
 
 	def reset(self):
 		"""Reset all the sensors on the adafruit IMU.
@@ -589,14 +592,15 @@ class Arduino_SPOT(object):
 
 
 	def drawLoadPicScreen(self):
-		self.microblaze.write_mailbox(0, 32)
+		self.microblaze.write_mailbox(0, 100)
 		self.microblaze.write_mailbox(4, 0)
 		self.microblaze.write_mailbox(8, 320)
 		self.microblaze.write_mailbox(12, 240)
 		self.microblaze.write_mailbox(16, 0x001f)
 		self.microblaze.write_mailbox(20, 0) # unfilled
 		self.microblaze.write_blocking_command(RECTANGLE)
-
+		time.sleep(delay)
+		self.write_CUSTOM('LOADING...', 180, 100, 0xffe0)
 		time.sleep(delay)
 
 	# Full UI's with graphics and text
@@ -626,7 +630,7 @@ class Arduino_SPOT(object):
 		self.write_SELECT(640, 365)
 
 	# Main->View->Select
-	def drawSelectView(self, type):
+	def drawInfoState(self):
 		# self.layerMode(1)
 		# self.layerEffect(2)
 		self.layer(1)
@@ -634,10 +638,10 @@ class Arduino_SPOT(object):
 		self.drawLoadPicScreen()
 		self.drawUpperButton()
 		self.drawLowerButton()
+		self.write_TAG(100, 315)
+		self.write_DISTANCE(100, 365)
+		self.write_CB(100, 415)
 		self.write_TYPE()
-		self.write_TAG(100, 290)
-		self.write_DISTANCE(100, 340)
-		self.write_CB(100, 390)
 		self.write_HOME(655, 86)
 		self.write_GOBACK(635, 365)
 
@@ -814,7 +818,7 @@ class Arduino_SPOT(object):
 	def write_TAG(self, x, y):
 		self.textMode()
 		self.fontSize(2)
-		self.transparentBackground(0xf700)
+		self.transparentBackground(0x041f)
 		self.textCursor(x, y)
 		self.writeText(11)
 		self.graphicsMode()
@@ -822,7 +826,7 @@ class Arduino_SPOT(object):
 	def write_TYPE(self):
 		self.textMode()
 		self.fontSize(2)
-		self.transparentBackground(0xf700)
+		self.transparentBackground(0x041f)
 		self.textCursor(100, 265)
 		word = "Type: "
 		numBytes = len(word)
@@ -835,10 +839,25 @@ class Arduino_SPOT(object):
 		print('c-side numBytes = ', self.microblaze.read_mailbox(0))
 		self.graphicsMode()
 
+	def write_CUSTOM(self, word, x, y, color):
+		self.textMode()
+		self.fontSize(2)
+		self.transparentBackground(color)
+		self.textCursor(x, y)
+		numBytes = len(word)
+		print('numBytes =', numBytes)
+		self.microblaze.write_mailbox(4, numBytes)
+		for i in range(0, numBytes):
+			# self.microblaze.write_mailbox((i+1)*4, 0)
+			self.microblaze.write_mailbox((i+2)*4, ord(word[i]))
+		self.writeText(99)
+		print('c-side numBytes = ', self.microblaze.read_mailbox(0))
+		self.graphicsMode()
+
 	def write_CB(self, x, y):
 		self.textMode()
 		self.fontSize(2)
-		self.transparentBackground(0xf700)
+		self.transparentBackground(0x041f)
 		self.textCursor(x, y)
 		self.writeText(12)
 		self.graphicsMode()
@@ -846,7 +865,7 @@ class Arduino_SPOT(object):
 	def write_DISTANCE(self, x, y):
 		self.textMode()
 		self.fontSize(2)
-		self.transparentBackground(0xf700)
+		self.transparentBackground(0x041f)
 		self.textCursor(x, y)
 		self.writeText(13)
 		self.graphicsMode()
@@ -907,39 +926,6 @@ class Arduino_SPOT(object):
 		self.writeText(20)
 		self.graphicsMode()
 
-	def displayDistance(self, textDistance):
-		numBytes = len(str(textDistance))
-		self.microblaze.write_mailbox(0, textDistance)
-		self.microblaze.write_mailbox(4, numBytes)
-		self.textMode()
-		self.fontSize(2)
-		self.transparentBackground(0xf700)
-		self.textCursor(120, 360)
-		self.writeText(99)
-		self.graphicsMode()
-
-	def displayCreatedBy(self, textCreatedBy):
-		numBytes = len(str(textCreatedBy))
-		self.microblaze.write_mailbox(0, textCreatedBy)
-		self.microblaze.write_mailbox(4, numBytes)
-		self.textMode()
-		self.fontSize(2)
-		self.transparentBackground(0xf700)
-		self.textCursor(120, 410)
-		self.writeText(99)
-		self.graphicsMode()
-
-	def displayTag(self, textTag):
-		numBytes = len(str(textTag))
-		self.microblaze.write_mailbox(0, textTag)
-		self.microblaze.write_mailbox(4, numBytes)
-		self.textMode()
-		self.fontSize(2)
-		self.transparentBackground(0xf700)
-		self.textCursor(120, 310)
-		self.writeText(99)
-		self.graphicsMode()
-
 	def transparentBackground(self, font_color):
 		self.microblaze.write_mailbox(0, font_color)
 		self.microblaze.write_blocking_command(TEXT_TRANSPARENT)
@@ -987,9 +973,20 @@ class Arduino_SPOT(object):
 		# buf3 = self.buf_manager.cma_get_buffer(buf2, stream_size)
 		# draw_addr = self.buf_manager.cma_get_phy_addr(self.buf565)
 		# self.microblaze.write_mailbox(0, phy_addr)
+		self.layer(0)
+		time.sleep(delay)
 		self.microblaze.write_mailbox(0, x_start)
 		self.microblaze.write_mailbox(4, y_start)
 		self.microblaze.write_blocking_command(CAMERA)
+		self.layer(1)
+		time.sleep(delay)
+		self.drawRect(100, 0, 320, 240, 0x0000, 1)
+
+	def drawImage(self, x_start, y_start):
+		#uses drawAddr buffer
+		self.microblaze.write_mailbox(0, x_start)
+		self.microblaze.write_mailbox(4, y_start)
+		self.microblaze.write_blocking_command(DRAW_IMAGE)
 
 	def drawRect(self, x_start, y_start, x_size, y_size, color, fill):
 		self.microblaze.write_mailbox(0, x_start)
@@ -1153,6 +1150,7 @@ class Arduino_SPOT(object):
 		self.microblaze.write_blocking_command(IMAGE_ADDRESS)
 		self.buf565 = buf1
 		self.buf888 = buf3
+		self.drawAddr = buf5
 		return buf1, buf3
 
 	'''
