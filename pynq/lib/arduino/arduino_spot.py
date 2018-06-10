@@ -1,4 +1,4 @@
-from math import ceil
+import math
 from statistics import median
 import asyncio
 import os
@@ -13,7 +13,7 @@ from . import MAILBOX_OFFSET
 from . import MAILBOX_PY2IOP_CMD_OFFSET
 
 
-__author__ = "Neil O'Bryan & Brandon Pon"
+__author__ = "Neil O'Bryan, Brandon Pon, Saurabh Gupta, Bryan Lavin-Parmenter"
 __copyright__ = "Copyright 2018, SPOT"
 
 ARDUINO_SPOT = "arduino_spot.bin"
@@ -501,7 +501,7 @@ class Arduino_SPOT(object):
 	def drawUpperButton(self):
 		color = 0x01c0
 		self.microblaze.write_mailbox(0, 600)
-		self.microblaze.write_mailbox(4, 50)
+		self.microblaze.write_mailbox(4, 30)
 		self.microblaze.write_mailbox(8, 150)
 		self.microblaze.write_mailbox(12, 100)
 		self.microblaze.write_mailbox(16, color)
@@ -511,11 +511,11 @@ class Arduino_SPOT(object):
 		time.sleep(delay)
 
 		self.microblaze.write_mailbox(0, 750)
-		self.microblaze.write_mailbox(4, 50)
+		self.microblaze.write_mailbox(4, 30)
 		self.microblaze.write_mailbox(8, 750)
-		self.microblaze.write_mailbox(12, 150)
+		self.microblaze.write_mailbox(12, 130)
 		self.microblaze.write_mailbox(16, 800)
-		self.microblaze.write_mailbox(20, 100)
+		self.microblaze.write_mailbox(20, 80)
 		self.microblaze.write_mailbox(24, color)
 		self.microblaze.write_mailbox(28, 0) #unfilled
 		self.microblaze.write_blocking_command(TRIANGLE)
@@ -523,9 +523,9 @@ class Arduino_SPOT(object):
 		time.sleep(delay)
 
 		self.microblaze.write_mailbox(0, 750)
-		self.microblaze.write_mailbox(4, 51)
+		self.microblaze.write_mailbox(4, 31)
 		self.microblaze.write_mailbox(8, 750)
-		self.microblaze.write_mailbox(12, 149)
+		self.microblaze.write_mailbox(12, 129)
 		self.microblaze.write_mailbox(16, 0x0000)
 		self.microblaze.write_blocking_command(DRAWLINE)
 
@@ -535,7 +535,7 @@ class Arduino_SPOT(object):
 	def drawLowerButton(self):
 		color = 0x01c0
 		self.microblaze.write_mailbox(0, 600) # x coordinate of top left corner
-		self.microblaze.write_mailbox(4, 330) # y coordinate of top left corner
+		self.microblaze.write_mailbox(4, 350) # y coordinate of top left corner
 		self.microblaze.write_mailbox(8, 150) # width
 		self.microblaze.write_mailbox(12, 100) # height
 		self.microblaze.write_mailbox(16, color) # color
@@ -545,11 +545,11 @@ class Arduino_SPOT(object):
 		time.sleep(delay)
 
 		self.microblaze.write_mailbox(0, 750)
-		self.microblaze.write_mailbox(4, 330)
+		self.microblaze.write_mailbox(4, 350)
 		self.microblaze.write_mailbox(8, 750)
-		self.microblaze.write_mailbox(12, 430)
+		self.microblaze.write_mailbox(12, 450)
 		self.microblaze.write_mailbox(16, 800)
-		self.microblaze.write_mailbox(20, 380)
+		self.microblaze.write_mailbox(20, 400)
 		self.microblaze.write_mailbox(24, color)
 		self.microblaze.write_mailbox(28, 0) #unfilled
 		self.microblaze.write_blocking_command(TRIANGLE)
@@ -557,11 +557,61 @@ class Arduino_SPOT(object):
 		time.sleep(delay)
 
 		self.microblaze.write_mailbox(0, 750)
-		self.microblaze.write_mailbox(4, 331)
+		self.microblaze.write_mailbox(4, 351)
 		self.microblaze.write_mailbox(8, 750)
-		self.microblaze.write_mailbox(12, 429)
+		self.microblaze.write_mailbox(12, 449)
 		self.microblaze.write_mailbox(16, 0x0000)
 		self.microblaze.write_blocking_command(DRAWLINE)
+
+		time.sleep(delay)
+
+
+	def buttonArrows(self):
+		color = 0x01c0
+
+		# Right arrow
+		self.microblaze.write_mailbox(0, 750)
+		self.microblaze.write_mailbox(4, 180)
+		self.microblaze.write_mailbox(8, 750)
+		self.microblaze.write_mailbox(12, 220)
+		self.microblaze.write_mailbox(16, 780)
+		self.microblaze.write_mailbox(20, 200)
+		self.microblaze.write_mailbox(24, color)
+		self.microblaze.write_mailbox(28, 1)
+		self.microblaze.write_blocking_command(TRIANGLE)
+
+		time.sleep(delay)
+
+		self.microblaze.write_mailbox(0, 600)
+		self.microblaze.write_mailbox(4, 195)
+		self.microblaze.write_mailbox(8, 150)
+		self.microblaze.write_mailbox(12, 10)
+		self.microblaze.write_mailbox(16, color)
+		self.microblaze.write_mailbox(20, 1) #unfilled
+		self.microblaze.write_blocking_command(RECTANGLE)
+
+		time.sleep(delay)
+
+		# Left arrow
+		self.microblaze.write_mailbox(0, 600)
+		self.microblaze.write_mailbox(4, 280)
+		self.microblaze.write_mailbox(8, 630)
+		self.microblaze.write_mailbox(12, 260)
+		self.microblaze.write_mailbox(16, 630)
+		self.microblaze.write_mailbox(20, 300)
+		self.microblaze.write_mailbox(24, color)
+		self.microblaze.write_mailbox(28, 1)
+		self.microblaze.write_blocking_command(TRIANGLE)
+
+		time.sleep(delay)
+
+		self.microblaze.write_mailbox(0, 630)
+		self.microblaze.write_mailbox(4, 275)
+		self.microblaze.write_mailbox(8, 150)
+		self.microblaze.write_mailbox(12, 10)
+		self.microblaze.write_mailbox(16, color)
+		self.microblaze.write_mailbox(20, 1) #unfilled
+		self.microblaze.write_blocking_command(RECTANGLE)
 
 		time.sleep(delay)
 
@@ -593,7 +643,7 @@ class Arduino_SPOT(object):
 
 	def drawLoadPicScreen(self):
 		self.microblaze.write_mailbox(0, 100)
-		self.microblaze.write_mailbox(4, 0)
+		self.microblaze.write_mailbox(4, 10)
 		self.microblaze.write_mailbox(8, 320)
 		self.microblaze.write_mailbox(12, 240)
 		self.microblaze.write_mailbox(16, 0x001f)
@@ -607,14 +657,15 @@ class Arduino_SPOT(object):
 	def drawMainScreen(self):
 		# self.layerMode(1)
 		# self.layerEffect(2)
+		time.sleep(delay)
 		self.layer(1)
 		time.sleep(delay)
 		self.drawRadar()
 		self.drawUpperButton()
 		self.drawLowerButton()
 		self.write_COMPASS()
-		self.write_VIEW(650, 86)
-		self.write_MARK(655, 365)
+		self.write_VIEW(650, 66)
+		self.write_MARK(655, 385)
 
 	# Main->View
 	def drawViewScreen(self):
@@ -625,9 +676,10 @@ class Arduino_SPOT(object):
 		self.drawRadar()
 		self.drawUpperButton()
 		self.drawLowerButton()
+		self.buttonArrows()
 		self.write_COMPASS()
-		self.write_CANCEL(640, 86)
-		self.write_SELECT(640, 365)
+		self.write_CANCEL(640, 66)
+		self.write_SELECT(640, 385)
 
 	# Main->View->Select
 	def drawInfoState(self):
@@ -642,8 +694,31 @@ class Arduino_SPOT(object):
 		self.write_DISTANCE(100, 365)
 		self.write_CB(100, 415)
 		self.write_TYPE()
-		self.write_HOME(655, 86)
-		self.write_GOBACK(635, 365)
+		self.write_HOME(655, 66)
+		self.write_GOBACK(635, 385)
+
+	def drawAlertState(self):
+		# self.layerMode(1)
+		# self.layerEffect(2)
+		self.layer(1)
+		time.sleep(delay)
+		self.microblaze.write_mailbox(0, 100)
+		self.microblaze.write_mailbox(4, 10)
+		self.microblaze.write_mailbox(8, 320)
+		self.microblaze.write_mailbox(12, 240)
+		self.microblaze.write_mailbox(16, 0x001f)
+		self.microblaze.write_mailbox(20, 0) # unfilled
+		self.microblaze.write_blocking_command(RECTANGLE)
+		time.sleep(delay)
+		self.write_CUSTOM('ALERT!', 180, 100, 0xffe0)
+		time.sleep(delay)
+		self.drawLowerButton()
+		self.write_TAG(100, 315)
+		self.write_DISTANCE(100, 365)
+		self.write_CB(100, 415)
+		self.write_TYPE()
+		self.write_GOBACK(635, 385)
+
 
 	# Main->Mark
 	def drawMarkScreen(self):
@@ -656,8 +731,8 @@ class Arduino_SPOT(object):
 		self.write_OBJECT(250, 375)
 		self.drawUpperButton()
 		self.drawLowerButton()
-		self.write_CANCEL(640, 86)
-		self.write_MARK(655, 365)
+		self.write_CANCEL(640, 66)
+		self.write_MARK(655, 385)
 
 	# Main->Mark->Mark
 	def drawAfterMark(self):
@@ -672,8 +747,9 @@ class Arduino_SPOT(object):
 		self.write_TYPE()
 		self.drawUpperButton()
 		self.drawLowerButton()
-		self.write_CANCEL(640, 86)
-		self.write_CONFIRM(635, 365)
+		self.buttonArrows()
+		self.write_CANCEL(640, 66)
+		self.write_CONFIRM(635, 385)
 
 	# Alert (Interest)
 	def drawAlertInterest(self):
@@ -689,8 +765,8 @@ class Arduino_SPOT(object):
 		self.write_TYPE()
 		self.drawUpperButton()
 		self.drawLowerButton()
-		self.write_DISMISS(635, 86)
-		self.write_VIEW(650, 365)
+		self.write_DISMISS(635, 66)
+		self.write_VIEW(650, 385)
 
 	# Alert (Danger)
 	def drawAlertDanger(self):
@@ -706,8 +782,8 @@ class Arduino_SPOT(object):
 		self.write_TYPE()
 		self.drawUpperButton()
 		self.drawLowerButton()
-		self.write_DISMISS(635, 86)
-		self.write_VIEW(650, 365)
+		self.write_DISMISS(635, 66)
+		self.write_VIEW(650, 385)
 
 	#text functions
 	def textMode(self):
@@ -830,13 +906,13 @@ class Arduino_SPOT(object):
 		self.textCursor(100, 265)
 		word = "Type: "
 		numBytes = len(word)
-		print('numBytes = ',numBytes)
+		# print('numBytes = ',numBytes)
 		self.microblaze.write_mailbox(4, numBytes)
 		for i in range(0, numBytes):
 			# self.microblaze.write_mailbox((i+1)*4, 0)
 			self.microblaze.write_mailbox((i+2)*4, ord(word[i]))
 		self.writeText(99)
-		print('c-side numBytes = ', self.microblaze.read_mailbox(0))
+		# print('c-side numBytes = ', self.microblaze.read_mailbox(0))
 		self.graphicsMode()
 
 	def write_CUSTOM(self, word, x, y, color):
@@ -845,13 +921,13 @@ class Arduino_SPOT(object):
 		self.transparentBackground(color)
 		self.textCursor(x, y)
 		numBytes = len(word)
-		print('numBytes =', numBytes)
+		# print('numBytes =', numBytes)
 		self.microblaze.write_mailbox(4, numBytes)
 		for i in range(0, numBytes):
 			# self.microblaze.write_mailbox((i+1)*4, 0)
 			self.microblaze.write_mailbox((i+2)*4, ord(word[i]))
 		self.writeText(99)
-		print('c-side numBytes = ', self.microblaze.read_mailbox(0))
+		# print('c-side numBytes = ', self.microblaze.read_mailbox(0))
 		self.graphicsMode()
 
 	def write_CB(self, x, y):
@@ -980,7 +1056,7 @@ class Arduino_SPOT(object):
 		self.microblaze.write_blocking_command(CAMERA)
 		self.layer(1)
 		time.sleep(delay)
-		self.drawRect(100, 0, 320, 240, 0x0000, 1)
+		self.drawRect(100, 10, 320, 240, 0x0000, 1)
 
 	def drawImage(self, x_start, y_start):
 		#uses drawAddr buffer
@@ -1055,7 +1131,7 @@ class Arduino_SPOT(object):
 	def drawDanger(self, x, y, color):
 		self.layer(0)
 		time.sleep(delay)
-		self.draw2X(x, y, 15, color)
+		self.drawRect(x-13, y-13, 26, 26, color, 1)
 
 	def drawInterest(self, x, y, color):
 		self.layer(0)
@@ -1078,7 +1154,7 @@ class Arduino_SPOT(object):
 
 	def writeToTX(self, address, message):
 		messageLen = len(message)
-		numPackets = ceil(messageLen / MAX_LEN)
+		numPackets = math.ceil(messageLen / MAX_LEN)
 		returnBytes = []
 		if(numPackets == 1):
 			self.writeHelper(address, message)
@@ -1141,7 +1217,7 @@ class Arduino_SPOT(object):
 		tx_addr = self.buf_manager.cma_get_phy_addr(buf2)
 
 		buf4 = self.buf_manager.cma_alloc(stream_size, data_type="uint8_t")
-		buf5 = self.buf_manager.cma_get_buffer(buf0, stream_size)
+		buf5 = self.buf_manager.cma_get_buffer(buf4, stream_size)
 		draw_addr = self.buf_manager.cma_get_phy_addr(buf4)
 
 		self.microblaze.write_mailbox(0, phy_addr)
@@ -1151,7 +1227,7 @@ class Arduino_SPOT(object):
 		self.buf565 = buf1
 		self.buf888 = buf3
 		self.drawAddr = buf5
-		return buf1, buf3
+		return buf1, buf3, buf5
 
 	'''
 	565 to 888
@@ -1199,18 +1275,18 @@ class Arduino_SPOT(object):
 		time.sleep(delay)
 
 	def prepareToSend(self):
-		# self.beginTX(1)
-		gpsVal = None
+		# gpsVal = None
 		# while(gpsVal == None):
-		# 	gpsVal = self.parseGPS(self.readFromGPS())
-		imuVal = self.parseIMU(self.get_euler())
-		rangeVal = self.parseRange()
-		tag = "t,Big Boi!"
-		# self.writeToTX(4, gpsVal)
-		self.writeToTX(4, imuVal)
-		self.writeToTX(4, rangeVal)
-		self.writeToTX(4, tag)
-		print(gpsVal, imuVal, rangeVal, tag)
+		# 	gpsTuple = self.readFromGPS()
+		# 	gpsVal = self.parseGPS(gpsTuple)
+		#HARDCODE vALS HERE
+		# gpsTuple = (34.414676, -119.84185)
+		# gpsVal = self.parseGPS(gpsTuple)
+		imuEuler = self.get_euler()
+		imuVal = self.parseIMU(imuEuler)
+		rangeVal, range = self.parseRange()
+		# tag = "t,Big Boi!"
+		return imuVal, rangeVal, range 
 
 	def parseGPS(self, val):
 		if(val[0] != None and val[1] != None):
@@ -1223,7 +1299,8 @@ class Arduino_SPOT(object):
 		return "v," + returnString[0:-1]
 
 	def parseRange(self):
-		return "r," + str(self.medianRange())
+		range = self.medianRange()
+		return "r," + str(range), range
 
 	def parseRangeChr(self, val):
 		returnString = ""
